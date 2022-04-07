@@ -533,7 +533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Address: /temp
   sliderObject: {fileID: 0}
-  Transmitter: {fileID: 1853618882}
+  Transmitter: {fileID: 1853618885}
 --- !u!114 &286603668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,7 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0973a6a39ed173641ad3811404849130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Transmitter: {fileID: 1853618882}
+  Transmitter: {fileID: 1853618885}
 --- !u!4 &610502077
 Transform:
   m_ObjectHideFlags: 0
@@ -2144,7 +2144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb978b896e244e69cb32252ed8cf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 0}
   _address: /example/8/rotary/3
   _mapBundle: {fileID: 0}
   reflectionMember:
@@ -3357,7 +3357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb978b896e244e69cb32252ed8cf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 1853618885}
   _address: /pressure
   _mapBundle: {fileID: 0}
   reflectionMember:
@@ -3471,7 +3471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da87fb95f42e48b2b05b160c09ff113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 0}
   _address: /example/8/button/5
   _mapBundle: {fileID: 0}
   reflectionMember:
@@ -3579,7 +3579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a32d72eebc1a4a0d9eb08e7cc2e64ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 0}
   _address: /example/8/pad/2
   _mapBundle: {fileID: 0}
   reflectionMember:
@@ -4138,7 +4138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da87fb95f42e48b2b05b160c09ff113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 0}
   _address: /example/8/button/7
   _mapBundle: {fileID: 0}
   reflectionMember:
@@ -4667,7 +4667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb978b896e244e69cb32252ed8cf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 0}
   _address: /example/8/slider/3
   _mapBundle: {fileID: 0}
   reflectionMember:
@@ -5164,7 +5164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da87fb95f42e48b2b05b160c09ff113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 0}
   _address: /example/8/button/6
   _mapBundle: {fileID: 0}
   reflectionMember:
@@ -5273,7 +5273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1853618884}
-  - component: {fileID: 1853618882}
+  - component: {fileID: 1853618885}
   m_Layer: 0
   m_Name: OSC Manager
   m_TagString: Untagged
@@ -5281,7 +5281,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1853618882
+--- !u!4 &1853618884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853618881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3349898, y: 0.19805288, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1853618885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5300,26 +5315,11 @@ MonoBehaviour:
   _localHostMode: 1
   _localPortMode: 2
   _localReceiver: {fileID: 0}
-  _localHost: 10.190.133.153
+  _localHost: 172.26.160.1
   _localPort: 7000
   _remoteHost: 192.168.43.108
   _remotePort: 7000
   _useBundle: 0
---- !u!4 &1853618884
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853618881}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3349898, y: 0.19805288, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885371621
 GameObject:
   m_ObjectHideFlags: 0
@@ -5702,7 +5702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a32d72eebc1a4a0d9eb08e7cc2e64ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618882}
+  _transmitter: {fileID: 0}
   _address: /example/8/pad/1
   _mapBundle: {fileID: 0}
   reflectionMember:
