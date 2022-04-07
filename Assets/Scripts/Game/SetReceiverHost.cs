@@ -13,7 +13,10 @@ namespace extOSC.Examples
         {
             if (!string.IsNullOrEmpty(PortController.Instance.desktopIP))
             {
+                Debug.Log(PortController.Instance.desktopIP);
                 Receiver.LocalHost = PortController.Instance.desktopIP;
+                Receiver.Connect();
+
             }
         }
 

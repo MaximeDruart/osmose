@@ -491,6 +491,7 @@ GameObject:
   m_Component:
   - component: {fileID: 286603666}
   - component: {fileID: 286603667}
+  - component: {fileID: 286603668}
   m_Layer: 5
   m_Name: tempController
   m_TagString: Untagged
@@ -533,6 +534,18 @@ MonoBehaviour:
   Address: /temp
   sliderObject: {fileID: 0}
   Transmitter: {fileID: 1853618882}
+--- !u!114 &286603668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286603665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab0808f068f3444099047ee325bb07f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &337866566
 GameObject:
   m_ObjectHideFlags: 0
@@ -5261,7 +5274,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1853618884}
   - component: {fileID: 1853618882}
-  - component: {fileID: 1853618883}
   m_Layer: 0
   m_Name: OSC Manager
   m_TagString: Untagged
@@ -5281,11 +5293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464088183d2a1484ab8fb64e356c9f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoConnect: 1
+  _autoConnect: 0
   _closeOnPause: 0
   _mapBundle: {fileID: 0}
   _workInEditor: 0
-  _localHostMode: 0
+  _localHostMode: 1
   _localPortMode: 2
   _localReceiver: {fileID: 0}
   _localHost: 10.190.133.153
@@ -5293,25 +5305,6 @@ MonoBehaviour:
   _remoteHost: 192.168.43.108
   _remotePort: 7000
   _useBundle: 0
---- !u!114 &1853618883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853618881}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbba286dc10e549b2bdec947ef8dbd3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _autoConnect: 1
-  _closeOnPause: 0
-  _mapBundle: {fileID: 0}
-  _workInEditor: 0
-  _localHostMode: 1
-  _localHost: 10.190.133.153
-  _localPort: 8000
 --- !u!4 &1853618884
 Transform:
   m_ObjectHideFlags: 0

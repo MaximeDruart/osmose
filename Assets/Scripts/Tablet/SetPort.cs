@@ -14,6 +14,9 @@ namespace extOSC.Examples
             if (!string.IsNullOrEmpty(PortController.Instance.desktopIP))
             {
                 Transmitter.RemoteHost = PortController.Instance.desktopIP;
+                Transmitter.LocalHost = PortController.Instance.desktopIP;
+                Transmitter.Connect();
+
             }
         }
 
