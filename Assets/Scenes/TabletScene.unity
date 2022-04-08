@@ -491,7 +491,6 @@ GameObject:
   m_Component:
   - component: {fileID: 286603666}
   - component: {fileID: 286603667}
-  - component: {fileID: 286603668}
   m_Layer: 5
   m_Name: tempController
   m_TagString: Untagged
@@ -534,18 +533,6 @@ MonoBehaviour:
   Address: /temp
   sliderObject: {fileID: 0}
   Transmitter: {fileID: 1853618885}
---- !u!114 &286603668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286603665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab0808f068f3444099047ee325bb07f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &337866566
 GameObject:
   m_ObjectHideFlags: 0
@@ -4667,8 +4654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bb978b896e244e69cb32252ed8cf5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transmitter: {fileID: 0}
-  _address: /example/8/slider/3
+  _transmitter: {fileID: 1853618885}
+  _address: /waterfill
   _mapBundle: {fileID: 0}
   reflectionMember:
     Target: {fileID: 1710106955}
