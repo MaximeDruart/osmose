@@ -10,7 +10,10 @@ public class waterEvent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        waterMat = waterObject.GetComponent<Material>();
+        waterMat = waterObject.GetComponent<MeshRenderer>().sharedMaterial;
+
+        waterMat.SetFloat("_Fill", 0.8f);
+
     }
 
     // Update is called once per frame
@@ -21,6 +24,8 @@ public class waterEvent : MonoBehaviour
 
     public void updateMat(float fill)
     {
-        waterMat.SetFloat("Fill", fill);
+        waterMat = waterObject.GetComponent<MeshRenderer>().sharedMaterial;
+
+        waterMat.SetFloat("_Fill", fill);
     }
 }
