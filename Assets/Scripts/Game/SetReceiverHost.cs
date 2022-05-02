@@ -15,9 +15,8 @@ namespace extOSC.Examples
             {
                 Debug.Log(PortController.Instance.desktopIP);
                 Receiver.LocalHost = PortController.Instance.desktopIP;
-                Receiver.Connect();
-
             }
+            Receiver.Connect();
         }
 
         // Update is called once per frame

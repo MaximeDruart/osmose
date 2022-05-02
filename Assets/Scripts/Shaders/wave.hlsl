@@ -83,7 +83,7 @@ float ring(float2 st, float2 center, float radius, float thickness, float bleed1
 }
 
 
-void main_float(float uTime, float2 uFragCoord, float uFreq, float uThickness, float2 uOrigin, float uRadius, float uBleed, out float4 Out)
+void main_float(float uTime, float2 uFragCoord, float uFreq, float uThickness, float2 uOrigin, float uRadius, float uBleed, float uProgress, out float4 Out)
 {
     float2 uv = float2(uFragCoord.x, uFragCoord.y);
 
@@ -102,14 +102,20 @@ void main_float(float uTime, float2 uFragCoord, float uFreq, float uThickness, f
 	float n2 = snoise01(nPos + noiseTime);
 
 
-    r +=   n*0.18;
+    r +=  n*0.18;
     r +=  n2*0.08;
 
-	r *= time*3.;
+    r *= uProgress*3.0;
+    // if (uProgress != 0) {
+    // } else {
+	//     // r *= time*3.;
+    //     r=0.00001;
+    // }
         
 
 	float pct = ring(uv, uOrigin, r, uThickness*time, uBleed, uBleed); 
     float3 color = float3(1., 1.,1.) * pct + float3(1., 1., 1.) * pct * n * 2.;
+    if (uProgress < 0.08) color = float3(0., 0., 0.);
     Out = float4(color,1.0);
 
 }
