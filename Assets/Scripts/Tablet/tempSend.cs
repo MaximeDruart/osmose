@@ -26,7 +26,7 @@ namespace extOSC.Examples
 
         protected virtual void Start()
         {
-
+            Debug.Log("start");
         }
 
         private void SendTemp(bool isActivated, int index)
