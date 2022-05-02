@@ -11,10 +11,10 @@ namespace extOSC.Examples
 
         void Awake()
         {
-            Debug.Log(PortController.Instance.desktopIP);
-            if (!string.IsNullOrEmpty(PortController.Instance.desktopIP) && !string.IsNullOrEmpty(PortController.Instance.deviceIp))
+            Debug.Log(PortController.Instance.remoteIp);
+            if (!string.IsNullOrEmpty(PortController.Instance.remoteIp) && !string.IsNullOrEmpty(PortController.Instance.deviceIp))
             {
-                Transmitter.RemoteHost = PortController.Instance.desktopIP;
+                Transmitter.RemoteHost = PortController.Instance.remoteIp;
                 Transmitter.LocalHost = PortController.Instance.deviceIp;
                 Transmitter.Connect();
                 Debug.Log(Transmitter.IsStarted);

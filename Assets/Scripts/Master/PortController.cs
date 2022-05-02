@@ -2,6 +2,6 @@ public class PortController : Singleton<PortController>
 {
 
     public string deviceIp;
-    public string desktopIP;
+    public string remoteIp;
 
 }

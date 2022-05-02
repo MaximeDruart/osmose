@@ -9,14 +9,14 @@ public class SetRemoteHostInput : MonoBehaviour
 
     private void Start()
     {
-        PortController.Instance.desktopIP = defaultHost;
+        PortController.Instance.remoteIp = defaultHost;
 
     }
 
     public void setHost(string host)
     {
         Debug.Log(host);
-        PortController.Instance.desktopIP = host;
+        PortController.Instance.remoteIp = host;
     }
 
 }
