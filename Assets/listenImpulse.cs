@@ -33,9 +33,7 @@ namespace extOSC.Examples
                     startWave = false;
                     waveValue = 0f;
                 }
-
             }
-
         }
     }
 }
