@@ -10,10 +10,6 @@ namespace extOSC.Examples
 
         public string Address = "/temp";
 
-
-
-        public GameObject sliderObject;
-
         int motorAmount = 6;
         bool[] motorState = new bool[] { false, false, false, false, false, false };
 

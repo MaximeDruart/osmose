@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace extOSC.Examples
 {
@@ -14,11 +15,23 @@ namespace extOSC.Examples
         bool[] motorState = new bool[] { false, false, false, false, false, false };
 
         public GameObject[] motorsObjects;
+        private Material[] motorsMaterials;
 
 
 
         [Header("OSC Settings")]
         public OSCTransmitter Transmitter;
+
+
+        void Start()
+        {
+
+            for (int i = 0; i < motorsObjects.Length; i++)
+            {
+                Debug.Log(motorsObjects[i].GetComponent<Renderer>().material);
+                // motorsMaterials[i] = motorsObjects[i].GetComponent<Renderer>().material;
+            }
+        }
 
         public void SendTemp(int index)
         {
@@ -47,13 +60,16 @@ namespace extOSC.Examples
             GameObject motor = motorsObjects[index];
             Material mat = motor.GetComponent<Renderer>().material;
 
+
             if (isOn)
             {
-                mat.color = Color.red;
+                mat.DOFloat(1, "_alpha", 1);
+                mat.DOColor(Color.black, "_baseColor", 1);
             }
             else
             {
-                mat.color = Color.black;
+                mat.DOFloat(0.3f, "_alpha", 1);
+                mat.DOColor(Color.red, "_baseColor", 1);
             }
 
 
