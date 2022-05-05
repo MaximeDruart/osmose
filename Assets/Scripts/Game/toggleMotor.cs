@@ -26,11 +26,6 @@ namespace extOSC.Examples
         void Start()
         {
 
-            for (int i = 0; i < motorsObjects.Length; i++)
-            {
-                Debug.Log(motorsObjects[i].GetComponent<Renderer>().material);
-                // motorsMaterials[i] = motorsObjects[i].GetComponent<Renderer>().material;
-            }
         }
 
         public void SendTemp(int index)
