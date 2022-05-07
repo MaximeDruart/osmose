@@ -9,17 +9,21 @@ namespace extOSC
     public class Draw : MonoBehaviour
     {
 
+        [Header("extOSC")]
+
         public OSCTransmitter Transmitter;
         public string BaseAddress = "/draw";
 
+        [Header("Drawing settings")]
         public GameObject Brush;
-        public float brushSize = 3f;
+        public GameObject lineObject;
+
+        [Header("Match preview")]
+        public GameObject lineTargetObject;
+        public bool showPreview = false;
 
         private LineRenderer lineRenderer;
         private LineRenderer lineTargetRenderer;
-
-        public GameObject lineObject;
-        public GameObject lineTargetObject;
 
         private List<Vector2> points = new List<Vector2>();
 
@@ -89,8 +93,6 @@ namespace extOSC
                     var go = Instantiate(Brush, hit.point, Quaternion.identity, transform);
 
                     go.layer = LayerMask.NameToLayer("Ignore Raycast");
-
-                    // go.transform.localScale = Vector3.one * brushSize;
                     go.transform.rotation = Quaternion.Euler(-90, 0, 0);
                 }
             }
@@ -132,7 +134,7 @@ namespace extOSC
                         Debug.Log(drawingIsValid);
 
 
-                        //SendDrawing(points, drawingIsValid);
+                        SendDrawing(points, drawingIsValid);
                     }
 
                 }
@@ -254,7 +256,7 @@ namespace extOSC
             // remove the scale component : otherwise bigger scale would induce a smaller possible error margin for the drawing
             offset /= userDiagonal;
 
-            UpdateLineTarget(drawingCopy);
+            if (showPreview) UpdateLineTarget(drawingCopy);
             return offset;
         }
 

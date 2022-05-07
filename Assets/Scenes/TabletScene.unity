@@ -3099,10 +3099,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724ca2d76440b124091ecbd3ca612b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Transmitter: {fileID: 1853618885}
+  BaseAddress: /draw
   Brush: {fileID: 878494557500543303, guid: 6f90d65aa10d2014996261ae69bc4e5a, type: 3}
-  brushSize: 3
   lineObject: {fileID: 1043062368}
   lineTargetObject: {fileID: 862017344}
+  showPreview: 1
 --- !u!1 &1043062368
 GameObject:
   m_ObjectHideFlags: 0
@@ -6106,13 +6108,13 @@ MonoBehaviour:
   _autoConnect: 0
   _closeOnPause: 0
   _mapBundle: {fileID: 0}
-  _workInEditor: 0
+  _workInEditor: 1
   _localHostMode: 1
   _localPortMode: 2
   _localReceiver: {fileID: 0}
   _localHost: 172.26.160.1
   _localPort: 7000
-  _remoteHost: 192.168.43.108
+  _remoteHost: 10.190.133.153
   _remotePort: 7000
   _useBundle: 0
 --- !u!1 &1880769158
