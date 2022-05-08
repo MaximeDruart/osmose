@@ -75,9 +75,6 @@ namespace extOSC
         {
             float distanceToTarget = Vector2.Distance(targetValue, value);
 
-            Debug.Log(distanceToTarget);
-
-
             float opacity = opacityRadius - distanceToTarget;
 
             opacity = Mathf.Clamp(opacity, 0, 1);

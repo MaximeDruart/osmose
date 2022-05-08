@@ -22,7 +22,6 @@ namespace extOSC.Examples
 
         protected virtual void Start()
         {
-            Debug.Log("start");
         }
 
         private void SendTemp(bool isActivated, int index)
@@ -31,8 +30,6 @@ namespace extOSC.Examples
             motorState[index] = isActivated;
 
             message.AddValue(OSCValue.Float(getTempValue()));
-
-            Debug.Log(getTempValue());
 
             Transmitter.Send(message);
         }

@@ -82,7 +82,6 @@ namespace extOSC
         public void OnPadValueChange(Vector2 value)
         {
             float distanceToTarget = Vector2.Distance(targetValue, value);
-            Debug.Log(distanceToTarget);
 
             if (distanceToTarget < validationTreshold)
             {

@@ -15,7 +15,6 @@ public class SetDeviceIp : MonoBehaviour
 
     public void setIp(string ip)
     {
-        Debug.Log(ip);
         PortController.Instance.deviceIp = ip;
     }
 

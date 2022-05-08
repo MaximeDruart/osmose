@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,8 @@ namespace extOSC
         [Header("Match preview")]
         public GameObject lineTargetObject;
         public bool showPreview = false;
+
+        public UnityEvent<bool> onCompleted;
 
         private LineRenderer lineRenderer;
         private LineRenderer lineTargetRenderer;
@@ -79,27 +83,6 @@ namespace extOSC
 
         }
 
-        void Drawing()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                var Ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(Ray, out hit))
-                {
-                    if (hit.transform.name != "drawingboard") return;
-
-
-                    var go = Instantiate(Brush, hit.point, Quaternion.identity, transform);
-
-                    go.layer = LayerMask.NameToLayer("Ignore Raycast");
-                    go.transform.rotation = Quaternion.Euler(-90, 0, 0);
-                }
-            }
-
-
-        }
-
         void AddPoint()
         {
             if (Input.GetMouseButton(0))
@@ -108,7 +91,7 @@ namespace extOSC
                 RaycastHit hit;
                 if (Physics.Raycast(Ray, out hit))
                 {
-                    if (hit.transform.name != "drawingboard") return;
+                    if (hit.transform.name != "DrawingBoard") return;
                     if (!isDrawingEnabled) return;
 
                     Vector2 vec2HitPoint = new Vector2(hit.point.x, hit.point.y);
@@ -131,10 +114,8 @@ namespace extOSC
                     {
                         isDrawingEnabled = false;
                         bool drawingIsValid = isDrawingValid(drawings[activeDrawing]);
-                        Debug.Log(drawingIsValid);
-
-
                         SendDrawing(points, drawingIsValid);
+                        if (drawingIsValid) activeDrawing++;
                     }
 
                 }
@@ -160,6 +141,10 @@ namespace extOSC
             }
         }
 
+        void TriggerCompleted()
+        {
+            onCompleted.Invoke(true);
+        }
 
         bool isDrawingValid(List<Vector2> drawing)
         {
@@ -167,13 +152,6 @@ namespace extOSC
             float score = GetCompareScore(drawing, newUserArray);
             Debug.Log(score);
             return score < validationThresholds[activeDrawing];
-        }
-
-
-        void ValidateDrawing()
-        {
-
-
         }
 
         void SendDrawing(List<Vector2> _points, bool isValid)
@@ -277,7 +255,6 @@ namespace extOSC
 
         void UnDraw()
         {
-            Debug.Log("undrawing");
             int initialPointsCount = points.Count;
             bool[] hasRunForIndex = new bool[points.Count];
             for (int i = 0; i < hasRunForIndex.Length; i++)
