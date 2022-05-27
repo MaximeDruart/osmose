@@ -24,7 +24,7 @@ public class PlayNote : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private float innerCircleRectStartSize;
     private float pointsRectStartSize;
 
-    public UnityEvent playFunction;
+    public UnityEvent<bool> playFunction;
 
 
 
@@ -35,8 +35,6 @@ public class PlayNote : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         innerCircleRectStartSize = innerCircleRect.rect.width;
         pointsRectStartSize = pointsRect.rect.width;
-
-        Debug.Log("fazfza down");
 
     }
 
@@ -61,7 +59,7 @@ public class PlayNote : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         isOpened = true;
-        playFunction.Invoke();
+        playFunction.Invoke(true);
     }
     public void OnPointerUp(PointerEventData eventData)
     {

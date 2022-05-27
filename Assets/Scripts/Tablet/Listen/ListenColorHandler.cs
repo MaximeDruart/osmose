@@ -16,20 +16,27 @@ namespace extOSC
     public class ListenColorHandler : MonoBehaviour
     {
 
+        [Header("extOSC")]
         public OSCTransmitter Transmitter;
         public string OpacityAddress = "/listen/opacity";
         public string ConfirmAddress = "/listen/opacity/done";
-        public Vector2 targetValue = new Vector2(0.1f, 0.3f);
 
+
+        [Header("Color Validation")]
+        public Vector2 targetValue = new Vector2(0.1f, 0.3f);
         public float validationTreshold = 0.03f;
         public float opacityRadius = 0.45f;
 
 
 
+        [Header("Objects")]
 
         [SerializeField]
         private GameObject ColorPadObj;
         private Component ColorPad;
+
+        [Header("Debugging")]
+        public bool isValidateEnabled = true;
 
         // Start is called before the first frame update
 
@@ -84,7 +91,7 @@ namespace extOSC
             sendOpacity(opacity);
 
 
-            if (distanceToTarget < validationTreshold)
+            if (distanceToTarget < validationTreshold && isValidateEnabled)
             {
                 ToggleComponentInteract(ColorPad, false);
                 SendConfirm();

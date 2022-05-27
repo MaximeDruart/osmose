@@ -35,7 +35,7 @@ namespace extOSC
 
         private List<List<Vector2>> drawings;
 
-        private float[] validationThresholds = { 0.25f };
+        private float[] validationThresholds = { 0.25f, 0.25f, 0.25f };
 
         private int activeDrawing = 0;
 
@@ -70,10 +70,55 @@ namespace extOSC
                 new Vector2(5,4)
             };
 
-            // List<Vector2> secondDrawing = new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero };
+            List<Vector2> secondDrawing = new List<Vector2> {
+                new Vector2(0,1.7f),
+                new Vector2(0.5f,1),
+                new Vector2(1.5f,0),
+                new Vector2(1.5f,1),
+                new Vector2(0.9f,2),
+                new Vector2(0.5f,3),
+                new Vector2(1,3.5f),
+                new Vector2(1.8f,3),
+                new Vector2(2.8f,3),
+                new Vector2(2,4.2f),
+                new Vector2(3.4f,5),
+                new Vector2(4,4.7f),
+                new Vector2(4.5f,4),
+                new Vector2(3.8f,3),
+                new Vector2(4.6f,3),
+                new Vector2(6,3.2f),
+                new Vector2(5.5f,2),
+                new Vector2(5,1),
+                new Vector2(5,0),
+                new Vector2(6,1),
+                new Vector2(6.5f,1.7f),
+            };
 
+            List<Vector2> thirdDrawing = new List<Vector2> {
+                new Vector2(4.5f,2),
+                new Vector2(3,5),
+                new Vector2(3,3.8f),
+                new Vector2(2.2f,3),
+                new Vector2(1.2f,2),
+                new Vector2(0,2.5f),
+                new Vector2(1,3.5f),
+                new Vector2(2,3),
+                new Vector2(2.5f,2),
+                new Vector2(3,1),
+                new Vector2(3.8f,0),
+                new Vector2(4.5f,1),
+                new Vector2(5,2),
+                new Vector2(5.5f,3),
+                new Vector2(7,3.5f),
+                new Vector2(7,2),
+                new Vector2(6,2),
+                new Vector2(5,3),
+                new Vector2(4.2f,4),
+                new Vector2(5,5),
+                new Vector2(5.8f,4.2f),
+            };
 
-            drawings = new List<List<Vector2>> { firstDrawing };
+            drawings = new List<List<Vector2>> { firstDrawing, secondDrawing, thirdDrawing };
         }
 
         private void Update()
@@ -114,8 +159,18 @@ namespace extOSC
                     {
                         isDrawingEnabled = false;
                         bool drawingIsValid = isDrawingValid(drawings[activeDrawing]);
+
                         SendDrawing(points, drawingIsValid);
                         if (drawingIsValid) activeDrawing++;
+
+                        if (activeDrawing == drawings.Count)
+                        {
+                            isDrawingEnabled = false;
+                            TriggerCompleted();
+                        }
+
+
+                        StartCoroutine(UnDraw(2));
                     }
 
                 }
@@ -150,7 +205,6 @@ namespace extOSC
         {
             List<Vector2> newUserArray = GetMatchUserArray(drawing);
             float score = GetCompareScore(drawing, newUserArray);
-            Debug.Log(score);
             return score < validationThresholds[activeDrawing];
         }
 
@@ -253,27 +307,39 @@ namespace extOSC
             return Vector2.Distance(new Vector2(minX, minY), new Vector2(maxX, maxY));
         }
 
-        void UnDraw()
+        IEnumerator UnDraw(float delay)
         {
-            int initialPointsCount = points.Count;
-            bool[] hasRunForIndex = new bool[points.Count];
-            for (int i = 0; i < hasRunForIndex.Length; i++)
-                hasRunForIndex[i] = false;
+            yield return new WaitForSeconds(delay);
 
-            void onVirtualUpdate(int index)
-            {
-                if (hasRunForIndex[index]) return;
-                points.RemoveAt(index);
-                // UpdateLine(points);
-                lineRenderer.positionCount = points.Count;
-                hasRunForIndex[index] = true;
-            }
-            DOTween.SetTweensCapacity(initialPointsCount, initialPointsCount - 1);
-            var tween = DOVirtual.Int(initialPointsCount, 0, 3f, onVirtualUpdate);
-            tween.onComplete = () =>
+            points.Clear();
+            UpdateLine(new List<Vector2>());
+            UpdateLineTarget(new List<Vector2>());
+
+            if (drawings.Count != activeDrawing)
             {
                 isDrawingEnabled = true;
-            };
+            }
+
+
+            // int initialPointsCount = points.Count;
+            // bool[] hasRunForIndex = new bool[points.Count];
+            // for (int i = 0; i < hasRunForIndex.Length; i++)
+            //     hasRunForIndex[i] = false;
+
+            // void onVirtualUpdate(int index)
+            // {
+            //     if (hasRunForIndex[index]) return;
+            //     points.RemoveAt(index);
+            //     // UpdateLine(points);
+            //     lineRenderer.positionCount = points.Count;
+            //     hasRunForIndex[index] = true;
+            // }
+            // DOTween.SetTweensCapacity(initialPointsCount, initialPointsCount - 1);
+            // var tween = DOVirtual.Int(initialPointsCount, 0, 3f, onVirtualUpdate);
+            // tween.onComplete = () =>
+            // {
+            //     isDrawingEnabled = true;
+            // };
 
         }
 

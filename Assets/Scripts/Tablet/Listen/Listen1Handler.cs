@@ -16,14 +16,23 @@ namespace extOSC
     public class Listen1Handler : MonoBehaviour
     {
 
+        [Header("extOSC")]
         public OSCTransmitter Transmitter;
         public string Address = "/listen/frequency/done";
+
+
+        [Header("Listen Validation")]
         public Vector2 targetValue = new Vector2(0.1f, 0.3f);
 
         public float validationTreshold = 0.2f;
 
+        [Header("Circle Clamping")]
+
+        public float circleRadius = 1.1f;
 
 
+
+        [Header("Objects")]
 
         [SerializeField]
         private GameObject Pad1Obj;
@@ -36,7 +45,10 @@ namespace extOSC
         [SerializeField]
         private GameObject FreqSliderObj;
         private Component FreqSlider;
-        // Start is called before the first frame update
+
+        [Header("Debugging")]
+   
+        public bool isValidateEnabled = true;
 
         void Start()
         {
@@ -79,11 +91,15 @@ namespace extOSC
             Transmitter.Send(message);
         }
 
-        public void OnPadValueChange(Vector2 value)
+        public void OnPadValueChange(Vector2 inputValue)
         {
+
+            Vector2 value = ConstraintValueToCircle(inputValue);
+
             float distanceToTarget = Vector2.Distance(targetValue, value);
 
-            if (distanceToTarget < validationTreshold)
+
+            if (distanceToTarget < validationTreshold && isValidateEnabled)
             {
                 ToggleComponentInteract(Pad1, false);
                 ToggleComponentInteract(ColorPad, true);
@@ -92,6 +108,48 @@ namespace extOSC
                 SendConfirm();
             };
         }
+
+        private Vector2 ConstraintValueToCircle(Vector2 inputValue)
+        {
+
+            Vector2 clampedValue = GetPosInCircle(inputValue);
+
+            Type t = Pad1.GetType();
+            var p = t.GetProperty("Value");
+            Debug.Log(p);
+            Debug.Log(Pad1);
+            p.SetValue(Pad1, clampedValue);
+
+            return clampedValue;
+
+        }
+
+
+        private Vector2 GetPosInCircle(Vector2 position)
+        {
+            Vector2 newPos;
+            float distanceToCenter = Vector2.Distance(Vector2.zero, position);
+
+            if (distanceToCenter <= circleRadius)
+            {
+                return position;
+            }
+            else
+            {
+                newPos = position;
+                double doubleRad = Math.Atan2(position.y, position.x);
+
+                float radians = (float)doubleRad;
+
+                newPos = new Vector2(
+                    Mathf.Cos(radians) * circleRadius,
+                    Mathf.Sin(radians) * circleRadius
+                );
+
+                return newPos;
+            }
+        }
+
     }
 }
 
