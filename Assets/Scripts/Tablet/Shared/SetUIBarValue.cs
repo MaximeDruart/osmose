@@ -37,7 +37,7 @@ public class SetUIBarValue : MonoBehaviour
 
     void SetWidth(float width)
     {
-        ProgressionBarRect.sizeDelta = new Vector2(width * 0.01f * ProgressionContainerRect.rect.width, ProgressionContainerRect.rect.height);
+        ProgressionBarRect.sizeDelta = new Vector2(width * 0.01f * ProgressionContainerRect.rect.width, ProgressionBarRect.rect.height);
     }
 
     public void setText(float value)

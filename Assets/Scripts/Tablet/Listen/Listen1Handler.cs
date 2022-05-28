@@ -116,8 +116,6 @@ namespace extOSC
 
             Type t = Pad1.GetType();
             var p = t.GetProperty("Value");
-            Debug.Log(p);
-            Debug.Log(Pad1);
             p.SetValue(Pad1, clampedValue);
 
             return clampedValue;
