@@ -6,21 +6,27 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 
-public class ReceiveDrawing : MonoBehaviour {
+public class ValidateTempPressure : MonoBehaviour {
 
 
     [SerializeField] private GameObject CreatureObj;
-    private Material CreatureMat;
+    // private Material CreatureMat;
+
+    private float startX = -636f;
+    private float endX = -637.907f;
 
 
-    // private void Start() {
-    //     CreatureMat = CreatureObj.GetComponent<Renderer>().material;
-    //     CreatureMat.setFloat("_uOpacity", 0.6);
-    // }
 
-    // public void onValidTempPressure() {
-    //     Sequence mySequence = DOTween.Sequence();
-    //     mySequence.Append(CreatureObj.DOMoveX(x, 1));
-    //     CreatureMat.setFloat("_uOpacity", 1);
-    // }
+    private void Start() {
+        // CreatureMat = CreatureObj.GetComponent<Renderer>().material;
+        // CreatureMat.SetFloat("_uOpacity", 0.6f);
+        // CreatureObj.transform.DOMoveX(startX, 0.001f);
+
+    }
+
+    public void onValidTempPressure() {
+        Sequence mySequence = DOTween.Sequence();
+        // mySequence.Append(CreatureObj.transform.DOMoveX(endX, 1f));
+        // CreatureMat.SetFloat("_uOpacity", 1f);
+    }
 }
