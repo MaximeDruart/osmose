@@ -58,7 +58,7 @@ Material:
     m_Floats:
     - _Cloud_Brightness: 0.2
     - _Cloud_Power: 0.2
-    - _Distortion_Speed: 0.1
+    - _Distortion_Speed: 0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
