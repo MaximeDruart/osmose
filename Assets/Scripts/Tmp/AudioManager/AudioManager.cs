@@ -127,6 +127,6 @@ public class AudioManager : MonoBehaviour
         _amplitude = currentAmplitude / _amplitudeHighest;
         _amplitudeBuffer = currentAmplitudeBuffer / _amplitudeHighest;
 
-        Debug.Log(_amplitudeBuffer);
+        // Debug.Log(_amplitudeBuffer);
     }
 }
