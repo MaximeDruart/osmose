@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace extOSC.Examples
 {
-    public class listenImpulse : MonoBehaviour
+    public class ListenImpulse : MonoBehaviour
     {
         // Start is called before the first frame update
         [SerializeField]

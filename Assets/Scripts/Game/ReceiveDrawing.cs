@@ -24,6 +24,8 @@ namespace extOSC
         public GameObject Brush;
         public GameObject LineObject;
 
+        public GameObject Loader;
+
 
         public GameObject Canvas;
 
@@ -53,7 +55,6 @@ namespace extOSC
         // Start is called before the first frame update
         void Start()
         {
-            Debug.Log(LineObject);
             lineRenderer = LineObject.GetComponent<LineRenderer>();
             DotBackground = gameObject.GetComponent<Image>();
 
@@ -61,6 +62,7 @@ namespace extOSC
 
             Canvas.transform.localScale = Vector3.zero;
             DotBackground.color = new Color32(160, 197, 255, 0);
+            Loader.transform.localScale = Vector3.zero;
 
             FirstDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
             SecondDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
@@ -109,31 +111,43 @@ namespace extOSC
 
         void OnReceive(bool isValid)
         {
-            // UpdateLine(points);
             lineRenderer.positionCount = points.Count;
             Sequence mySequence = DOTween.Sequence();
+            mySequence.Append(Canvas.transform.DOScale(Vector3.one * 0.15f, 0.3f));
+            mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 103), 0.6f));
+            mySequence.AppendCallback(() => StartCoroutine(AnimateLine()));
+            var tween = mySequence.Append(Loader.transform.DOScale(Vector3.one * 0.18f, 0.3f))
+            .OnStart(() => Loader.transform.DOLocalRotate(new Vector3(0, 600, 0), 6.6f).SetEase(Ease.Linear));
 
-            mySequence.Append(Canvas.transform.DOScale(Vector3.one * 0.15f, 1f));
-            mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 103), 1f));
-            if (isValid) {
+            if (isValid)
+            {
                 mySequence.AppendCallback(UpdateCreatureDrawing);
             }
-            mySequence.AppendInterval(2f);
+            mySequence.AppendInterval(6f);
+            mySequence.Append(Loader.transform.DOScale(Vector3.zero, 0.3f));
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 0), 1f));
             mySequence.Append(Canvas.transform.DOScale(Vector3.zero, 1f));
+            mySequence.AppendCallback(ClearDrawing);
 
             IncrementText();
-            StartCoroutine(AnimateLine());
 
         }
 
-        void UpdateCreatureDrawing() {
-            if (activeDrawing == 1) {
+        void ClearDrawing()
+        {
+            lineRenderer.positionCount = 0;
+        }
+
+        void UpdateCreatureDrawing()
+        {
+            if (activeDrawing == 1)
+            {
                 FirstDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
                 SecondDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
                 ThirdDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
             }
-            if (activeDrawing == 2) {
+            if (activeDrawing == 2)
+            {
                 FirstDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
                 SecondDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
                 ThirdDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
@@ -154,14 +168,16 @@ namespace extOSC
 
         private IEnumerator AnimateLine()
         {
-            yield return new WaitForSeconds(2);
             float segmentDuration = animationDuration / points.Count;
+            lineRenderer.SetPosition(0, points[0]);
+
 
             for (int i = 0; i < points.Count - 1; i++)
             {
                 float startTime = Time.time;
 
                 Vector3 startPosition = points[i];
+                Debug.Log(startPosition);
                 Vector3 endPosition = points[i + 1];
 
                 Vector3 pos = startPosition;
@@ -169,6 +185,7 @@ namespace extOSC
                 {
                     float t = (Time.time - startTime) / segmentDuration;
                     pos = Vector3.Lerp(startPosition, endPosition, t);
+                    Debug.Log(pos);
 
                     // animate all other points except point at index i
                     for (int j = i + 1; j < points.Count; j++)

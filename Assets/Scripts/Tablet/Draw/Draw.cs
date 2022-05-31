@@ -1,10 +1,9 @@
-using UnityEngine;
-using UnityEngine.Events;
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace extOSC
 {
@@ -160,7 +159,7 @@ namespace extOSC
                         isDrawingEnabled = false;
                         bool drawingIsValid = isDrawingValid(drawings[activeDrawing]);
 
-                        SendDrawing(points, drawingIsValid);
+                        SendDrawing(GetNormalizedPointsToSend(points), drawingIsValid);
                         if (drawingIsValid) activeDrawing++;
 
                         if (activeDrawing == drawings.Count)
@@ -175,6 +174,20 @@ namespace extOSC
 
                 }
             }
+        }
+
+        List<Vector2> GetNormalizedPointsToSend(List<Vector2> _points)
+        {
+
+            Vector2[] newUserArray = new Vector2[_points.Count];
+
+            // making sure the first point is in 0/0
+            for (int i = 0; i < _points.Count; i++)
+            {
+                newUserArray[i] = points[i] - _points[0];
+            }
+
+            return newUserArray.ToList();
         }
 
         void UpdateLine(List<Vector2> _points)
