@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 public class ToDoModule : MonoBehaviour
 {
@@ -25,7 +25,7 @@ public class ToDoModule : MonoBehaviour
         mySequence.Append(innerCircleMaterial.DOFade(0.3f, 0.5f));
         mySequence.Append(innerCircleMaterial.DOFade(0.8f, 0.5f));
         mySequence.Append(innerCircleMaterial.DOFade(0.3f, 0.5f));
-        mySequence.Append(innerCircleMaterial.DOFade(0.8f, 0.5f));
+        mySequence.Append(innerCircleMaterial.DOFade(1f, 0.5f));
 
 
         mySequence.AppendCallback(() =>
