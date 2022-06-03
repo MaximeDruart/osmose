@@ -512,7 +512,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 0
   m_FillMethod: 4
-  m_FillAmount: 0.359476
+  m_FillAmount: 0.119
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -5178,6 +5178,7 @@ GameObject:
   - component: {fileID: 582234725}
   - component: {fileID: 582234727}
   - component: {fileID: 582234726}
+  - component: {fileID: 582234728}
   m_Layer: 5
   m_Name: Rotary
   m_TagString: Untagged
@@ -5268,7 +5269,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 29352471}
-  _value: 0.316
+  _value: 0
   _maxValue: 1
   _minValue: 0
   _handleImage: {fileID: 29352471}
@@ -5287,11 +5288,52 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 582234728}
+        m_TargetAssemblyTypeName: HandleTemperature, Assembly-CSharp
+        m_MethodName: checkForValidation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _wholeNumbers: 0
   _resetValue: 0
   _resetValueTime: 0
   _callbackOnReset: 0
   _reverse: 0
+--- !u!114 &582234728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582234724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3a2d9612631a84380c2a1c67f221b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetValue: 0.51
+  validationRange: 0.1
+  validateTemperature:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 847485319}
+        m_TargetAssemblyTypeName: ValidateEnvironment, Assembly-CSharp
+        m_MethodName: ValidateTemperature
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &601887613
 GameObject:
   m_ObjectHideFlags: 0
@@ -7057,6 +7099,7 @@ GameObject:
   - component: {fileID: 847485316}
   - component: {fileID: 847485318}
   - component: {fileID: 847485317}
+  - component: {fileID: 847485319}
   m_Layer: 5
   m_Name: EnvironmentContainer
   m_TagString: Untagged
@@ -7126,6 +7169,45 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847485315}
   m_CullTransparentMesh: 1
+--- !u!114 &847485319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847485315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdeaa97359a6fe4e9c2bc0e152f649a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onValidation:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 773149742}
+        m_TargetAssemblyTypeName: UIWarning, Assembly-CSharp
+        m_MethodName: EndWarning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 167396990}
+        m_TargetAssemblyTypeName: ToDoModule, Assembly-CSharp
+        m_MethodName: SetIsDone
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &862017344
 GameObject:
   m_ObjectHideFlags: 0
@@ -10441,6 +10523,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Transmitter: {fileID: 1853618885}
   Address: /pressure
+  CorrectValue: 4
+  setValidationStatus:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 847485319}
+        m_TargetAssemblyTypeName: ValidateEnvironment, Assembly-CSharp
+        m_MethodName: ValidatePressure
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1324948148
 GameObject:
   m_ObjectHideFlags: 0

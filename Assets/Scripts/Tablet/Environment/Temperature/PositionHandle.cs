@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PositionHandle : MonoBehaviour
@@ -11,7 +9,6 @@ public class PositionHandle : MonoBehaviour
     private RectTransform rect;
 
     private float fullRotationDeg = 270;
-
 
 
     void Start()

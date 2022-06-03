@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace extOSC.Examples
 {
@@ -17,6 +14,9 @@ namespace extOSC.Examples
         int motorAmount = 6;
         bool[] motorState = new bool[] { false, false, false, false, false, false };
 
+        public int CorrectValue = 4;
+        public UnityEvent<bool> setValidationStatus;
+
         void Start()
         {
 
@@ -27,14 +27,20 @@ namespace extOSC.Examples
             var message = new OSCMessage(Address);
             motorState[index] = isOn;
 
-            message.AddValue(OSCValue.Float(getTempValue()));
+            setValidationStatus.Invoke((GetNoOfActivatedMotors() == CorrectValue));
+
+            message.AddValue(OSCValue.Float(GetTempValue()));
             Transmitter.Send(message);
         }
+
+
 
         public void SendArray()
         {
             OSCMessage message = new OSCMessage(Address);
             var array = OSCValue.Array();
+
+            setValidationStatus.Invoke((GetNoOfActivatedMotors() == CorrectValue));
 
             foreach (bool isActivated in motorState)
             {
@@ -46,12 +52,21 @@ namespace extOSC.Examples
         }
 
 
-        private float getTempValue()
+        private float GetTempValue()
         {
             float temp = 0f;
             foreach (var motorIsActivated in motorState)
             {
                 if (motorIsActivated) temp += (1 / (float)motorAmount);
+            }
+            return temp;
+        }
+        private int GetNoOfActivatedMotors()
+        {
+            int temp = 0;
+            foreach (var motorIsActivated in motorState)
+            {
+                if (motorIsActivated) temp++;
             }
             return temp;
         }
