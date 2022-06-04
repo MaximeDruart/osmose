@@ -12,6 +12,7 @@ namespace extOSC.Examples
         public string Address = "/pressure";
 
         int motorAmount = 6;
+
         bool[] motorState = new bool[] { false, false, false, false, false, false };
 
         public int CorrectValue = 4;

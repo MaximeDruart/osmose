@@ -39,6 +39,9 @@ public class ValidateEnvironment : MonoBehaviour
 
     private void Validate()
     {
-        if (isTempValidated && isPressureValidated) onValidation.Invoke();
+        if (isTempValidated && isPressureValidated)
+        {
+            onValidation.Invoke();
+        }
     }
 }

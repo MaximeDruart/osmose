@@ -30,7 +30,7 @@ public class UIWarning : MonoBehaviour
     void Update()
     {
 
-        t += isWarning ? 0.05f : -0.05f;
+        t += isWarning ? 0.15f : -0.15f;
 
         Color actualColor = Color.Lerp(borderStandardColor, borderWarningColor, t);
 

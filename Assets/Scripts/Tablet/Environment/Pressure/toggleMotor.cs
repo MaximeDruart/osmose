@@ -37,6 +37,8 @@ namespace extOSC.Examples
             BackgroundImage = Background.GetComponent<Image>();
 
             ToggleAnimation(0);
+            // sending the current state to the handler at the start so we can start w/ activated and deactivated motors
+            onToggle.Invoke(isOn, index);
         }
 
         public void OnPointerClick(PointerEventData data)
