@@ -18,20 +18,41 @@ namespace extOSC.Examples
         public int CorrectValue = 4;
         public UnityEvent<bool> setValidationStatus;
 
-        void Start()
-        {
+        public AudioClip audioOn;
+        public AudioClip audioOff;
 
+        private AudioSource audioSource;
+
+        void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
         }
 
-        public void SendTemp(bool isOn, int index)
+        public void SendTemp(bool isOn, int index, bool isInitial = false)
         {
             var message = new OSCMessage(Address);
             motorState[index] = isOn;
 
             setValidationStatus.Invoke((GetNoOfActivatedMotors() == CorrectValue));
 
+            if (!isInitial) TriggerAudio(isOn);
+
             message.AddValue(OSCValue.Float(GetTempValue()));
             Transmitter.Send(message);
+        }
+
+
+        private void TriggerAudio(bool isOn)
+        {
+            if (isOn)
+            {
+                audioSource.PlayOneShot(audioOn, 0.6f);
+            }
+            else
+            {
+                audioSource.PlayOneShot(audioOff, 0.6f);
+
+            }
         }
 
 

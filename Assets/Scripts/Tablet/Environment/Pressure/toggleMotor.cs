@@ -15,7 +15,7 @@ namespace extOSC.Examples
 
         public int index = 0;
 
-        public UnityEvent<bool, int> onToggle;
+        public UnityEvent<bool, int, bool> onToggle;
 
         [Header("Game Objects")]
         public GameObject MiddleDot;
@@ -38,14 +38,14 @@ namespace extOSC.Examples
 
             ToggleAnimation(0);
             // sending the current state to the handler at the start so we can start w/ activated and deactivated motors
-            onToggle.Invoke(isOn, index);
+            onToggle.Invoke(isOn, index, true);
         }
 
         public void OnPointerClick(PointerEventData data)
         {
             isOn = !isOn;
             ToggleAnimation();
-            onToggle.Invoke(isOn, index);
+            onToggle.Invoke(isOn, index, false);
         }
 
         void ToggleAnimation(float duration = 0.5f)
