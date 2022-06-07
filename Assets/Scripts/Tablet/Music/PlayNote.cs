@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
 
 public class PlayNote : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
@@ -16,13 +16,13 @@ public class PlayNote : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     [SerializeField] private float animationSpeed = 0.01f;
     [SerializeField] private GameObject innerCircle;
-    [SerializeField] private GameObject points;
+    [SerializeField] private GameObject innerCircle2;
 
     private RectTransform innerCircleRect;
-    private RectTransform pointsRect;
+    private RectTransform innerCircle2Rect;
 
     private float innerCircleRectStartSize;
-    private float pointsRectStartSize;
+    private float innerCircle2RectStartSize;
 
     public UnityEvent<bool> playFunction;
 
@@ -31,10 +31,10 @@ public class PlayNote : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     void Start()
     {
         innerCircleRect = innerCircle.GetComponent<RectTransform>();
-        pointsRect = points.GetComponent<RectTransform>();
+        innerCircle2Rect = innerCircle2.GetComponent<RectTransform>();
 
         innerCircleRectStartSize = innerCircleRect.rect.width;
-        pointsRectStartSize = pointsRect.rect.width;
+        innerCircle2RectStartSize = innerCircle2Rect.rect.width;
 
     }
 
@@ -53,7 +53,7 @@ public class PlayNote : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     void UpdateAnim(float progress)
     {
         innerCircleRect.sizeDelta = Vector2.Lerp(new Vector2(innerCircleRectStartSize, innerCircleRectStartSize), new Vector2(65, 65), progress);
-        pointsRect.sizeDelta = Vector2.Lerp(new Vector2(pointsRectStartSize, pointsRectStartSize), new Vector2(52, 52), progress);
+        innerCircle2Rect.sizeDelta = Vector2.Lerp(new Vector2(innerCircle2RectStartSize, innerCircle2RectStartSize), new Vector2(52, 52), progress);
     }
 
     public void OnPointerDown(PointerEventData eventData)

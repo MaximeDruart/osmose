@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 
 public class SetUIBarValue : MonoBehaviour
@@ -30,8 +30,7 @@ public class SetUIBarValue : MonoBehaviour
         ProgressionContainerRect = ProgressionContainer.GetComponent<RectTransform>();
         ProgressionBarRect = ProgressionBar.GetComponent<RectTransform>();
 
-        setText(value);
-        SetWidth(value);
+        SetValue(value);
     }
 
 
@@ -40,8 +39,14 @@ public class SetUIBarValue : MonoBehaviour
         ProgressionBarRect.sizeDelta = new Vector2(width * 0.01f * ProgressionContainerRect.rect.width, ProgressionBarRect.rect.height);
     }
 
-    public void setText(float value)
+    void setText(float value)
     {
         text.text = value.ToString();
+    }
+
+    public void SetValue(float value)
+    {
+        setText(value);
+        SetWidth(value);
     }
 }

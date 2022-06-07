@@ -116,7 +116,7 @@ namespace extOSC
             mySequence.Append(Canvas.transform.DOScale(Vector3.one * 0.15f, 0.3f));
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 103), 0.6f));
             mySequence.AppendCallback(() => StartCoroutine(AnimateLine()));
-            var tween = mySequence.Append(Loader.transform.DOScale(Vector3.one * 0.18f, 0.3f))
+            var tween = mySequence.Append(Loader.transform.DOScale(Vector3.one * 50f, 0.3f))
             .OnStart(() => Loader.transform.DOLocalRotate(new Vector3(0, 600, 0), 6.6f).SetEase(Ease.Linear));
 
             if (isValid)

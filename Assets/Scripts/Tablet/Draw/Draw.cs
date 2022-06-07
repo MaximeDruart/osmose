@@ -23,7 +23,13 @@ namespace extOSC
         public GameObject lineTargetObject;
         public bool showPreview = false;
 
+        [Space(10)]
+
+        public GameObject Loader;
+        private Vector3 LoaderInitialScale;
+
         public UnityEvent<bool> onCompleted;
+
 
         private LineRenderer lineRenderer;
         private LineRenderer lineTargetRenderer;
@@ -31,6 +37,7 @@ namespace extOSC
         private List<Vector2> points = new List<Vector2>();
 
         private bool isDrawingEnabled = true;
+
 
         private List<List<Vector2>> drawings;
 
@@ -44,7 +51,9 @@ namespace extOSC
             lineRenderer = lineObject.GetComponent<LineRenderer>();
             lineTargetRenderer = lineTargetObject.GetComponent<LineRenderer>();
 
-            // N shape drawing
+            LoaderInitialScale = Loader.transform.localScale;
+            Loader.transform.localScale = Vector3.zero;
+
             List<Vector2> firstDrawing = new List<Vector2> {
                 new Vector2(1,4),
                 new Vector2(2,5),
@@ -127,6 +136,11 @@ namespace extOSC
 
         }
 
+        private void FixedUpdate()
+        {
+            Loader.transform.Rotate(0, Time.deltaTime * 45f, 0);
+        }
+
         void AddPoint()
         {
             if (Input.GetMouseButton(0))
@@ -157,19 +171,22 @@ namespace extOSC
                     if (isDrawingEnabled)
                     {
                         isDrawingEnabled = false;
-                        bool drawingIsValid = isDrawingValid(drawings[activeDrawing]);
+                        ToggleLoading(true);
 
+
+                        bool drawingIsValid = isDrawingValid(drawings[activeDrawing]);
                         SendDrawing(GetNormalizedPointsToSend(points), drawingIsValid);
                         if (drawingIsValid) activeDrawing++;
+
+
+                        StartCoroutine(UnDraw(8));
+
 
                         if (activeDrawing == drawings.Count)
                         {
                             isDrawingEnabled = false;
                             TriggerCompleted();
                         }
-
-
-                        StartCoroutine(UnDraw(2));
                     }
 
                 }
@@ -179,15 +196,39 @@ namespace extOSC
         List<Vector2> GetNormalizedPointsToSend(List<Vector2> _points)
         {
 
-            Vector2[] newUserArray = new Vector2[_points.Count];
+            float scale = 5f;
+
+            List<Vector2> drawingCopy = _points.ConvertAll(vec => new Vector2(vec.x, vec.y));
 
             // making sure the first point is in 0/0
-            for (int i = 0; i < _points.Count; i++)
+
+            Vector2 lowestPoint = new Vector2(drawingCopy[0].x, drawingCopy[0].y);
+            Vector2 highestPoint = new Vector2(drawingCopy[0].x, drawingCopy[0].y);
+
+            for (int i = 0; i < drawingCopy.Count; i++)
             {
-                newUserArray[i] = points[i] - _points[0];
+                if (drawingCopy[i].x < lowestPoint.x) lowestPoint.x = drawingCopy[i].x;
+                if (drawingCopy[i].x > highestPoint.x) highestPoint.x = drawingCopy[i].x;
+                if (drawingCopy[i].y < lowestPoint.y) lowestPoint.y = drawingCopy[i].y;
+                if (drawingCopy[i].y > highestPoint.y) highestPoint.y = drawingCopy[i].y;
             }
 
-            return newUserArray.ToList();
+            for (int i = 0; i < drawingCopy.Count; i++)
+            {
+                drawingCopy[i] = points[i] - lowestPoint;
+            }
+
+
+            float diagonal = GetDiagonal(_points);
+
+
+            for (int i = 0; i < drawingCopy.Count; i++)
+            {
+                drawingCopy[i] *= (scale / diagonal);
+            }
+
+
+            return drawingCopy;
         }
 
         void UpdateLine(List<Vector2> _points)
@@ -214,13 +255,6 @@ namespace extOSC
             onCompleted.Invoke(true);
         }
 
-        bool isDrawingValid(List<Vector2> drawing)
-        {
-            List<Vector2> newUserArray = GetMatchUserArray(drawing);
-            float score = GetCompareScore(drawing, newUserArray);
-            return score < validationThresholds[activeDrawing];
-        }
-
         void SendDrawing(List<Vector2> _points, bool isValid)
         {
             OSCMessage message = new OSCMessage(BaseAddress);
@@ -235,6 +269,14 @@ namespace extOSC
             message.AddValue(array);
             Transmitter.Send(message);
         }
+
+        bool isDrawingValid(List<Vector2> drawing)
+        {
+            List<Vector2> newUserArray = GetMatchUserArray(drawing);
+            float score = GetCompareScore(drawing, newUserArray);
+            return score < validationThresholds[activeDrawing];
+        }
+
 
         // Reduces the user array to have the same amount of points as the stored drawing
         List<Vector2> GetMatchUserArray(List<Vector2> drawing)
@@ -328,33 +370,28 @@ namespace extOSC
             UpdateLine(new List<Vector2>());
             UpdateLineTarget(new List<Vector2>());
 
+            ToggleLoading(false);
             if (drawings.Count != activeDrawing)
             {
                 isDrawingEnabled = true;
             }
 
-
-            // int initialPointsCount = points.Count;
-            // bool[] hasRunForIndex = new bool[points.Count];
-            // for (int i = 0; i < hasRunForIndex.Length; i++)
-            //     hasRunForIndex[i] = false;
-
-            // void onVirtualUpdate(int index)
-            // {
-            //     if (hasRunForIndex[index]) return;
-            //     points.RemoveAt(index);
-            //     // UpdateLine(points);
-            //     lineRenderer.positionCount = points.Count;
-            //     hasRunForIndex[index] = true;
-            // }
-            // DOTween.SetTweensCapacity(initialPointsCount, initialPointsCount - 1);
-            // var tween = DOVirtual.Int(initialPointsCount, 0, 3f, onVirtualUpdate);
-            // tween.onComplete = () =>
-            // {
-            //     isDrawingEnabled = true;
-            // };
-
         }
 
+        void ToggleLoading(bool isTrue)
+        {
+            if (isTrue)
+            {
+                Loader.transform.rotation = Quaternion.Euler(Loader.transform.rotation.x, 0, Loader.transform.rotation.z);
+
+                Loader.transform.DOScale(LoaderInitialScale, 0.2f);
+                lineRenderer.material.DOColor(new Color32(85, 125, 154, 255), 0.3f);
+            }
+            else
+            {
+                Loader.transform.DOScale(Vector3.zero, 0.2f);
+                lineRenderer.material.DOColor(new Color32(0, 147, 255, 255), 0.3f);
+            }
+        }
     }
 }
