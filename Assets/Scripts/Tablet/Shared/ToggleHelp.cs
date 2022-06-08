@@ -10,15 +10,18 @@ public class ToggleHelp : MonoBehaviour
 
     public GameObject Sidebar;
     private RectTransform SidebarRect;
+    public GameObject Content;
+    private RectTransform ContentRect;
 
     private Sequence mySequence;
     // Start is called before the first frame update
     void Start()
     {
         SidebarRect = Sidebar.GetComponent<RectTransform>();
-        mySequence = DOTween.Sequence();
-        mySequence.Append(SidebarRect.DOLocalMoveX(120, 0.3f));
-        mySequence.Pause();
+        ContentRect = Content.GetComponent<RectTransform>();
+        // mySequence = DOTween.Sequence();
+        // mySequence.Append(SidebarRect.DOLocalMoveX(120, 0.3f));
+        // mySequence.Pause();
     }
 
     // Update is called once per frame
@@ -33,6 +36,7 @@ public class ToggleHelp : MonoBehaviour
         if (!isOpened)
         {
             Debug.Log("playing !!");
+            SidebarRect.DOLocalMoveX(120, 0.3f);
             mySequence.Play();
         }
         else
