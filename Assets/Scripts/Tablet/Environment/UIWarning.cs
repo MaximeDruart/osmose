@@ -30,16 +30,19 @@ public class UIWarning : MonoBehaviour
     void Update()
     {
 
-        t += isWarning ? 0.15f : -0.15f;
+        t += isWarning ? 0.008f : -0.008f;
+        t = Mathf.Clamp01(t);
+
 
         Color actualColor = Color.Lerp(borderStandardColor, borderWarningColor, t);
+        Color actualBgColor = Color.Lerp(Color.white, Color.red, t);
 
-        float intensity = extOSC.OSCUtilities.Map(Mathf.Sin(Time.time * 2f), -1, 1, 0.4f, 1) * hdrIntensity;
+        float intensity = extOSC.OSCUtilities.Map(Mathf.Sin(Time.time * 2f), -1, 1, 0.6f, 1) * hdrIntensity;
 
         if (!isWarning) intensity = 1;
 
         borderMaterial.SetColor("_Color", actualColor * intensity);
-        // bgMaterial.color = Color.Lerp(Color.white, Color.red * intensity, t);
+        bgMaterial.color = actualBgColor * intensity;
     }
 
     public void EndWarning()
