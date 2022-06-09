@@ -1,19 +1,16 @@
 
 using System;
-using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-
-using extOSC.Core.Reflection;
+using DG.Tweening;
 using extOSC.UI;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 
 namespace extOSC
 {
 
-    public class Listen1Handler : MonoBehaviour
+    public class Listen1Handler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
 
         [Header("extOSC")]
@@ -46,9 +43,21 @@ namespace extOSC
         private GameObject FreqSliderObj;
         private Component FreqSlider;
 
+        [Header("Audio")]
+
+
+        [SerializeField] private AudioSource audioSourceNormal;
+        [SerializeField] private AudioSource audioSourceDistorted;
+        [SerializeField] private float maxDistortionDistance = 3;
+
+        private float volumeMix = 0;
+
+
         [Header("Debugging")]
-   
+
         public bool isValidateEnabled = true;
+
+
 
         void Start()
         {
@@ -98,6 +107,8 @@ namespace extOSC
 
             float distanceToTarget = Vector2.Distance(targetValue, value);
 
+            HandleAudio(distanceToTarget);
+
 
             if (distanceToTarget < validationTreshold && isValidateEnabled)
             {
@@ -108,6 +119,8 @@ namespace extOSC
                 SendConfirm();
             };
         }
+
+
 
         private Vector2 ConstraintValueToCircle(Vector2 inputValue)
         {
@@ -148,6 +161,30 @@ namespace extOSC
             }
         }
 
+
+        private void HandleAudio(float distance)
+        {
+            volumeMix = OSCUtilities.Map(distance, 0, maxDistortionDistance, 0, 1, true);
+
+            audioSourceNormal.volume = 1 - volumeMix;
+            audioSourceDistorted.volume = volumeMix;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (!audioSourceNormal.isPlaying)
+            {
+                audioSourceNormal.Play();
+                audioSourceDistorted.Play();
+            };
+            audioSourceNormal.DOFade(1 - volumeMix, 0.5f);
+            audioSourceDistorted.DOFade(volumeMix, 0.5f);
+        }
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            audioSourceNormal.DOFade(0, 0.5f);
+            audioSourceDistorted.DOFade(0, 0.5f);
+        }
     }
 }
 
