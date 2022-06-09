@@ -28,6 +28,10 @@ public class ToggleHelp : MonoBehaviour
 
     public TMP_Text text;
 
+    [Space(10)]
+
+    public BoolVariable HelpIsOpened;
+
 
     private Sequence mySequence;
     // Start is called before the first frame update
@@ -56,12 +60,13 @@ public class ToggleHelp : MonoBehaviour
     public void Toggle(bool _)
     {
         isOpened = !isOpened;
+        HelpIsOpened.Value = isOpened;
         ToggleImage();
         if (isOpened)
         {
 
             Sequence mySeq = DOTween.Sequence();
-            ContainerRect.DOLocalMoveX(-663, 0.3f);
+            ContainerRect.DOLocalMoveX(-428, 0.3f);
             Content.GetComponent<Image>().DOFade(1f, 0.3f);
             Content.SetActive(true);
             PlaneFilterMat.DOFade(0.8f, 0.3f);

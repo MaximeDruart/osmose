@@ -29,6 +29,7 @@ namespace extOSC
         private Vector3 LoaderInitialScale;
 
         public UnityEvent<bool> onCompleted;
+        public BoolVariable HelpIsOpened;
 
 
         private LineRenderer lineRenderer;
@@ -151,6 +152,7 @@ namespace extOSC
                 {
                     if (hit.transform.name != "DrawingBoard") return;
                     if (!isDrawingEnabled) return;
+                    if (HelpIsOpened.Value) return;
 
                     Vector2 vec2HitPoint = new Vector2(hit.point.x, hit.point.y);
 
