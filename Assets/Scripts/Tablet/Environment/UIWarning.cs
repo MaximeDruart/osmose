@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class UIWarning : MonoBehaviour
     public Color borderWarningColor;
     public Color borderStandardColor;
     public GameObject background;
+    public GameObject TitleBackground;
+    public GameObject TitleBackgroundMaterial;
+    public TMP_Text TitleText;
 
     [SerializeField]
     private float hdrIntensity;

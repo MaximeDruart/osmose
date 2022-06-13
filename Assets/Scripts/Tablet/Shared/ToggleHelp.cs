@@ -66,10 +66,10 @@ public class ToggleHelp : MonoBehaviour
         {
 
             Sequence mySeq = DOTween.Sequence();
-            ContainerRect.DOLocalMoveX(-428, 0.3f);
-            Content.GetComponent<Image>().DOFade(1f, 0.3f);
-            Content.SetActive(true);
-            PlaneFilterMat.DOFade(0.8f, 0.3f);
+            mySeq.Append(ContainerRect.DOLocalMoveX(-428, 0.3f));
+            mySeq.Join(PlaneFilterMat.DOFade(0.8f, 0.3f));
+            mySeq.AppendCallback(() => Content.SetActive(true));
+            mySeq.Append(Content.GetComponent<Image>().DOFade(1f, 0.3f));
 
 
 
