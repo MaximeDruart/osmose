@@ -17,6 +17,7 @@ namespace extOSC.Examples
         [Header("extOSC")]
 
         public OSCTransmitter Transmitter;
+        public string Address = "/motion";
 
         [Header("Game Objects")]
 
@@ -36,6 +37,9 @@ namespace extOSC.Examples
 
         [Space(10)]
         public BoolVariable HelpIsOpened;
+
+        public float motionDuration = 5f;
+
 
 
 
@@ -76,14 +80,26 @@ namespace extOSC.Examples
             mySequence.Append(Trail.GetComponent<Image>().DOFade(0f, 0.6f));
             mySequence.Join(LineProgression.GetComponent<Image>().DOFade(0f, 0.6f));
             mySequence.Join(Thumb.GetComponent<Image>().DOFade(0f, 0.6f));
+            mySequence.AppendCallback(SendMessage);
+
+            mySequence.AppendInterval(motionDuration);
 
             mySequence.Append(Background.GetComponent<Image>().DOFade(0f, 0.6f));
 
-            mySequence.OnComplete(() =>
-            {
-                Canvas.SetActive(false);
-                HelpIsOpened.Value = false;
-            });
+            mySequence.OnComplete(OnComplete);
+        }
+
+        private void SendMessage()
+        {
+            var message = new OSCMessage(Address);
+            message.AddValue(OSCValue.Impulse());
+
+            Transmitter.Send(message);
+        }
+        private void OnComplete()
+        {
+            Canvas.SetActive(false);
+            HelpIsOpened.Value = false;
         }
 
         public void OnPointerDown(PointerEventData eventData)
