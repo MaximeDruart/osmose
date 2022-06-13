@@ -11,8 +11,11 @@ public class SetResolution : MonoBehaviour
     [Range(0.1f, 1f)]
     public float resolutionPct = 0.6f;
 
+    public bool isActivated = false;
+
     void Start()
     {
+        if (!isActivated) return;
         // Application.TargetFramerate = 60;
         // matching the surface format which is 3/2;
         // native resolution is 2736 * 1824 which leads to low fps so we're aiming for less
