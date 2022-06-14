@@ -1,12 +1,32 @@
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class TriggerMotion : MonoBehaviour
 {
 
+    private VideoPlayer videoPlayer;
+    private AudioSource audioSource;
+    public GameObject Filter;
+
+    private void Start()
+    {
+        videoPlayer = GetComponent<VideoPlayer>();
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.volume = 0;
+    }
 
     public void TriggerAnim()
     {
         // play motion
         // then hide it
+        audioSource.volume = 1;
+        videoPlayer.Play();
+        videoPlayer.loopPointReached += (VideoPlayer vp) =>
+        {
+            Filter.GetComponent<Renderer>().material.DOFade(0f, 0.6f);
+            gameObject.SetActive(false);
+        };
     }
 }
