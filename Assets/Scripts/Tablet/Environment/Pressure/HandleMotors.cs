@@ -10,6 +10,7 @@ namespace extOSC.Examples
         [Header("OSC Settings")]
         public OSCTransmitter Transmitter;
         public string Address = "/pressure";
+        public string AddressCompleted = "/pressure/completed";
 
         int motorAmount = 6;
 
@@ -33,11 +34,43 @@ namespace extOSC.Examples
             var message = new OSCMessage(Address);
             motorState[index] = isOn;
 
-            setValidationStatus.Invoke((GetNoOfActivatedMotors() == CorrectValue));
+            bool isValid = GetNoOfActivatedMotors() == CorrectValue;
+            setValidationStatus.Invoke(isValid);
+            if (isValid) SendConfirmationMessage();
+
 
             if (!isInitial) TriggerAudio(isOn);
 
             message.AddValue(OSCValue.Float(GetTempValue()));
+            Transmitter.Send(message);
+        }
+
+
+        public void SendArray()
+        {
+            OSCMessage message = new OSCMessage(Address);
+            var array = OSCValue.Array();
+
+            bool isValid = GetNoOfActivatedMotors() == CorrectValue;
+            setValidationStatus.Invoke(isValid);
+            if (isValid) SendConfirmationMessage();
+
+
+
+            foreach (bool isActivated in motorState)
+            {
+                array.AddValue(OSCValue.Bool(isActivated));
+            }
+
+            message.AddValue(array);
+            Transmitter.Send(message);
+        }
+
+        void SendConfirmationMessage()
+        {
+            OSCMessage message = new OSCMessage(Address);
+
+            message.AddValue(OSCValue.Impulse());
             Transmitter.Send(message);
         }
 
@@ -57,21 +90,7 @@ namespace extOSC.Examples
 
 
 
-        public void SendArray()
-        {
-            OSCMessage message = new OSCMessage(Address);
-            var array = OSCValue.Array();
 
-            setValidationStatus.Invoke((GetNoOfActivatedMotors() == CorrectValue));
-
-            foreach (bool isActivated in motorState)
-            {
-                array.AddValue(OSCValue.Bool(isActivated));
-            }
-
-            message.AddValue(array);
-            Transmitter.Send(message);
-        }
 
 
         private float GetTempValue()

@@ -1,32 +1,75 @@
-using UnityEngine;
-using UnityEngine.Events;
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using UnityEngine;
+using UnityEngine.Events;
 
-public class ValidateTempPressure : MonoBehaviour {
+namespace extOSC.Examples
+{
+    public class ValidateTempPressure : MonoBehaviour
+    {
+
+        public OSCReceiver Receiver;
+        public string TemperatureAddress = "/temp";
+        public string TemperatureAddressCompleted = "/temp/completed";
+        public string PressureAddress = "/pressure";
+        public string PressureAddressCompleted = "/pressure/completed";
+
+        private bool[] motorState = new bool[] { false, false, false, false, false, false };
+
+        public GameObject[] motorObjects;
+
+        [SerializeField] private Animator animator;
 
 
-    [SerializeField] private GameObject CreatureObj;
-    // private Material CreatureMat;
+        private void Start()
+        {
+            Receiver.Bind(TemperatureAddress, onTemperature);
+            Receiver.Bind(TemperatureAddressCompleted, onTemperatureCompleted);
 
-    private float startX = -636f;
-    private float endX = -637.907f;
+            Receiver.Bind(PressureAddress, onPressure);
+            Receiver.Bind(PressureAddressCompleted, onPressureCompleted);
 
+        }
 
+        private void onValidTempPressure()
+        {
 
-    private void Start() {
-        // CreatureMat = CreatureObj.GetComponent<Renderer>().material;
-        // CreatureMat.SetFloat("_uOpacity", 0.6f);
-        // CreatureObj.transform.DOMoveX(startX, 0.001f);
+        }
+        private void onTemperature(OSCMessage message)
+        {
+            if (message.ToFloat(out float temp))
+            {
+                // temp value
+            }
+        }
+        private void onTemperatureCompleted(OSCMessage message)
+        {
+            //
+        }
+        private void onPressure(OSCMessage message)
+        {
+            if (message.ToArray(out var arrayValues))
+            {
+                for (int i = 0; i < arrayValues.Count; i++)
+                {
+                    motorState[i] = arrayValues[i].BoolValue;
+                    UpdateMotor(i);
+                }
 
-    }
+            }
+        }
 
-    public void onValidTempPressure() {
-        Sequence mySequence = DOTween.Sequence();
-        // mySequence.Append(CreatureObj.transform.DOMoveX(endX, 1f));
-        // CreatureMat.SetFloat("_uOpacity", 1f);
+        private void UpdateMotor(int motorIndex)
+        {
+            // animate motor object
+            // motorObjects[i]
+        }
+
+        private void onPressureCompleted(OSCMessage message)
+        {
+
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace extOSC.Examples
 
         private AudioSource[] audioSources;
 
+        public Animator animator;
+
         void Start()
         {
             audioSources = GetComponents<AudioSource>();
@@ -28,13 +30,15 @@ namespace extOSC.Examples
         {
             if (message.ToInt(out var value))
             {
-                audioSources[value].Play();
+                audioSources[value - 1].Play();
                 TriggerDance();
             }
         }
         void ReceiveCompleted(OSCMessage message)
         {
             isValidated = true;
+            animator.SetBool("isDance", true);
+
         }
 
         private void FixedUpdate()
@@ -48,6 +52,9 @@ namespace extOSC.Examples
 
         void TriggerDance()
         {
+            animator.SetTrigger("Dance");
+            // animator.SetBool("isDance", true);
+
             // play animation once
         }
     }

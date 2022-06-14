@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace extOSC.Examples
 {
@@ -24,6 +23,9 @@ namespace extOSC.Examples
         public Vector2 minMaxNoteDelay;
 
         private bool isComponentValidated = false;
+
+
+        public UnityEvent onValidation;
 
         void Start()
         {
@@ -89,6 +91,8 @@ namespace extOSC.Examples
                 Transmitter.Send(validationMessage);
 
                 isComponentValidated = true;
+
+                onValidation.Invoke();
             }
         }
 
@@ -108,6 +112,7 @@ namespace extOSC.Examples
             {
                 isNoteValidated = true;
                 consecutiveNotes++;
+                startTime = Time.time;
             }
 
             if (!isNoteValidated)
@@ -115,9 +120,6 @@ namespace extOSC.Examples
                 consecutiveNotes = 0;
                 // delaySinceLastNote = 0f;
             }
-
-            Debug.Log(consecutiveNotes);
-
 
             return consecutiveNotes >= 4;
         }

@@ -1,1 +1,14 @@
-<root />
+<root>
+  <message info="Receiver: 7000. From: Debug" type="Received" timestamp="[18:04:43]">
+    <packet>L211c2ljAAAsaQAAAAAAAw==</packet>
+  </message>
+  <message info="Receiver: 7000. From: Debug" type="Received" timestamp="[17:48:27]">
+    <packet>L211c2ljAAAsaQAAAAAAAw==</packet>
+  </message>
+  <message info="Receiver: 7000. From: Debug" type="Received" timestamp="[17:48:24]">
+    <packet>L211c2ljAAAsaQAAAAAAAg==</packet>
+  </message>
+  <message info="Receiver: 7000. From: Debug" type="Received" timestamp="[17:48:23]">
+    <packet>L211c2ljAAAsaQAAAAAAAQ==</packet>
+  </message>
+</root>
