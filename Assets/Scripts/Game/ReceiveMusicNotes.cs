@@ -43,19 +43,12 @@ namespace extOSC.Examples
 
         private void FixedUpdate()
         {
-            if (isValidated)
-            {
-                // play animation continuously
-            }
         }
 
 
         void TriggerDance()
         {
             animator.SetTrigger("Dance");
-            // animator.SetBool("isDance", true);
-
-            // play animation once
         }
     }
 

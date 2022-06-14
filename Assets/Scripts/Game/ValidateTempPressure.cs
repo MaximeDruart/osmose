@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace extOSC.Examples
 {
@@ -33,10 +29,11 @@ namespace extOSC.Examples
 
         }
 
-        private void onValidTempPressure()
+        private void onTotalCompletion()
         {
-
+            animator.SetBool("isDeployed", true);
         }
+
         private void onTemperature(OSCMessage message)
         {
             if (message.ToFloat(out float temp))
