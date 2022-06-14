@@ -6,7 +6,11 @@ namespace extOSC.Examples
     {
         // Start is called before the first frame update
         public OSCReceiver Receiver;
-        public string Address = "/music/";
+        private string Address = "/music";
+        private string CompletedAddress = "/music/completed";
+
+
+        private bool isValidated = false;
 
         private AudioSource[] audioSources;
 
@@ -14,24 +18,37 @@ namespace extOSC.Examples
         {
             audioSources = GetComponents<AudioSource>();
 
-            Receiver.Bind(Address + "1", ReceiveMusic1);
-            Receiver.Bind(Address + "2", ReceiveMusic2);
-            Receiver.Bind(Address + "3", ReceiveMusic3);
+            Receiver.Bind(Address, ReceiveMusic);
+            Receiver.Bind(CompletedAddress, ReceiveCompleted);
 
         }
 
         // Update is called once per frame
-        void ReceiveMusic1(OSCMessage message)
+        void ReceiveMusic(OSCMessage message)
         {
-            audioSources[0].Play();
+            if (message.ToInt(out var value))
+            {
+                audioSources[value].Play();
+                TriggerDance();
+            }
         }
-        void ReceiveMusic2(OSCMessage message)
+        void ReceiveCompleted(OSCMessage message)
         {
-            audioSources[1].Play();
+            isValidated = true;
         }
-        void ReceiveMusic3(OSCMessage message)
+
+        private void FixedUpdate()
         {
-            audioSources[2].Play();
+            if (isValidated)
+            {
+                // play animation continuously
+            }
+        }
+
+
+        void TriggerDance()
+        {
+            // play animation once
         }
     }
 

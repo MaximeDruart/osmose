@@ -12641,8 +12641,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 3412354303
-  m_fontColor: {r: 1, g: 0.39215687, b: 0.39215687, a: 0.79607844}
+    rgba: 3422552063
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.79607844}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16846,6 +16846,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca75e17af50442845989069926da183f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Transmitter: {fileID: 1853618885}
+  playOnTablet: 0
+  minMaxNoteDelay: {x: 3, y: 5}
 --- !u!4 &1599846954
 Transform:
   m_ObjectHideFlags: 0

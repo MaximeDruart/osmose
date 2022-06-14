@@ -2,34 +2,125 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicController : MonoBehaviour
+namespace extOSC.Examples
 {
-    // Start is called before the first frame update
-    private AudioSource[] audioSources;
-    void Start()
+    public class MusicController : MonoBehaviour
     {
-        audioSources = GetComponents<AudioSource>();
-    }
+        // Start is called before the first frame update
+        public OSCTransmitter Transmitter;
+        private string Address = "/music";
 
-    public void playSound1(bool isTrue)
-    {
-        if (isTrue)
+        private string CompletedAddress = "/music/completed";
+
+
+
+        public bool playOnTablet = false;
+        private AudioSource[] audioSources;
+
+        // private float delaySinceLastNote = 0f;
+        private int consecutiveNotes = 0;
+        private float startTime = 0f;
+
+        public Vector2 minMaxNoteDelay;
+
+        private bool isComponentValidated = false;
+
+        void Start()
         {
-            audioSources[0].Play();
+            audioSources = GetComponents<AudioSource>();
         }
-    }
-    public void playSound2(bool isTrue)
-    {
-        if (isTrue)
+
+        public void playSound1(bool isTrue)
         {
-            audioSources[1].Play();
+            if (isTrue)
+            {
+                if (playOnTablet)
+                {
+                    audioSources[0].Play();
+                }
+                SendNote(1);
+
+            }
         }
-    }
-    public void playSound3(bool isTrue)
-    {
-        if (isTrue)
+        public void playSound2(bool isTrue)
         {
-            audioSources[2].Play();
+            if (isTrue)
+            {
+                if (playOnTablet)
+                {
+                    audioSources[1].Play();
+                }
+                SendNote(2);
+
+            }
         }
+        public void playSound3(bool isTrue)
+        {
+            if (isTrue)
+            {
+                if (playOnTablet)
+                {
+                    audioSources[2].Play();
+                }
+                SendNote(3);
+
+            }
+        }
+
+        private void SendNote(int i)
+        {
+            // SEND MUSIC NOTE
+            var message = new OSCMessage(Address);
+            message.AddValue(OSCValue.Int(i));
+
+            Transmitter.Send(message);
+
+
+            // VALIDATE
+
+            if (isComponentValidated) return;
+
+            bool isValidated = Validate();
+
+            if (isValidated)
+            {
+                var validationMessage = new OSCMessage(CompletedAddress);
+                validationMessage.AddValue(OSCValue.Impulse());
+                Transmitter.Send(validationMessage);
+
+                isComponentValidated = true;
+            }
+        }
+
+        private bool Validate()
+        {
+            bool isNoteValidated = false;
+
+            if (consecutiveNotes == 0)
+            {
+                startTime = Time.time;
+            }
+
+            float delaySinceLastNote = Time.time - startTime;
+
+
+            if ((delaySinceLastNote > minMaxNoteDelay.x && delaySinceLastNote < minMaxNoteDelay.y) || delaySinceLastNote == 0)
+            {
+                isNoteValidated = true;
+                consecutiveNotes++;
+            }
+
+            if (!isNoteValidated)
+            {
+                consecutiveNotes = 0;
+                // delaySinceLastNote = 0f;
+            }
+
+            Debug.Log(consecutiveNotes);
+
+
+            return consecutiveNotes >= 4;
+        }
+
     }
 }
