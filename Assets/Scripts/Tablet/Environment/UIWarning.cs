@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,10 +10,13 @@ public class UIWarning : MonoBehaviour
 
     public Color borderWarningColor;
     public Color borderStandardColor;
+
+    public Color TextColor;
     public GameObject background;
     public GameObject TitleBackground;
-    public GameObject TitleBackgroundMaterial;
+    private GameObject TitleBackgroundMaterial;
     public TMP_Text TitleText;
+    public TMP_Text ToDoText;
 
     [SerializeField]
     private float hdrIntensity;
@@ -41,9 +42,19 @@ public class UIWarning : MonoBehaviour
         Color actualColor = Color.Lerp(borderStandardColor, borderWarningColor, t);
         Color actualBgColor = Color.Lerp(Color.white, Color.red, t);
 
-        float intensity = extOSC.OSCUtilities.Map(Mathf.Sin(Time.time * 2f), -1, 1, 0.6f, 1) * hdrIntensity;
+        Color textColor = Color.Lerp(Color.white, TextColor, t);
 
-        if (!isWarning) intensity = 1;
+        float intensity = extOSC.OSCUtilities.Map(Mathf.Sin(Time.time * 2f), -1, 1, 0.6f, 1) * hdrIntensity;
+        float opacity = extOSC.OSCUtilities.Map(Mathf.Sin(Time.time * 2f), -1, 1, 0.5f, 1f);
+
+        if (!isWarning)
+        {
+            intensity = 1;
+            opacity = 1;
+        }
+
+        TitleText.color = new Color(textColor.r, textColor.g, textColor.b, opacity);
+        ToDoText.color = new Color(textColor.r, textColor.g, textColor.b, opacity);
 
         borderMaterial.SetColor("_Color", actualColor * intensity);
         bgMaterial.color = actualBgColor * intensity;
