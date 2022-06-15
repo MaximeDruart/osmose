@@ -15,6 +15,8 @@ namespace extOSC.Examples
         private bool[] motorState = new bool[] { false, false, false, false, false, false };
 
         public GameObject[] motorObjects;
+        public float[] motorObjectsInitialPosX;
+        public float motorMovementAmount = 0.2f;
 
         [SerializeField] private Animator animator;
 
@@ -26,6 +28,13 @@ namespace extOSC.Examples
 
             Receiver.Bind(PressureAddress, onPressure);
             Receiver.Bind(PressureAddressCompleted, onPressureCompleted);
+
+
+            for (int i = 0; i < motorObjects.Length; i++)
+            {
+                motorObjectsInitialPosX[i] = motorObjects[i].transform.localPosition.x;
+
+            }
 
         }
 
@@ -52,16 +61,23 @@ namespace extOSC.Examples
                 for (int i = 0; i < arrayValues.Count; i++)
                 {
                     motorState[i] = arrayValues[i].BoolValue;
-                    UpdateMotor(i);
+                    UpdateMotor(i, motorState[i]);
                 }
 
             }
         }
 
-        private void UpdateMotor(int motorIndex)
+        private void UpdateMotor(int motorIndex, bool isActivated)
         {
             // animate motor object
-            // motorObjects[i]
+            if (isActivated)
+            {
+                motorObjects[motorIndex].transform.DOLocalMoveX(motorObjectsInitialPosX[motorIndex] - motorMovementAmount, 0.6f);
+            }
+            else
+            {
+                motorObjects[motorIndex].transform.DOLocalMoveX(motorObjectsInitialPosX[motorIndex], 0.6f);
+            }
         }
 
         private void onPressureCompleted(OSCMessage message)
