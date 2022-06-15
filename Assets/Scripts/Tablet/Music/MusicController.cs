@@ -48,7 +48,11 @@ namespace extOSC.Examples
             // if max delay is exceeded, turn off moufle
             if (delaySinceLastNote > minMaxNoteDelay.y)
             {
-                SendCancelIsAvailable();
+                if (consecutiveNotes != 0)
+                {
+                    SendCancelIsAvailable();
+                    SendCancel();
+                }
             }
         }
 

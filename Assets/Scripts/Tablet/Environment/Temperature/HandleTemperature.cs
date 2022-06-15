@@ -17,7 +17,7 @@ public class HandleTemperature : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     private AudioSource audioSource;
 
-    private float maxVolume = 1;
+    private float maxVolume = 0.7f;
 
 
     // Start is called before the first frame update
@@ -39,7 +39,7 @@ public class HandleTemperature : MonoBehaviour, IPointerDownHandler, IPointerUpH
     public void UpdatePitch(float value)
     {
         audioSource.pitch = extOSC.OSCUtilities.Map(value, 0, 1, minPitch, maxPitch);
-        maxVolume = extOSC.OSCUtilities.Map(value, 0, 0.5f, 0.3f, 1);
+        maxVolume = extOSC.OSCUtilities.Map(value, 0, 0.5f, 0.3f, 0.7f);
         audioSource.volume = extOSC.OSCUtilities.Map(value, 0, 0.5f, 0.3f, 1);
     }
 

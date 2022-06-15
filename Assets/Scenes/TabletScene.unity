@@ -13262,8 +13262,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  audioOn: {fileID: 8300000, guid: 00d8445f3b18bc64aaac96e2d0e4c66f, type: 3}
-  audioOff: {fileID: 8300000, guid: 030fbd1001a9e0e4e88c3c5a700767f6, type: 3}
+  audioOn: {fileID: 8300000, guid: e100ae404bd96dd47a8d5a35e38c3560, type: 3}
+  audioOff: {fileID: 8300000, guid: e100ae404bd96dd47a8d5a35e38c3560, type: 3}
 --- !u!82 &1321819225
 AudioSource:
   m_ObjectHideFlags: 0

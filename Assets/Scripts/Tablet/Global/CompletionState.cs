@@ -8,15 +8,13 @@ using UnityEngine;
 public class CompletionState : ScriptableObject
 {
 
-    public Dictionary<string, bool> completedModules;
+    public Dictionary<string, bool> completedModules = new Dictionary<string, bool>(){
+    {"Environment", false},
+    {"Listen", false},
+    {"Music", false},
+    {"Drawing", false},
+};
 
-    private void Awake()
-    {
-        completedModules.Add("Environment", false);
-        completedModules.Add("Listen", false);
-        completedModules.Add("Music", false);
-        completedModules.Add("Drawing", false);
-    }
 
     public void SetEnvironmentCompleted()
     {

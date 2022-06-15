@@ -7,7 +7,7 @@ public class ResetCompletionState : MonoBehaviour
     [SerializeField] private CompletionState completionState;
     [SerializeField] private bool doReset = true;
 
-    void Awake()
+    void Start()
     {
         if (doReset)
         {
