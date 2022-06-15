@@ -37,13 +37,18 @@ namespace extOSC.Examples
         }
         void Update()
         {
+            delaySinceLastNote = Time.time - startTime;
+
+            // if delay is in the correct frames, light up corresponding moufle
             if (delaySinceLastNote > minMaxNoteDelay.x && delaySinceLastNote < minMaxNoteDelay.y)
             {
                 SendIsAvailable();
             }
-            else
-            {
 
+            // if max delay is exceeded, turn off moufle
+            if (delaySinceLastNote > minMaxNoteDelay.y)
+            {
+                SendCancelIsAvailable();
             }
         }
 
@@ -125,6 +130,14 @@ namespace extOSC.Examples
             // SEND MUSIC NOTE
             var message = new OSCMessage(AvaibleFramesAddress);
             message.AddValue(OSCValue.Int(consecutiveNotes));
+
+            Transmitter.Send(message);
+        }
+        private void SendCancelIsAvailable()
+        {
+            // SEND MUSIC NOTE
+            var message = new OSCMessage(CancelAvaibleFramesAddress);
+            message.AddValue(OSCValue.Impulse());
 
             Transmitter.Send(message);
         }

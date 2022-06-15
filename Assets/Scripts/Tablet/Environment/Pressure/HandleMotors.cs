@@ -10,7 +10,6 @@ namespace extOSC.Examples
         [Header("OSC Settings")]
         public OSCTransmitter Transmitter;
         public string Address = "/pressure";
-        public string AddressCompleted = "/pressure/completed";
 
         int motorAmount = 6;
 

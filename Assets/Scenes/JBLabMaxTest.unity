@@ -264,10 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8b9244975c1a54788089d4219fea8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Clip1: {fileID: 0}
-  Clip2: {fileID: 0}
-  Clip3: {fileID: 0}
-  Clip4: {fileID: 0}
+  AudioClips: []
 --- !u!1 &280301877
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +388,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280301877}
   m_CullTransparentMesh: 1
+--- !u!1 &379322437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 379322438}
+  m_Layer: 0
+  m_Name: Modules
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &379322438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 379322437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 568232248}
+  m_Father: {fileID: 1173860238}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &380530473
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,7 +846,7 @@ GameObject:
   - component: {fileID: 568232251}
   - component: {fileID: 568232250}
   m_Layer: 5
-  m_Name: PlayMusicNotes
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -830,13 +859,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568232247}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.893}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1173860238}
-  m_RootOrder: 1
+  m_Father: {fileID: 379322438}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &568232250
 AudioSource:
@@ -1141,7 +1170,6 @@ MonoBehaviour:
   Receiver: {fileID: 1450268868}
   animator: {fileID: 0}
   moufles: []
-  mouflesMaterials: []
   OnCompleted:
     m_PersistentCalls:
       m_Calls:
@@ -6932,7 +6960,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 882229508}
-  - {fileID: 568232248}
+  - {fileID: 379322438}
   - {fileID: 1897102832}
   m_Father: {fileID: 931713912}
   m_RootOrder: 3
@@ -7569,7 +7597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbba286dc10e549b2bdec947ef8dbd3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoConnect: 1
+  _autoConnect: 0
   _closeOnPause: 0
   _mapBundle: {fileID: 0}
   _workInEditor: 1

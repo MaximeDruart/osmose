@@ -3,45 +3,67 @@ using UnityEngine.Events;
 
 
 
-public class ValidateEnvironment : MonoBehaviour
+namespace extOSC.Examples
 {
-    // Start is called before the first frame update
-
-
-    public UnityEvent onValidation;
-
-    private bool isTempValidated = false;
-    private bool isPressureValidated = false;
-
-    void Start()
+    public class ValidateEnvironment : MonoBehaviour
     {
+        // Start is called before the first frame update
 
-    }
+        public OSCTransmitter Transmitter;
+        public string AddressCompleted = "/environment/completed";
 
-    // Update is called once per frame
-    void Update()
-    {
+        public UnityEvent onValidation;
 
-    }
+        private bool isTempValidated = false;
+        private bool isPressureValidated = false;
 
+        public CompletionState completionState;
 
-    public void ValidateTemperature(bool isValidated)
-    {
-        isTempValidated = isValidated;
-        Validate();
-    }
-    public void ValidatePressure(bool isValidated)
-    {
-        isPressureValidated = isValidated;
-        Validate();
-    }
-
-
-    private void Validate()
-    {
-        if (isTempValidated && isPressureValidated)
+        void Start()
         {
-            onValidation.Invoke();
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+
+        public void ValidateTemperature(bool isValidated)
+        {
+            isTempValidated = isValidated;
+            Validate();
+        }
+        public void ValidatePressure(bool isValidated)
+        {
+            isPressureValidated = isValidated;
+            Validate();
+        }
+
+        private void SendValidationState()
+        {
+            var message = new OSCMessage(AddressCompleted);
+            message.AddValue(OSCValue.Bool(isPressureValidated));
+            message.AddValue(OSCValue.Bool(isTempValidated));
+
+            Transmitter.Send(message);
+        }
+
+
+
+        private void Validate()
+        {
+            if (completionState.completedModules["Environment"]) return;
+
+            SendValidationState();
+
+            if (isTempValidated && isPressureValidated)
+            {
+                onValidation.Invoke();
+            }
         }
     }
+
 }

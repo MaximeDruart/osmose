@@ -1,33 +1,44 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace extOSC.Examples
 {
-    public class ValidateTempPressure : MonoBehaviour
+    public class ReceiveEnvironment : MonoBehaviour
     {
 
-        public OSCReceiver Receiver;
-        public string TemperatureAddress = "/temp";
-        public string TemperatureAddressCompleted = "/temp/completed";
-        public string PressureAddress = "/pressure";
-        public string PressureAddressCompleted = "/pressure/completed";
-
-        private bool[] motorState = new bool[] { false, false, false, false, false, false };
-
-        public GameObject[] motorObjects;
-        public float[] motorObjectsInitialPosX;
+        [SerializeField] private OSCReceiver Receiver;
+        [SerializeField] private GameObject[] motorObjects;
         public float motorMovementAmount = 0.2f;
 
         [SerializeField] private Animator animator;
+
+        [Space(10)]
+        [SerializeField] private UnityEvent onComplete;
+
+
+        private string TemperatureAddress = "/temp";
+        private string PressureAddress = "/pressure";
+
+        private string AddressCompleted = "/environment/completed";
+
+
+        private bool isTempValidated = false;
+        private bool isPressureValidated = false;
+
+        private bool[] motorState = new bool[] { false, false, false, false, false, false };
+
+        private float[] motorObjectsInitialPosX;
+
 
 
         private void Start()
         {
             Receiver.Bind(TemperatureAddress, onTemperature);
-            Receiver.Bind(TemperatureAddressCompleted, onTemperatureCompleted);
 
             Receiver.Bind(PressureAddress, onPressure);
-            Receiver.Bind(PressureAddressCompleted, onPressureCompleted);
+            Receiver.Bind(AddressCompleted, onCompleted);
+
 
 
             for (int i = 0; i < motorObjects.Length; i++)
@@ -50,10 +61,7 @@ namespace extOSC.Examples
                 // temp value
             }
         }
-        private void onTemperatureCompleted(OSCMessage message)
-        {
-            //
-        }
+
         private void onPressure(OSCMessage message)
         {
             if (message.ToArray(out var arrayValues))
@@ -80,9 +88,30 @@ namespace extOSC.Examples
             }
         }
 
-        private void onPressureCompleted(OSCMessage message)
+        private void onCompleted(OSCMessage message)
         {
+            // if creature is deployed dont go back
+            if (animator.GetBool("isDeployed")) return;
 
+            isPressureValidated = message.Values[0].BoolValue;
+            isTempValidated = message.Values[0].BoolValue;
+
+            // if both are done, it means we're already semi deployed
+            if (isTempValidated && isPressureValidated)
+            {
+                animator.SetBool("isDeployed", true);
+                onComplete.Invoke();
+            }
+            // if only one is done, semi deploy it
+            else if (isTempValidated || isPressureValidated)
+            {
+                animator.SetBool("isSemiFetus", true);
+            }
+            // if none, go back to fetus
+            else
+            {
+                animator.SetBool("isSemiFetus", false);
+            }
         }
     }
 }
