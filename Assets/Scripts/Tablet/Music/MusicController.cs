@@ -10,6 +10,7 @@ namespace extOSC.Examples
         private string Address = "/music";
 
         private string CompletedAddress = "/music/completed";
+        private string CancelAddress = "/music/cancel";
 
 
 
@@ -95,6 +96,14 @@ namespace extOSC.Examples
                 onValidation.Invoke();
             }
         }
+        private void SendCancel()
+        {
+            // SEND MUSIC NOTE
+            var message = new OSCMessage(CancelAddress);
+            message.AddValue(OSCValue.Impulse());
+
+            Transmitter.Send(message);
+        }
 
         private bool Validate()
         {
@@ -118,6 +127,7 @@ namespace extOSC.Examples
             if (!isNoteValidated)
             {
                 consecutiveNotes = 0;
+                SendCancel();
                 // delaySinceLastNote = 0f;
             }
 

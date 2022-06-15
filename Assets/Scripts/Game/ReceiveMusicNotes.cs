@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace extOSC.Examples
 {
@@ -8,13 +9,15 @@ namespace extOSC.Examples
         public OSCReceiver Receiver;
         private string Address = "/music";
         private string CompletedAddress = "/music/completed";
+        private string CancelAddress = "/music/cancel";
 
 
-        private bool isValidated = false;
+        // private bool isValidated = false;
 
         private AudioSource[] audioSources;
 
         public Animator animator;
+        public UnityEvent OnCompleted;
 
         void Start()
         {
@@ -22,6 +25,7 @@ namespace extOSC.Examples
 
             Receiver.Bind(Address, ReceiveMusic);
             Receiver.Bind(CompletedAddress, ReceiveCompleted);
+            Receiver.Bind(CancelAddress, CancelDance);
 
         }
 
@@ -36,19 +40,22 @@ namespace extOSC.Examples
         }
         void ReceiveCompleted(OSCMessage message)
         {
-            isValidated = true;
-            animator.SetBool("isDance", true);
 
+            OnCompleted.Invoke();
+            // isValidated = true;
+            // animator.SetBool("isDance", true);
         }
 
-        private void FixedUpdate()
+
+        private void CancelDance(OSCMessage message)
         {
+            animator.SetBool("isDance", false);
         }
 
 
         void TriggerDance()
         {
-            animator.SetTrigger("Dance");
+            animator.SetBool("isDance", true);
         }
     }
 

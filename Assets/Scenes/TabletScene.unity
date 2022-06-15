@@ -16920,7 +16920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Transmitter: {fileID: 1853618885}
   playOnTablet: 1
-  minMaxNoteDelay: {x: 3, y: 5}
+  minMaxNoteDelay: {x: 2, y: 3.4}
   onValidation:
     m_PersistentCalls:
       m_Calls:
