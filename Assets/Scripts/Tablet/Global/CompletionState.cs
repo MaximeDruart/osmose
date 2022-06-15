@@ -7,26 +7,46 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CompletionState", menuName = "ScriptableObjects/CompletionState", order = 0)]
 public class CompletionState : ScriptableObject
 {
-    public bool EnvironmentCompleted = false;
-    public bool ListenCompleted = false;
-    public bool MusicCompleted = false;
-    public bool DrawingCompleted = false;
 
+    public Dictionary<string, bool> completedModules;
+
+    private void Awake()
+    {
+        completedModules.Add("Environment", false);
+        completedModules.Add("Listen", false);
+        completedModules.Add("Music", false);
+        completedModules.Add("Drawing", false);
+    }
 
     public void SetEnvironmentCompleted()
     {
-        EnvironmentCompleted = true;
+        completedModules["Environment"] = true;
+
     }
     public void SetListenCompleted()
     {
-        ListenCompleted = true;
+        completedModules["Listen"] = true;
+
     }
     public void SetMusicCompleted()
     {
-        MusicCompleted = true;
+        completedModules["Music"] = true;
+
     }
     public void SetDrawingCompleted()
     {
-        DrawingCompleted = true;
+        completedModules["Drawing"] = true;
+
+    }
+    public int getNoOfCompletedModules()
+    {
+        int c = 0;
+        foreach (KeyValuePair<string, bool> module in completedModules)
+        {
+            if (module.Value) c++;
+        }
+
+        return c;
+
     }
 }

@@ -11,6 +11,8 @@ namespace extOSC.Examples
 
         private string CompletedAddress = "/music/completed";
         private string CancelAddress = "/music/cancel";
+        private string AvaibleFramesAddress = "/music/available";
+        private string CancelAvaibleFramesAddress = "/music/available/cancel";
 
 
 
@@ -20,6 +22,7 @@ namespace extOSC.Examples
         // private float delaySinceLastNote = 0f;
         private int consecutiveNotes = 0;
         private float startTime = 0f;
+        private float delaySinceLastNote = 0f;
 
         public Vector2 minMaxNoteDelay;
 
@@ -32,6 +35,19 @@ namespace extOSC.Examples
         {
             audioSources = GetComponents<AudioSource>();
         }
+        void Update()
+        {
+            if (delaySinceLastNote > minMaxNoteDelay.x && delaySinceLastNote < minMaxNoteDelay.y)
+            {
+                SendIsAvailable();
+            }
+            else
+            {
+
+            }
+        }
+
+
 
         public void playSound1(bool isTrue)
         {
@@ -104,6 +120,14 @@ namespace extOSC.Examples
 
             Transmitter.Send(message);
         }
+        private void SendIsAvailable()
+        {
+            // SEND MUSIC NOTE
+            var message = new OSCMessage(AvaibleFramesAddress);
+            message.AddValue(OSCValue.Int(consecutiveNotes));
+
+            Transmitter.Send(message);
+        }
 
         private bool Validate()
         {
@@ -114,7 +138,7 @@ namespace extOSC.Examples
                 startTime = Time.time;
             }
 
-            float delaySinceLastNote = Time.time - startTime;
+            delaySinceLastNote = Time.time - startTime;
 
 
             if ((delaySinceLastNote > minMaxNoteDelay.x && delaySinceLastNote < minMaxNoteDelay.y) || delaySinceLastNote == 0)
@@ -128,7 +152,6 @@ namespace extOSC.Examples
             {
                 consecutiveNotes = 0;
                 SendCancel();
-                // delaySinceLastNote = 0f;
             }
 
             return consecutiveNotes >= 4;

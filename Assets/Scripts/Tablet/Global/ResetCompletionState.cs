@@ -11,10 +11,11 @@ public class ResetCompletionState : MonoBehaviour
     {
         if (doReset)
         {
-            completionState.EnvironmentCompleted = false;
-            completionState.ListenCompleted = false;
-            completionState.MusicCompleted = false;
-            completionState.DrawingCompleted = false;
+            completionState.completedModules["Environment"] = false;
+            completionState.completedModules["Listen"] = false;
+            completionState.completedModules["Music"] = false;
+            completionState.completedModules["Drawing"] = false;
+
         }
 
     }
