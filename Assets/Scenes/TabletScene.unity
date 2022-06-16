@@ -4892,6 +4892,12 @@ MonoBehaviour:
   - {r: 0.3739757, g: 0.38679248, b: 0.023718417, a: 1}
   - {r: 1, g: 0.042452812, b: 0.6049247, a: 1}
   Handle: {fileID: 70638706}
+  ValidColorIndex: 4
+  AddressCompleted: /listen/completed
+  completionState: {fileID: 0}
+  OnCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &508399653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8565,7 +8571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 858739e83bb453840924663dfdbad726, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -9644,7 +9650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 326.3, y: -41.9}
+  m_AnchoredPosition: {x: 362, y: -41.9}
   m_SizeDelta: {x: 275, y: 275}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &913542825
@@ -11956,7 +11962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 858739e83bb453840924663dfdbad726, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -19377,6 +19383,36 @@ MonoBehaviour:
   - {r: 0.3739757, g: 0.38679248, b: 0.023718417, a: 1}
   - {r: 1, g: 0.042452812, b: 0.6049247, a: 1}
   Handle: {fileID: 1045025761}
+  ValidColorIndex: 4
+  AddressCompleted: /listen/completed
+  completionState: {fileID: 11400000, guid: 18e409a2936869a4793f176a870e8f79, type: 2}
+  OnCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 18e409a2936869a4793f176a870e8f79, type: 2}
+        m_TargetAssemblyTypeName: CompletionState, Assembly-CSharp
+        m_MethodName: SetListenCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 908871031}
+        m_TargetAssemblyTypeName: ToDoModule, Assembly-CSharp
+        m_MethodName: SetIsDone
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1881073688
 GameObject:
   m_ObjectHideFlags: 0
@@ -20288,7 +20324,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983407072}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20300,7 +20336,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 13.099976, y: -40.9}
+  m_AnchoredPosition: {x: 48.79998, y: -40.9}
   m_SizeDelta: {x: 275, y: 275}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1983407074
@@ -20403,13 +20439,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Transmitter: {fileID: 1853618885}
-  Address: /listen/frequency/done
+  Address: /listen/frequency/completed
   targetValue: {x: 0.1, y: 0.3}
   validationTreshold: 0.1
   circleRadius: 0.9
   Pad1Obj: {fileID: 1983407072}
-  ColorPadObj: {fileID: 0}
-  FreqSliderObj: {fileID: 0}
+  ColorPadObj: {fileID: 1876477643}
+  ColorPad2Obj: {fileID: 508399650}
   audioSourceNormal: {fileID: 608672591}
   audioSourceDistorted: {fileID: 1024369410}
   maxDistortionDistance: 1.1

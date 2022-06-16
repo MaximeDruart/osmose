@@ -15,18 +15,18 @@ namespace extOSC
 
         [Header("extOSC")]
         public OSCTransmitter Transmitter;
-        public string Address = "/listen/frequency/done";
+        public string Address = "/listen/frequency/completed";
 
 
         [Header("Listen Validation")]
         public Vector2 targetValue = new Vector2(0.1f, 0.3f);
-
         public float validationTreshold = 0.2f;
+
+        private bool isListen1Completed = false;
 
         [Header("Circle Clamping")]
 
         public float circleRadius = 1.1f;
-
 
 
         [Header("Objects")]
@@ -38,14 +38,11 @@ namespace extOSC
         [SerializeField]
         private GameObject ColorPadObj;
         private Component ColorPad;
-
         [SerializeField]
-        private GameObject FreqSliderObj;
-        private Component FreqSlider;
+        private GameObject ColorPad2Obj;
+        private Component ColorPad2;
 
         [Header("Audio")]
-
-
         [SerializeField] private AudioSource audioSourceNormal;
         [SerializeField] private AudioSource audioSourceDistorted;
         [SerializeField] private float maxDistortionDistance = 3;
@@ -62,11 +59,13 @@ namespace extOSC
         void Start()
         {
             Pad1 = Pad1Obj.GetComponent<OSCPad>();
-            ColorPad = ColorPadObj.GetComponent<OSCPad>();
-            FreqSlider = FreqSliderObj.GetComponent<OSCSlider>();
 
+            ColorPad = ColorPadObj.GetComponent<OSCPad>();
             ToggleComponentInteract(ColorPad, false);
-            ToggleComponentInteract(FreqSlider, false);
+
+            ColorPad2 = ColorPad2Obj.GetComponent<OSCPad>();
+            ToggleComponentInteract(ColorPad2, false);
+
 
         }
 
@@ -92,13 +91,13 @@ namespace extOSC
             Transmitter.Send(message);
         }
 
-        void sendOpacity(float opacity)
-        {
-            OSCMessage message = new OSCMessage("/listen/opacity");
+        // void sendOpacity(float opacity)
+        // {
+        //     OSCMessage message = new OSCMessage("/listen/opacity");
 
-            message.AddValue(OSCValue.Float(opacity));
-            Transmitter.Send(message);
-        }
+        //     message.AddValue(OSCValue.Float(opacity));
+        //     Transmitter.Send(message);
+        // }
 
         public void OnPadValueChange(Vector2 inputValue)
         {
@@ -112,10 +111,11 @@ namespace extOSC
 
             if (distanceToTarget < validationTreshold && isValidateEnabled)
             {
+                isListen1Completed = true;
                 ToggleComponentInteract(Pad1, false);
                 ToggleComponentInteract(ColorPad, true);
-                ToggleComponentInteract(FreqSlider, true);
-                sendOpacity(0.5f);
+                ToggleComponentInteract(ColorPad2, true);
+                // sendOpacity(0.5f);
                 SendConfirm();
             };
         }
@@ -172,6 +172,8 @@ namespace extOSC
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (isListen1Completed) return;
+
             if (!audioSourceNormal.isPlaying)
             {
                 audioSourceNormal.Play();

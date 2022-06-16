@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace extOSC.Examples
@@ -16,12 +17,50 @@ namespace extOSC.Examples
         public GameObject Handle;
         private Image HandleImage;
 
+        [Header("Validation")]
+
+        public int ValidColorIndex = 4;
+
+        public string AddressCompleted = "/listen/completed";
+
+        public CompletionState completionState;
+
+        public UnityEvent OnCompleted;
+
+
+
         void Start()
         {
             HandleImage = Handle.GetComponent<Image>();
         }
 
+        private void SendValidation()
+        {
+            var message = new OSCMessage(AddressCompleted);
+            message.AddValue(OSCValue.Impulse());
+
+            Transmitter.Send(message);
+        }
+
+        private void Validate(int colorIndex)
+        {
+            if (completionState.completedModules["Listen"]) return;
+
+            if (colorIndex == ValidColorIndex)
+            {
+                SendValidation();
+                OnCompleted.Invoke();
+            }
+        }
+
         // Update is called once per frame
+        private void SendColor(Color color)
+        {
+            var message = new OSCMessage(Address);
+            message.AddValue(OSCValue.Color(color));
+
+            Transmitter.Send(message);
+        }
 
         public void SendWhite(Vector2 position)
         {
@@ -39,26 +78,22 @@ namespace extOSC.Examples
             deg = Mathf.Clamp(deg, 0, 359);
 
 
-            Color color = GetColorForAngle(deg);
+            int colorIndex = GetColorIndexForAngle(deg);
+            Color color = colors[colorIndex];
+
             SetHandleColor(color);
             SendColor(color);
 
+            Validate(colorIndex);
         }
 
-        private void SendColor(Color color)
-        {
-            var message = new OSCMessage(Address);
-            message.AddValue(OSCValue.Color(color));
 
-            Transmitter.Send(message);
-        }
-
-        private Color GetColorForAngle(float angle)
+        private int GetColorIndexForAngle(float angle)
         {
             float angleRangeForColor = 360 / colors.Length;
             int colorIndex = Mathf.FloorToInt(angle / angleRangeForColor);
 
-            return colors[colorIndex];
+            return colorIndex;
 
         }
 
