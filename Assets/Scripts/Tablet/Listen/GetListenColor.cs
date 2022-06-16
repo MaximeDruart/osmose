@@ -23,6 +23,11 @@ namespace extOSC.Examples
 
         // Update is called once per frame
 
+        public void SendWhite(Vector2 position)
+        {
+            SendColor(Color.white);
+        }
+
         public void GetColor(Vector2 position)
         {
 
