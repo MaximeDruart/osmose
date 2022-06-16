@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Video;
 
 public class TriggerMotion : MonoBehaviour
@@ -8,6 +9,7 @@ public class TriggerMotion : MonoBehaviour
     private VideoPlayer videoPlayer;
     private AudioSource audioSource;
     public GameObject Filter;
+    public UnityEvent OnFinishMotion;
 
     private void Start()
     {
@@ -27,6 +29,10 @@ public class TriggerMotion : MonoBehaviour
         {
             Filter.GetComponent<Renderer>().material.DOFade(0f, 0.6f);
             gameObject.SetActive(false);
+            OnFinishMotion.Invoke();
         };
+
+
+
     }
 }

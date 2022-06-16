@@ -33,6 +33,8 @@ namespace extOSC.Examples
 
         private float[] motorObjectsInitialPosX = new float[6];
 
+        private AudioSource audioSource;
+
         private void Start()
         {
             Receiver.Bind(TemperatureAddress, onTemperature);
@@ -45,6 +47,8 @@ namespace extOSC.Examples
                 motorObjectsInitialPosX[i] = motorObjects[i].transform.localPosition.x;
 
             }
+
+            audioSource = GetComponent<AudioSource>();
 
             if (StartDeployed)
             {
@@ -66,6 +70,7 @@ namespace extOSC.Examples
         {
             if (message.ToArray(out var arrayValues))
             {
+                PlayAudio();
                 for (int i = 0; i < arrayValues.Count; i++)
                 {
                     motorState[i] = arrayValues[i].BoolValue;
@@ -112,6 +117,11 @@ namespace extOSC.Examples
             {
                 animator.SetBool("isSemiFetus", false);
             }
+        }
+
+        private void PlayAudio()
+        {
+            audioSource.Play();
         }
     }
 }
