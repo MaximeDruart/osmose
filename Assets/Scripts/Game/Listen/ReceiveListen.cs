@@ -4,16 +4,15 @@ using UnityEngine.Events;
 public class ReceiveListen : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private Material noisewaveMaterial;
-    [SerializeField] private UnityEvent OnCompleted;
+    // [SerializeField] private Material noisewaveMaterial
     void Start()
     {
-        noisewaveMaterial.SetFloat("_uWaveOpacity", 0);
+        // noisewaveMaterial.SetFloat("_uWaveOpacity", 0);
     }
 
 
     // ADRESS : /listen/frequency
-    public void UpdateOpacity(float opacity)
+    public void ReceiveFreq(float freq)
     {
         // noisewaveMaterial.SetFloat("_uWaveOpacity", opacity);
 
@@ -35,10 +34,4 @@ public class ReceiveListen : MonoBehaviour
         // adjust the lights and fog according to this color
     }
 
-    // ADRESS : /listen/completed
-    public void ReceiveCompletion()
-    {
-        // play the sound
-        OnCompleted.Invoke();
-    }
 }
