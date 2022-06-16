@@ -39,6 +39,8 @@ namespace extOSC.Examples
         {
             delaySinceLastNote = Time.time - startTime;
 
+            if (isComponentValidated) return;
+
             // if delay is in the correct frames, light up corresponding moufle
             if (delaySinceLastNote > minMaxNoteDelay.x && delaySinceLastNote < minMaxNoteDelay.y)
             {
@@ -50,6 +52,7 @@ namespace extOSC.Examples
             {
                 if (consecutiveNotes != 0)
                 {
+                    consecutiveNotes = 0;
                     SendCancelIsAvailable();
                     SendCancel();
                 }
@@ -112,15 +115,21 @@ namespace extOSC.Examples
 
             if (isValidated)
             {
-                var validationMessage = new OSCMessage(CompletedAddress);
-                validationMessage.AddValue(OSCValue.Impulse());
-                Transmitter.Send(validationMessage);
-
                 isComponentValidated = true;
-
                 onValidation.Invoke();
+                SendCompleted();
             }
         }
+
+        private void SendCompleted()
+        {
+            // SEND MUSIC NOTE
+            var validationMessage = new OSCMessage(CompletedAddress);
+            validationMessage.AddValue(OSCValue.Impulse());
+            Transmitter.Send(validationMessage);
+        }
+
+
         private void SendCancel()
         {
             // SEND MUSIC NOTE
@@ -171,7 +180,7 @@ namespace extOSC.Examples
                 SendCancel();
             }
 
-            return consecutiveNotes >= 4;
+            return consecutiveNotes >= 5;
         }
 
     }

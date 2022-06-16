@@ -16,6 +16,9 @@ namespace extOSC.Examples
         [Space(10)]
         [SerializeField] private UnityEvent onComplete;
 
+        [Header("Debugging")]
+        [SerializeField] private bool StartDeployed = true;
+
 
         private string TemperatureAddress = "/temp";
         private string PressureAddress = "/pressure";
@@ -41,6 +44,12 @@ namespace extOSC.Examples
             {
                 motorObjectsInitialPosX[i] = motorObjects[i].transform.localPosition.x;
 
+            }
+
+            if (StartDeployed)
+            {
+                animator.SetBool("isSemiFetus", true);
+                animator.SetBool("isDeployed", true);
             }
 
         }

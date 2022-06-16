@@ -18883,7 +18883,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Transmitter: {fileID: 1853618885}
   playOnTablet: 1
-  minMaxNoteDelay: {x: 2, y: 3.4}
+  minMaxNoteDelay: {x: 2.4, y: 4}
   onValidation:
     m_PersistentCalls:
       m_Calls:
@@ -21759,14 +21759,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464088183d2a1484ab8fb64e356c9f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoConnect: 0
+  _autoConnect: 1
   _closeOnPause: 0
   _mapBundle: {fileID: 0}
   _workInEditor: 1
   _localHostMode: 1
   _localPortMode: 2
   _localReceiver: {fileID: 0}
-  _localHost: 172.26.160.1
+  _localHost: 10.190.133.153
   _localPort: 7000
   _remoteHost: 10.190.133.153
   _remotePort: 7000

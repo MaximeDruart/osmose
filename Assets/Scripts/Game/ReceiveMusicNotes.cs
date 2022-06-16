@@ -23,7 +23,7 @@ namespace extOSC.Examples
 
         public Animator animator;
         public GameObject[] moufles;
-        private Material[] mouflesMaterials;
+        private Material[] mouflesMaterials = new Material[4];
         public UnityEvent OnCompleted;
 
         void Start()
@@ -31,8 +31,8 @@ namespace extOSC.Examples
             audioSources = GetComponents<AudioSource>();
 
             Receiver.Bind(Address, ReceiveMusic);
-            Receiver.Bind(CompletedAddress, ReceiveCompleted);
             Receiver.Bind(CancelAddress, CancelDance);
+            Receiver.Bind(CompletedAddress, ReceiveCompleted);
 
             Receiver.Bind(AvaibleFramesAddress, SetAvailable);
             Receiver.Bind(CancelAvaibleFramesAddress, CancelAvailable);
@@ -49,7 +49,7 @@ namespace extOSC.Examples
             if (message.ToInt(out var value))
             {
                 audioSources[value - 1].Play();
-                TriggerDance();
+                ToggleDance();
             }
         }
         void ReceiveCompleted(OSCMessage message)
@@ -61,24 +61,28 @@ namespace extOSC.Examples
         }
 
 
-        private void CancelDance(OSCMessage message)
-        {
-            animator.SetBool("isDance", false);
-        }
-
         private void SetAvailable(OSCMessage message)
         {
             if (message.ToInt(out int index))
             {
+
+                // 1 by 1 option
+
                 mouflesMaterials[index - 1].DOFloat(1, "_isActivated", 0.6f);
 
                 for (int i = 0; i < mouflesMaterials.Length; i++)
                 {
-                    if (i != index - 1)
-                    {
-                        mouflesMaterials[i].DOFloat(0, "_isActivated", 0.6f);
-                    }
+                    mouflesMaterials[i].DOFloat(0, "_isActivated", 0.6f);
                 }
+
+                // progresively lighting up option
+
+                // mouflesMaterials[index - 1].DOFloat(1, "_isActivated", 0.6f);
+
+                // for (int i = index; i < mouflesMaterials.Length; i++)
+                // {
+                //     mouflesMaterials[i].DOFloat(0, "_isActivated", 0.6f);
+                // }
 
             }
         }
@@ -93,9 +97,14 @@ namespace extOSC.Examples
         }
 
 
-        void TriggerDance()
+        void ToggleDance()
         {
             animator.SetBool("isDance", true);
+        }
+
+        private void CancelDance(OSCMessage message)
+        {
+            animator.SetBool("isDance", false);
         }
     }
 
