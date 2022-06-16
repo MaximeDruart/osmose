@@ -23241,7 +23241,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1983407073}
   - component: {fileID: 1983407075}
-  - component: {fileID: 1983407074}
   - component: {fileID: 1983407076}
   m_Layer: 5
   m_Name: Listen1
@@ -23273,26 +23272,6 @@ RectTransform:
   m_AnchoredPosition: {x: 48.79998, y: -40.9}
   m_SizeDelta: {x: 275, y: 275}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1983407074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1983407072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a32d72eebc1a4a0d9eb08e7cc2e64ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transmitter: {fileID: 1853618885}
-  _address: /listen/frequency
-  _mapBundle: {fileID: 0}
-  reflectionMember:
-    Target: {fileID: 1983407075}
-    MemberName: Value
-  informOnChanged: 1
-  informInterval: 0
 --- !u!114 &1983407075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23373,7 +23352,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Transmitter: {fileID: 1853618885}
-  Address: /listen/frequency/completed
+  Address: /listen/frequency
+  AddressCompleted: /listen/frequency/completed
   targetValue: {x: 0.1, y: 0.3}
   validationTreshold: 0.1
   circleRadius: 0.9

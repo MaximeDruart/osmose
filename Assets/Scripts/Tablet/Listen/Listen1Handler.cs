@@ -15,7 +15,9 @@ namespace extOSC
 
         [Header("extOSC")]
         public OSCTransmitter Transmitter;
-        public string Address = "/listen/frequency/completed";
+        public string Address = "/listen/frequency";
+        public string AddressCompleted = "/listen/frequency/completed";
+        public string AddressAudio = "/listen/frequency/audio";
 
 
         [Header("Listen Validation")]
@@ -53,6 +55,7 @@ namespace extOSC
         [Header("Debugging")]
 
         public bool isValidateEnabled = true;
+        public bool PlayAudioOnTablet = false;
 
 
 
@@ -85,19 +88,19 @@ namespace extOSC
 
         void SendConfirm()
         {
-            OSCMessage message = new OSCMessage(Address);
+            OSCMessage message = new OSCMessage(AddressCompleted);
 
             message.AddValue(OSCValue.Impulse());
             Transmitter.Send(message);
         }
+        void SendDistance(float distance)
+        {
+            OSCMessage message = new OSCMessage(Address);
 
-        // void sendOpacity(float opacity)
-        // {
-        //     OSCMessage message = new OSCMessage("/listen/opacity");
+            message.AddValue(OSCValue.Float(distance));
+            Transmitter.Send(message);
+        }
 
-        //     message.AddValue(OSCValue.Float(opacity));
-        //     Transmitter.Send(message);
-        // }
 
         public void OnPadValueChange(Vector2 inputValue)
         {
@@ -106,7 +109,14 @@ namespace extOSC
 
             float distanceToTarget = Vector2.Distance(targetValue, value);
 
-            HandleAudio(distanceToTarget);
+
+            SendDistance(distanceToTarget);
+
+            if (PlayAudioOnTablet)
+            {
+                HandleAudio(distanceToTarget);
+            }
+
 
 
             if (distanceToTarget < validationTreshold && isValidateEnabled)
@@ -172,20 +182,46 @@ namespace extOSC
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (isListen1Completed) return;
 
-            if (!audioSourceNormal.isPlaying)
+            if (PlayAudioOnTablet)
             {
-                audioSourceNormal.Play();
-                audioSourceDistorted.Play();
-            };
-            audioSourceNormal.DOFade(1 - volumeMix, 0.5f);
-            audioSourceDistorted.DOFade(volumeMix, 0.5f);
+                if (isListen1Completed) return;
+
+                if (!audioSourceNormal.isPlaying)
+                {
+                    audioSourceNormal.Play();
+                    audioSourceDistorted.Play();
+                };
+                audioSourceNormal.DOFade(1 - volumeMix, 0.5f);
+                audioSourceDistorted.DOFade(volumeMix, 0.5f);
+            }
+            else
+            {
+                SendAudio(true);
+            }
+
+
         }
         public void OnPointerUp(PointerEventData eventData)
         {
-            audioSourceNormal.DOFade(0, 0.5f);
-            audioSourceDistorted.DOFade(0, 0.5f);
+            if (PlayAudioOnTablet)
+            {
+
+                audioSourceNormal.DOFade(0, 0.5f);
+                audioSourceDistorted.DOFade(0, 0.5f);
+            }
+            else
+            {
+                SendAudio(false);
+            }
+        }
+
+        private void SendAudio(bool isOn)
+        {
+            OSCMessage message = new OSCMessage(AddressAudio);
+
+            message.AddValue(OSCValue.Bool(isOn));
+            Transmitter.Send(message);
         }
     }
 }
