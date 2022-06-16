@@ -12,6 +12,11 @@ public class PlayCompletionAudio : MonoBehaviour
     [SerializeField] private AudioClip[] AudioClips;
 
 
+    [Header("Debugging")]
+
+    [SerializeField] private bool isActivated = true;
+
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -20,6 +25,7 @@ public class PlayCompletionAudio : MonoBehaviour
     // Update is called once per frame
     public void PlayMusicOnCompletion()
     {
+        if (!isActivated) return;
         audioSource.PlayOneShot(AudioClips[completionState.getNoOfCompletedModules() - 1]);
     }
 }

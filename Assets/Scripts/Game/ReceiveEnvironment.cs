@@ -28,18 +28,14 @@ namespace extOSC.Examples
 
         private bool[] motorState = new bool[] { false, false, false, false, false, false };
 
-        private float[] motorObjectsInitialPosX;
-
-
+        private float[] motorObjectsInitialPosX = new float[6];
 
         private void Start()
         {
             Receiver.Bind(TemperatureAddress, onTemperature);
-
             Receiver.Bind(PressureAddress, onPressure);
+
             Receiver.Bind(AddressCompleted, onCompleted);
-
-
 
             for (int i = 0; i < motorObjects.Length; i++)
             {
@@ -47,11 +43,6 @@ namespace extOSC.Examples
 
             }
 
-        }
-
-        private void onTotalCompletion()
-        {
-            animator.SetBool("isDeployed", true);
         }
 
         private void onTemperature(OSCMessage message)
@@ -80,7 +71,7 @@ namespace extOSC.Examples
             // animate motor object
             if (isActivated)
             {
-                motorObjects[motorIndex].transform.DOLocalMoveX(motorObjectsInitialPosX[motorIndex] - motorMovementAmount, 0.6f);
+                motorObjects[motorIndex].transform.DOLocalMoveX(motorObjectsInitialPosX[motorIndex] + motorMovementAmount, 0.6f);
             }
             else
             {
@@ -94,7 +85,7 @@ namespace extOSC.Examples
             if (animator.GetBool("isDeployed")) return;
 
             isPressureValidated = message.Values[0].BoolValue;
-            isTempValidated = message.Values[0].BoolValue;
+            isTempValidated = message.Values[1].BoolValue;
 
             // if both are done, it means we're already semi deployed
             if (isTempValidated && isPressureValidated)
