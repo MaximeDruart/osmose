@@ -9,9 +9,9 @@ using UnityEngine.UI;
 
 namespace extOSC.UI
 {
-    [AddComponentMenu("extOSC/UI/Rotary")]
+    [AddComponentMenu("extOSC/UI/RotaryEdited")]
     [RequireComponent(typeof(RectTransform))]
-    public class OSCRotary : Selectable, IInitializePotentialDragHandler, IDragHandler, ICanvasElement
+    public class OSCRotaryEdited : Selectable, IInitializePotentialDragHandler, IDragHandler, ICanvasElement
     {
         #region Public Vars
 
@@ -229,6 +229,7 @@ namespace extOSC.UI
 
         public void OnDrag(PointerEventData eventData)
         {
+
             if (!MayDrag(eventData))
                 return;
 
@@ -286,7 +287,7 @@ namespace extOSC.UI
 
             if (_handleImage != null)
             {
-                normal = OSCUtilities.Map(_handleImage.fillAmount, 0.1f, 0.9f, 0, 1);
+                normal = OSCUtilities.Map(_handleImage.fillAmount, 0.119f, 0.88f, 0, 1);
             }
 
             UpdateVisuals();
@@ -447,6 +448,7 @@ namespace extOSC.UI
             _previousDegrees = degrees;
 
             NormalizedValue = _reverse ? 1f - OSCUtilities.Map(degrees, -0.8f, 0.8f, 0f, 1f) : OSCUtilities.Map(degrees, -0.8f, 0.8f, 0f, 1f);
+
         }
 
         private void UpdateVisuals()
@@ -458,7 +460,7 @@ namespace extOSC.UI
 
             if (_handleImage != null)
             {
-                var fillAmount = OSCUtilities.Map(NormalizedValue, 0, 1, 0.1f, 0.9f);
+                var fillAmount = OSCUtilities.Map(NormalizedValue, 0, 1, 0.119f, 0.88f);
 
                 if (_reverse != !_handleImage.fillClockwise)
                 {
