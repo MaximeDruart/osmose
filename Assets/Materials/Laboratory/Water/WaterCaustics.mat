@@ -20,15 +20,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
+  m_Name: WaterCaustics
   m_Shader: {fileID: -6465566751694194690, guid: 9a098b74a4ce0814da261f0218bc66ea,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3003
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -60,23 +60,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Caustic_Brightness: 1.2
+    - _Caustic_Brightness: 0.65
     - _Caustic_Power: 0.15
     - _Cloud_Brightness: 0.87
-    - _Cloud_Power: 3.99
-    - _Distortion_Speed: 0.15
+    - _Cloud_Power: 6.77
+    - _Distortion_Speed: 0.3
     - _QueueControl: 0
-    - _QueueOffset: 3
-    - _Transparency: 0.5
+    - _QueueOffset: 0
+    - _Transparency: 0.04
     m_Colors:
-    - _Caustic_Color: {r: 0, g: 0.2736599, b: 0.5283019, a: 0}
-    - _Caustic_Direction: {r: 0.015, g: -0.015, b: 0, a: 0}
-    - _Caustic_Tiling: {r: 5, g: 5, b: 0, a: 0}
+    - _Caustic_Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Caustic_Direction: {r: 0.015, g: 0.025, b: 0, a: 0}
+    - _Caustic_Tiling: {r: 20, g: 7.5, b: 0, a: 0}
     - _Cloud_Direction: {r: 0.02, g: 0.02, b: 0, a: 0}
     - _Cloud_Tiling: {r: 5, g: 5, b: 0, a: 0}
-    - _Color: {r: 0.110359564, g: 0.1265931, b: 0.1509434, a: 1}
-    - _Distortion_Direction: {r: 0.01, g: -0.01, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Distortion_Direction: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Distortion_Tile: {r: 10, g: 10, b: 0, a: 0}
-    - _GlobalColor: {r: 0.2156863, g: 0.3254902, b: 0.4196078, a: 0}
-    - _Specular_Color: {r: 0.2156863, g: 0.3254902, b: 0.4196078, a: 0}
+    - _GlobalColor: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 0}
+    - _Specular_Color: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
   m_BuildTextureStacks: []

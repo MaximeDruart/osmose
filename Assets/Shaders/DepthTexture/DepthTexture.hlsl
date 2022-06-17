@@ -1,3 +1,6 @@
+#ifndef MYHSLINCLUDE_INCLUDED
+#define MYHSLINCLUDE_INCLUDED
+
 void DepthTexture_half(
     in Texture2D MainTex,
     in float2 UV,
@@ -26,3 +29,5 @@ void DepthTexture_half(
     half4 render = (col /= samples);
     Out = lerp(SAMPLE_TEXTURE2D(MainTex, SS, UV), render, Lerp);
 }
+
+#endif
