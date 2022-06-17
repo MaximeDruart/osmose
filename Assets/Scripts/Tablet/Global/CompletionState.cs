@@ -15,7 +15,6 @@ public class CompletionState : ScriptableObject
     {"Drawing", false},
 };
 
-
     public void SetEnvironmentCompleted()
     {
         completedModules["Environment"] = true;
@@ -46,5 +45,13 @@ public class CompletionState : ScriptableObject
 
         return c;
 
+    }
+
+    public void ResetState()
+    {
+        completedModules["Environment"] = false;
+        completedModules["Listen"] = false;
+        completedModules["Music"] = false;
+        completedModules["Drawing"] = false;
     }
 }

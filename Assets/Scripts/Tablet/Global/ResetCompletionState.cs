@@ -9,14 +9,6 @@ public class ResetCompletionState : MonoBehaviour
 
     void Start()
     {
-        if (doReset)
-        {
-            completionState.completedModules["Environment"] = false;
-            completionState.completedModules["Listen"] = false;
-            completionState.completedModules["Music"] = false;
-            completionState.completedModules["Drawing"] = false;
-
-        }
-
+        if (doReset) completionState.ResetState();
     }
 }

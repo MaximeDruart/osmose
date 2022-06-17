@@ -40,10 +40,6 @@ namespace extOSC.Examples
 
         public float motionDuration = 5f;
 
-
-
-
-
         void Start()
         {
             LineProgressionImage = LineProgression.GetComponent<Image>();
@@ -110,7 +106,7 @@ namespace extOSC.Examples
         {
             isHolding = false;
         }
-
     }
+
 
 }
