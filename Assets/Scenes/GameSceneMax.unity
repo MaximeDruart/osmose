@@ -5862,7 +5862,8 @@ AudioSource:
   m_GameObject: {fileID: 411785918}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1978490398951528327, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 8444275dfa216e04dbe3fce9af9c3f92, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.35
@@ -6447,7 +6448,8 @@ AudioSource:
   m_GameObject: {fileID: 745534901}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8115113587841234098, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 49a2a0272a2b1b94fba80c2a9caebca4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -6753,7 +6755,8 @@ AudioSource:
   m_GameObject: {fileID: 772223599}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8115113587841234098, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 5e5ddaade375e934480baa0aa479b8e0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -7380,8 +7383,8 @@ GameObject:
   m_Component:
   - component: {fileID: 948751054}
   - component: {fileID: 948751058}
-  - component: {fileID: 948751057}
   - component: {fileID: 948751056}
+  - component: {fileID: 948751057}
   - component: {fileID: 948751055}
   m_Layer: 0
   m_Name: IntroMotion
@@ -7414,7 +7417,8 @@ AudioSource:
   m_GameObject: {fileID: 948751053}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2235302669306372004, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -7559,6 +7563,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  MotionHasPlayed: {fileID: 11400000, guid: d4d35754658816d4ca7ff52b09c33cd8, type: 2}
 --- !u!328 &948751058
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -7578,7 +7583,7 @@ VideoPlayer:
   m_RenderMode: 1
   m_AspectRatio: 5
   m_DataSource: 0
-  m_PlaybackSpeed: 5.5
+  m_PlaybackSpeed: 7.56
   m_AudioOutputMode: 1
   m_TargetAudioSources:
   - {fileID: 948751055}
@@ -8052,6 +8057,18 @@ MonoBehaviour:
   onComplete:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 11400000, guid: 18e409a2936869a4793f176a870e8f79, type: 2}
+        m_TargetAssemblyTypeName: CompletionState, Assembly-CSharp
+        m_MethodName: SetEnvironmentCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1197195946}
         m_TargetAssemblyTypeName: PlayCompletionAudio, Assembly-CSharp
         m_MethodName: PlayMusicOnCompletion
@@ -8064,7 +8081,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  StartDeployed: 1
+  StartDeployed: 0
+  MotionHasPlayed: {fileID: 11400000, guid: d4d35754658816d4ca7ff52b09c33cd8, type: 2}
 --- !u!82 &1116087983
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8074,7 +8092,8 @@ AudioSource:
   m_GameObject: {fileID: 1116087980}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2520355198483618777, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 6658d53cdaab8104ebdcb4bc63d106a9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.722
@@ -8562,7 +8581,8 @@ AudioSource:
   m_GameObject: {fileID: 1197195943}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6731857956567423041, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -8661,12 +8681,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8b9244975c1a54788089d4219fea8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completionState: {fileID: 11400000, guid: 18e409a2936869a4793f176a870e8f79, type: 2}
   AudioClips:
   - {fileID: 8300000, guid: a00b124acabbc294cb0156baeacfccb8, type: 3}
   - {fileID: 8300000, guid: b9792f837cc673b47abbf588251d4a3c, type: 3}
   - {fileID: 8300000, guid: e5c097ca4e380c744bb0d2440d319998, type: 3}
   - {fileID: 8300000, guid: ac56b54b8952c8345ab82edda88e7676, type: 3}
-  isActivated: 0
+  isActivated: 1
 --- !u!1 &1218912092
 GameObject:
   m_ObjectHideFlags: 0
@@ -8787,7 +8808,8 @@ AudioSource:
   m_GameObject: {fileID: 1263471375}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6731857956567423041, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: fe435a794022e0149b6c8decb27643b3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -8883,7 +8905,8 @@ AudioSource:
   m_GameObject: {fileID: 1263471375}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6731857956567423041, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: eae89259f7746614aab7cb8728098c13, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -8979,7 +9002,8 @@ AudioSource:
   m_GameObject: {fileID: 1263471375}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6731857956567423041, guid: 3960863cd52cdf143a0a8e6197e72dd7,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 545d7c85a5549be41aa8e7457c412aae, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -9088,6 +9112,18 @@ MonoBehaviour:
   OnCompleted:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 11400000, guid: 18e409a2936869a4793f176a870e8f79, type: 2}
+        m_TargetAssemblyTypeName: CompletionState, Assembly-CSharp
+        m_MethodName: SetMusicCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1197195946}
         m_TargetAssemblyTypeName: PlayCompletionAudio, Assembly-CSharp
         m_MethodName: PlayMusicOnCompletion
@@ -9687,6 +9723,18 @@ MonoBehaviour:
   onReceive:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 11400000, guid: 18e409a2936869a4793f176a870e8f79, type: 2}
+        m_TargetAssemblyTypeName: CompletionState, Assembly-CSharp
+        m_MethodName: SetListenCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1197195946}
         m_TargetAssemblyTypeName: PlayCompletionAudio, Assembly-CSharp
         m_MethodName: PlayMusicOnCompletion
@@ -9771,7 +9819,7 @@ GameObject:
   - component: {fileID: 1464347686}
   - component: {fileID: 1464347685}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: AudioMic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9920,7 +9968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1532736200
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -182,11 +182,10 @@ namespace extOSC
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (isListen1Completed) return;
 
             if (PlayAudioOnTablet)
             {
-                if (isListen1Completed) return;
-
                 if (!audioSourceNormal.isPlaying)
                 {
                     audioSourceNormal.Play();

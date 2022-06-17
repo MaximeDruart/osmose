@@ -56,6 +56,8 @@ namespace extOSC.Examples
         // Update is called once per frame
         private void SendColor(Color color)
         {
+            if (completionState.completedModules["Listen"]) return;
+
             var message = new OSCMessage(Address);
             message.AddValue(OSCValue.Color(color));
 

@@ -35,6 +35,9 @@ namespace extOSC.Examples
 
         private AudioSource audioSource;
 
+        public BoolVariable MotionHasPlayed;
+
+
         private void Start()
         {
             Receiver.Bind(TemperatureAddress, onTemperature);
@@ -70,7 +73,10 @@ namespace extOSC.Examples
         {
             if (message.ToArray(out var arrayValues))
             {
-                PlayAudio();
+                if (MotionHasPlayed.Value)
+                {
+                    PlayAudio();
+                }
                 for (int i = 0; i < arrayValues.Count; i++)
                 {
                     motorState[i] = arrayValues[i].BoolValue;
@@ -121,6 +127,7 @@ namespace extOSC.Examples
 
         private void PlayAudio()
         {
+            Debug.Log("piston sound !");
             audioSource.Play();
         }
     }

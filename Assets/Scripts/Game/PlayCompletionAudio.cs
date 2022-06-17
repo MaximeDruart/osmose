@@ -7,7 +7,7 @@ public class PlayCompletionAudio : MonoBehaviour
     // Start is called before the first frame update
 
     private AudioSource audioSource;
-    private CompletionState completionState;
+    public CompletionState completionState;
 
     [SerializeField] private AudioClip[] AudioClips;
 
@@ -26,6 +26,7 @@ public class PlayCompletionAudio : MonoBehaviour
     public void PlayMusicOnCompletion()
     {
         if (!isActivated) return;
+        Debug.Log(completionState.getNoOfCompletedModules() - 1);
         audioSource.PlayOneShot(AudioClips[completionState.getNoOfCompletedModules() - 1]);
     }
 }

@@ -10,11 +10,14 @@ public class TriggerMotion : MonoBehaviour
     private AudioSource audioSource;
     public GameObject Filter;
     public UnityEvent OnFinishMotion;
+    public BoolVariable MotionHasPlayed;
 
     private void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
         audioSource = GetComponent<AudioSource>();
+
+        MotionHasPlayed.Value = false;
 
         audioSource.volume = 0;
     }
@@ -30,6 +33,7 @@ public class TriggerMotion : MonoBehaviour
             Filter.GetComponent<Renderer>().material.DOFade(0f, 0.6f);
             gameObject.SetActive(false);
             OnFinishMotion.Invoke();
+            MotionHasPlayed.Value = true;
         };
 
 

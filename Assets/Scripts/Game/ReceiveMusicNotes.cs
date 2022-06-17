@@ -30,6 +30,11 @@ namespace extOSC.Examples
         {
             audioSources = GetComponents<AudioSource>();
 
+            for (int i = 0; i < moufles.Length; i++)
+            {
+                mouflesMaterials[i] = moufles[i].GetComponent<Renderer>().material;
+            }
+
             Receiver.Bind(Address, ReceiveMusic);
             Receiver.Bind(CancelAddress, CancelDance);
             Receiver.Bind(CompletedAddress, ReceiveCompleted);
@@ -37,10 +42,6 @@ namespace extOSC.Examples
             Receiver.Bind(AvaibleFramesAddress, SetAvailable);
             Receiver.Bind(CancelAvaibleFramesAddress, CancelAvailable);
 
-            for (int i = 0; i < moufles.Length; i++)
-            {
-                mouflesMaterials[i] = moufles[i].GetComponent<Renderer>().material;
-            }
         }
 
         // Update is called once per frame

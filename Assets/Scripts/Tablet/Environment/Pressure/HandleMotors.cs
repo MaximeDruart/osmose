@@ -28,25 +28,27 @@ namespace extOSC.Examples
             audioSource = GetComponent<AudioSource>();
         }
 
+        // public void SendTemp(bool isOn, int index, bool isInitial = false)
+        // {
+        //     var message = new OSCMessage(Address);
+        //     motorState[index] = isOn;
+
+        //     bool isValid = GetNoOfActivatedMotors() == CorrectValue;
+        //     setValidationStatus.Invoke(isValid);
+        //     if (isValid) SendConfirmationMessage();
+
+
+        //     if (!isInitial) TriggerAudio(isOn);
+
+        //     message.AddValue(OSCValue.Float(GetTempValue()));
+        //     Transmitter.Send(message);
+        // }
+
+
         public void SendTemp(bool isOn, int index, bool isInitial = false)
         {
-            var message = new OSCMessage(Address);
             motorState[index] = isOn;
 
-            bool isValid = GetNoOfActivatedMotors() == CorrectValue;
-            setValidationStatus.Invoke(isValid);
-            if (isValid) SendConfirmationMessage();
-
-
-            if (!isInitial) TriggerAudio(isOn);
-
-            message.AddValue(OSCValue.Float(GetTempValue()));
-            Transmitter.Send(message);
-        }
-
-
-        public void SendArray()
-        {
             OSCMessage message = new OSCMessage(Address);
             var array = OSCValue.Array();
 
@@ -54,7 +56,7 @@ namespace extOSC.Examples
             setValidationStatus.Invoke(isValid);
             if (isValid) SendConfirmationMessage();
 
-
+            if (!isInitial) TriggerAudio(isOn);
 
             foreach (bool isActivated in motorState)
             {

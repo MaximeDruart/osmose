@@ -17771,7 +17771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1548004983
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23354,6 +23354,7 @@ MonoBehaviour:
   Transmitter: {fileID: 1853618885}
   Address: /listen/frequency
   AddressCompleted: /listen/frequency/completed
+  AddressAudio: /listen/frequency/audio
   targetValue: {x: 0.1, y: 0.3}
   validationTreshold: 0.1
   circleRadius: 0.9
@@ -23364,6 +23365,7 @@ MonoBehaviour:
   audioSourceDistorted: {fileID: 1024369410}
   maxDistortionDistance: 1.1
   isValidateEnabled: 1
+  PlayAudioOnTablet: 0
 --- !u!1 &1986718360
 GameObject:
   m_ObjectHideFlags: 0

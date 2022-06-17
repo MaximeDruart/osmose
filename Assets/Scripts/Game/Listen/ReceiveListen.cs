@@ -34,6 +34,7 @@ public class ReceiveListen : MonoBehaviour
     public void ReceiveFreqCompleted()
     {
         isListen1Completed = true;
+        ToggleSound(false);
         // make the wave easy to see on the creature
 
     }
