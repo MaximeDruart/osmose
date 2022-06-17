@@ -68,6 +68,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 3
     - _Transparency: 0.5
+    - _Zoom_Caustic_Tile: 0.5
     m_Colors:
     - _Caustic_Color: {r: 0, g: 0.2736599, b: 0.5283019, a: 0}
     - _Caustic_Direction: {r: 0.015, g: -0.015, b: 0, a: 0}
