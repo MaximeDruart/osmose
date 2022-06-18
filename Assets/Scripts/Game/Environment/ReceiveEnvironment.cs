@@ -38,12 +38,17 @@ namespace extOSC.Examples
         public BoolVariable MotionHasPlayed;
 
 
+        public GameObject EyesObject;
+
+        private SkinnedMeshRenderer skinnedMeshRenderer;
+        private Mesh skinnedMesh;
+
+
         private void Start()
         {
-            Receiver.Bind(TemperatureAddress, onTemperature);
-            Receiver.Bind(PressureAddress, onPressure);
 
-            Receiver.Bind(AddressCompleted, onCompleted);
+            skinnedMeshRenderer = EyesObject.GetComponent<SkinnedMeshRenderer>();
+            skinnedMesh = EyesObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
 
             for (int i = 0; i < motorObjects.Length; i++)
             {
@@ -53,11 +58,20 @@ namespace extOSC.Examples
 
             audioSource = GetComponent<AudioSource>();
 
+            AnimateEyes(100, 0);
+
+
             if (StartDeployed)
             {
                 animator.SetBool("isSemiFetus", true);
                 animator.SetBool("isDeployed", true);
+                AnimateEyes(0, 0);
             }
+
+            Receiver.Bind(TemperatureAddress, onTemperature);
+            Receiver.Bind(PressureAddress, onPressure);
+
+            Receiver.Bind(AddressCompleted, onCompleted);
 
         }
 
@@ -111,17 +125,21 @@ namespace extOSC.Examples
             if (isTempValidated && isPressureValidated)
             {
                 animator.SetBool("isDeployed", true);
+                AnimateEyes(0);
                 onComplete.Invoke();
             }
             // if only one is done, semi deploy it
             else if (isTempValidated || isPressureValidated)
             {
                 animator.SetBool("isSemiFetus", true);
+                AnimateEyes(50);
+
             }
             // if none, go back to fetus
             else
             {
                 animator.SetBool("isSemiFetus", false);
+                AnimateEyes(100);
             }
         }
 
@@ -129,6 +147,17 @@ namespace extOSC.Examples
         {
             Debug.Log("piston sound !");
             audioSource.Play();
+        }
+
+        private void AnimateEyes(int endValue, float animationDuration = 3f)
+        {
+            float currentValue = skinnedMeshRenderer.GetBlendShapeWeight(0);
+            int currentValueInt = Mathf.FloorToInt(currentValue);
+            DOVirtual
+                .Int(currentValueInt, endValue, animationDuration,
+                (int i) => skinnedMeshRenderer.SetBlendShapeWeight(0, i)
+                )
+                .SetDelay(0.5f);
         }
     }
 }

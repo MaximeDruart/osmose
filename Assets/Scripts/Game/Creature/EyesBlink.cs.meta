@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a668ba549bdfb624d821c955bb3c1b6e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - EyesObject: {instanceID: 0}
+  - completionState: {fileID: 11400000, guid: 18e409a2936869a4793f176a870e8f79, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
