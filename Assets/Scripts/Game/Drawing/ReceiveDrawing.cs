@@ -31,7 +31,7 @@ namespace extOSC
 
 
 
-        [SerializeField] private float animationDuration = 5f;
+        [SerializeField] private float animationDuration = 2f;
 
         private LineRenderer lineRenderer;
         private Vector3[] linePoints;
@@ -47,10 +47,10 @@ namespace extOSC
 
         private Image DotBackground;
 
-        [SerializeField] GameObject FirstDrawing;
-        [SerializeField] GameObject SecondDrawing;
-        [SerializeField] GameObject ThirdDrawing;
 
+        [SerializeField] private GameObject SymbolObject;
+        private SkinnedMeshRenderer skinnedMeshRenderer;
+        private Mesh skinnedMesh;
 
         // Start is called before the first frame update
         void Start()
@@ -64,9 +64,9 @@ namespace extOSC
             DotBackground.color = new Color32(160, 197, 255, 0);
             Loader.transform.localScale = Vector3.zero;
 
-            FirstDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-            SecondDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
-            ThirdDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
+            skinnedMeshRenderer = SymbolObject.GetComponent<SkinnedMeshRenderer>();
+            skinnedMesh = SymbolObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+
         }
 
         // Update is called once per frame
@@ -142,18 +142,23 @@ namespace extOSC
         {
             if (activeDrawing == 1)
             {
-                FirstDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
-                SecondDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-                ThirdDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
+                DOVirtual.Int(0, 100, 2, (int i) =>
+                {
+                    skinnedMeshRenderer.SetBlendShapeWeight(0, i);
+                });
             }
             if (activeDrawing == 2)
             {
-                FirstDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
-                SecondDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 0);
-                ThirdDrawing.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                DOVirtual.Int(100, 0, 2, (int i) =>
+                {
+                    skinnedMeshRenderer.SetBlendShapeWeight(0, i);
+                });
+                DOVirtual.Int(0, 100, 2, (int i) =>
+                {
+                    skinnedMeshRenderer.SetBlendShapeWeight(1, i);
+                });
             }
         }
-
 
         void UpdateLine(List<Vector2> _points)
         {
@@ -177,7 +182,6 @@ namespace extOSC
                 float startTime = Time.time;
 
                 Vector3 startPosition = points[i];
-                Debug.Log(startPosition);
                 Vector3 endPosition = points[i + 1];
 
                 Vector3 pos = startPosition;
@@ -185,7 +189,6 @@ namespace extOSC
                 {
                     float t = (Time.time - startTime) / segmentDuration;
                     pos = Vector3.Lerp(startPosition, endPosition, t);
-                    Debug.Log(pos);
 
                     // animate all other points except point at index i
                     for (int j = i + 1; j < points.Count; j++)

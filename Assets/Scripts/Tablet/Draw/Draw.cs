@@ -46,6 +46,8 @@ namespace extOSC
 
         private int activeDrawing = 0;
 
+        private AudioSource audioSource;
+
 
         private void Start()
         {
@@ -54,6 +56,9 @@ namespace extOSC
 
             LoaderInitialScale = Loader.transform.localScale;
             Loader.transform.localScale = Vector3.zero;
+
+            audioSource = GetComponent<AudioSource>();
+
 
             List<Vector2> firstDrawing = new List<Vector2> {
                 new Vector2(1,4),
@@ -181,7 +186,7 @@ namespace extOSC
                         if (drawingIsValid) activeDrawing++;
 
 
-                        StartCoroutine(UnDraw(8));
+                        StartCoroutine(UnDraw(3));
 
 
                         if (activeDrawing == drawings.Count)
@@ -384,16 +389,23 @@ namespace extOSC
         {
             if (isTrue)
             {
-                Loader.transform.rotation = Quaternion.Euler(Loader.transform.rotation.x, 0, Loader.transform.rotation.z);
+                // Loader.transform.rotation = Quaternion.Euler(Loader.transform.rotation.x, 0, Loader.transform.rotation.z);
 
-                Loader.transform.DOScale(LoaderInitialScale, 0.2f);
-                lineRenderer.material.DOColor(new Color32(85, 125, 154, 255), 0.3f);
+                // Loader.transform.DOScale(LoaderInitialScale, 0.2f);
+                PlaySound();
+                lineRenderer.material.DOFade(0, 0.7f);
             }
             else
             {
-                Loader.transform.DOScale(Vector3.zero, 0.2f);
-                lineRenderer.material.DOColor(new Color32(0, 147, 255, 255), 0.3f);
+                // Loader.transform.DOScale(Vector3.zero, 0.2f);
+                lineRenderer.material.DOFade(1, 0.3f);
             }
         }
+
+        void PlaySound()
+        {
+            audioSource.Play();
+        }
     }
+
 }

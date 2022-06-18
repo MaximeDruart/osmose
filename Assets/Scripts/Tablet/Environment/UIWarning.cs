@@ -22,7 +22,9 @@ public class UIWarning : MonoBehaviour
     private float hdrIntensity;
     private bool isWarning = true;
 
-    float t = 1f;
+    private float t = 1f;
+
+    public CompletionState completionState;
 
 
     void Start()
@@ -35,7 +37,7 @@ public class UIWarning : MonoBehaviour
     void Update()
     {
 
-        t += isWarning ? 0.008f : -0.008f;
+        t += isWarning ? 0.008f : -0.08f;
         t = Mathf.Clamp01(t);
 
 
@@ -52,6 +54,8 @@ public class UIWarning : MonoBehaviour
             intensity = 1;
             opacity = 1;
         }
+
+        if (t == 0 && completionState.completedModules["Environment"]) return;
 
         TitleText.color = new Color(textColor.r, textColor.g, textColor.b, opacity);
         ToDoText.color = new Color(textColor.r, textColor.g, textColor.b, opacity);
