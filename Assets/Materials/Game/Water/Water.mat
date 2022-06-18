@@ -60,8 +60,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Caustic_Brightness: 1.2
-    - _Caustic_Power: 0.15
+    - _Caustic_Brightness: 1
+    - _Caustic_Power: 0.3
     - _Cloud_Brightness: 0.87
     - _Cloud_Power: 3.99
     - _Distortion_Speed: 0.15
