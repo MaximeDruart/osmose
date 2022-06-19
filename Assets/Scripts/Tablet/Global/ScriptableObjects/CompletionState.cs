@@ -16,11 +16,6 @@ public class CompletionState : ScriptableObject
     {"Drawing", false},
 };
 
-    public bool isTablet = true;
-
-    public UnityEvent onTabletEnd;
-    public UnityEvent onGameEnd;
-
     public void SetEnvironmentCompleted()
     {
         completedModules["Environment"] = true;
