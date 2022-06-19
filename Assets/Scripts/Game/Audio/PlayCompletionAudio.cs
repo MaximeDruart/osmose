@@ -26,7 +26,6 @@ public class PlayCompletionAudio : MonoBehaviour
     public void PlayMusicOnCompletion()
     {
         if (!isActivated) return;
-        Debug.Log(completionState.getNoOfCompletedModules() - 1);
         audioSource.PlayOneShot(AudioClips[completionState.getNoOfCompletedModules() - 1]);
     }
 }

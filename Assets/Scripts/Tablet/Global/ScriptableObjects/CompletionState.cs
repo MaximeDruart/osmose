@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 
@@ -14,6 +15,11 @@ public class CompletionState : ScriptableObject
     {"Music", false},
     {"Drawing", false},
 };
+
+    public bool isTablet = true;
+
+    public UnityEvent onTabletEnd;
+    public UnityEvent onGameEnd;
 
     public void SetEnvironmentCompleted()
     {
@@ -54,4 +60,10 @@ public class CompletionState : ScriptableObject
         completedModules["Music"] = false;
         completedModules["Drawing"] = false;
     }
+
+    public bool IsCompleted()
+    {
+        return getNoOfCompletedModules() == 4;
+    }
+
 }

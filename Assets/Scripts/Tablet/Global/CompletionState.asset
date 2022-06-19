@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6baac773f226f42a05232660bfe42a, type: 3}
   m_Name: CompletionState
   m_EditorClassIdentifier: 
-  EnvironmentCompleted: 0
-  ListenCompleted: 0
-  MusicCompleted: 0
-  DrawingCompleted: 0
+  isTablet: 1
+  onTabletEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  onGameEnd:
+    m_PersistentCalls:
+      m_Calls: []

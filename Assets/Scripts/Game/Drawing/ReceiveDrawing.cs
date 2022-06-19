@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
@@ -52,6 +53,9 @@ namespace extOSC
         private SkinnedMeshRenderer skinnedMeshRenderer;
         private Mesh skinnedMesh;
 
+        public UnityEvent OnCompleted;
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -69,14 +73,12 @@ namespace extOSC
 
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        }
-
         void onValidDrawing()
         {
-            activeDrawing++;
+            if (activeDrawing < 3)
+            {
+                activeDrawing++;
+            }
         }
 
 
@@ -128,7 +130,7 @@ namespace extOSC
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 0), 1f));
             mySequence.Append(Canvas.transform.DOScale(Vector3.zero, 1f));
             mySequence.AppendCallback(ClearDrawing);
-
+            mySequence.AppendCallback(CheckForValidation);
             IncrementText();
 
         }
@@ -136,6 +138,14 @@ namespace extOSC
         void ClearDrawing()
         {
             lineRenderer.positionCount = 0;
+        }
+
+        void CheckForValidation()
+        {
+            if (activeDrawing == 3)
+            {
+                OnCompleted.Invoke();
+            }
         }
 
         void UpdateCreatureDrawing()
