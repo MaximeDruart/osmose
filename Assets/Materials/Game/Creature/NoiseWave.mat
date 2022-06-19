@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NoiseWave
-  m_Shader: {fileID: -6465566751694194690, guid: 82c6de2399ae52c4c9c8cd0c0f172259,
+  m_Shader: {fileID: -6465566751694194690, guid: 509612866d5aaaf4f8dae724ea1c4d3b,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -21,8 +21,24 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AO:
+        m_Texture: {fileID: 2800000, guid: 48f71c2b82a704e0e941c962005eacdd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _AlbedoMap:
+        m_Texture: {fileID: 2800000, guid: ba995dfb0e3d6493c975b73781f46eb2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
+        m_Texture: {fileID: 2800000, guid: b44972fbfe93f414fbfe11053a05af34, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ParallaxMapping_471f28cb23cb432c9a3ec03ecaacb18e_Heightmap_1:
         m_Texture: {fileID: 2800000, guid: 2be0e2274e00d2e47b62375fb2c75eda, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Roughness:
+        m_Texture: {fileID: 2800000, guid: 628affcc582d0447ab372f0ec482e2f3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_3549ce6b370d4364bca83b4f942d1b8d_Texture_1:
@@ -33,8 +49,16 @@ Material:
         m_Texture: {fileID: 2800000, guid: 26dc3b84c8e6549438af2d8f22de1642, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_efe4ce0575af4a86987d37dc708d0e17_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 21cd429fb8b56514e97b29a9f4b46210, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_fed4fa6eb24243e28bb15cec74d25c9e_Texture_1:
         m_Texture: {fileID: 2800000, guid: 494958d3760e29344a63703dbc7f40e3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaveMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -58,12 +82,12 @@ Material:
     - _uProgress: 0
     - _uRadius: 0.6
     - _uThickness: 0.18
-    - _uWaveOpacity: 0
-    - _uvScale: 1
+    - _uWaveOpacity: 1
+    - _uvScale: 0.5
     m_Colors:
     - _emission: {r: 0.01960784, g: 0, b: 0.1470588, a: 0}
     - _uBaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _uOrigin: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _uOrigin: {r: 1.09, g: 0.97, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8124461189137523861
 MonoBehaviour:
