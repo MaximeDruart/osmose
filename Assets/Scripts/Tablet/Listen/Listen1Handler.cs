@@ -127,6 +127,7 @@ namespace extOSC
                 ToggleComponentInteract(ColorPad2, true);
                 // sendOpacity(0.5f);
                 SendConfirm();
+                SendAudio(false);
             };
         }
 
