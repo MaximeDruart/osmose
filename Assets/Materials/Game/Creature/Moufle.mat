@@ -140,9 +140,9 @@ Material:
     - _ZWrite: 0
     - _isActivated: 0
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.30980182, b: 1, a: 1}
+    - _BaseColor: {r: 0.1432894, g: 0.15735134, b: 0.18867922, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _BloomColor: {r: 12.315433, g: 25.0787, b: 42.76814, a: 0}
+    - _BloomColor: {r: 24.630865, g: 50.1574, b: 85.53628, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 0, g: 0.30980182, b: 1, a: 1}
     - _EmissionColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}

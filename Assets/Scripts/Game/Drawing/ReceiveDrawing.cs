@@ -46,6 +46,7 @@ namespace extOSC
 
         private int drawingCounter = 0;
 
+        public GameObject DrawingContainer;
         private Image DotBackground;
 
 
@@ -60,7 +61,7 @@ namespace extOSC
         void Start()
         {
             lineRenderer = LineObject.GetComponent<LineRenderer>();
-            DotBackground = gameObject.GetComponent<Image>();
+            DotBackground = DrawingContainer.GetComponent<Image>();
 
             Receiver.Bind(Address, ReceiveMessage);
 
