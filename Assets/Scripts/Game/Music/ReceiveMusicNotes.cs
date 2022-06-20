@@ -33,6 +33,7 @@ namespace extOSC.Examples
             for (int i = 0; i < moufles.Length; i++)
             {
                 mouflesMaterials[i] = moufles[i].GetComponent<Renderer>().material;
+                mouflesMaterials[i].DOFloat(0, "_isActivated", 0f);
             }
 
             Receiver.Bind(Address, ReceiveMusic);

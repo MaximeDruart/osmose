@@ -47,5 +47,5 @@ Material:
     - _StencilWriteMask: 255
     - _UseUIAlphaClip: 0
     m_Colors:
-    - _Color: {r: 0.7979747, g: 0.19196558, b: 0.19196558, a: 0.99512136}
+    - _Color: {r: 0.79197544, g: 0.19052237, b: 0.19052237, a: 0.98763996}
   m_BuildTextureStacks: []

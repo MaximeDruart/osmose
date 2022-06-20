@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -25,9 +24,6 @@ namespace extOSC
         public GameObject Brush;
         public GameObject LineObject;
 
-        public GameObject Loader;
-
-
         public GameObject Canvas;
 
 
@@ -41,16 +37,17 @@ namespace extOSC
 
         private int activeDrawing = 0;
 
-
-        [SerializeField] private TMP_Text DrawingCounterText;
-
-        private int drawingCounter = 0;
+        public GameObject Mask;
+        private RectTransform MaskRect;
+        private RectMask2D MaskMask;
 
         public GameObject DrawingContainer;
         private Image DotBackground;
 
 
         [SerializeField] private GameObject SymbolObject;
+        private Material SymbolMat;
+        private Color SymbolMatStartColor;
         private SkinnedMeshRenderer skinnedMeshRenderer;
         private Mesh skinnedMesh;
 
@@ -67,20 +64,25 @@ namespace extOSC
         void Start()
         {
             lineRenderer = LineObject.GetComponent<LineRenderer>();
+
             DotBackground = DrawingContainer.GetComponent<Image>();
+            DotBackground.color = new Color32(160, 197, 255, 0);
+
+            MaskRect = Mask.GetComponent<RectTransform>();
+            MaskMask = Mask.GetComponent<RectMask2D>();
+            SetBorderPadding(6);
 
             for (int i = 0; i < emissionObjects.Length; i++)
             {
                 emissionMaterials[i] = emissionObjects[i].GetComponent<Renderer>().material;
             }
 
-
-            Canvas.transform.localScale = Vector3.zero;
-            DotBackground.color = new Color32(160, 197, 255, 0);
-            Loader.transform.localScale = Vector3.zero;
-
             skinnedMeshRenderer = SymbolObject.GetComponent<SkinnedMeshRenderer>();
             skinnedMesh = SymbolObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+            SymbolMat = SymbolObject.GetComponent<SkinnedMeshRenderer>().material;
+
+            SymbolMatStartColor = SymbolMat.GetColor("_EmissionColor");
+            SymbolMat.SetColor("_EmissionColor", new Color(0, 0, 0, 0));
 
             Receiver.Bind(Address, ReceiveMessage);
         }
@@ -89,6 +91,7 @@ namespace extOSC
         {
             if (activeDrawing < 3)
             {
+                Debug.Log("good rawing");
                 activeDrawing++;
             }
         }
@@ -116,34 +119,36 @@ namespace extOSC
 
         }
 
-        void IncrementText()
+        void SetBorderPadding(float pos)
         {
-            int incCounter = drawingCounter + 1;
-            DrawingCounterText.text = "00" + incCounter.ToString();
-
+            MaskMask.padding = new Vector4(pos, 0, pos, 0);
         }
+
+
 
         void OnReceive(bool isValid)
         {
             lineRenderer.positionCount = points.Count;
+            lineRenderer.material.DOFade(1, 0f);
             Sequence mySequence = DOTween.Sequence();
-            mySequence.Append(Canvas.transform.DOScale(Vector3.one * 0.15f, 0.3f));
+            DOVirtual.Float(6, 0, 0.9f, SetBorderPadding).SetEase(Ease.OutQuint);
+            mySequence.AppendInterval(0.8f);
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 103), 0.6f));
             mySequence.AppendCallback(() => StartCoroutine(AnimateLine()));
-            var tween = mySequence.Append(Loader.transform.DOScale(Vector3.one * 50f, 0.3f))
-            .OnStart(() => Loader.transform.DOLocalRotate(new Vector3(0, 600, 0), 6.6f).SetEase(Ease.Linear));
-
             if (isValid)
             {
                 mySequence.AppendCallback(UpdateCreatureDrawing);
             }
             mySequence.AppendInterval(6f);
-            mySequence.Append(Loader.transform.DOScale(Vector3.zero, 0.3f));
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 0), 1f));
-            mySequence.Append(Canvas.transform.DOScale(Vector3.zero, 1f));
+            mySequence.AppendCallback(() =>
+            {
+                DOVirtual.Float(0, 6, 0.9f, SetBorderPadding).SetEase(Ease.OutQuint);
+            });
+            mySequence.AppendInterval(0.5f);
+            mySequence.Append(lineRenderer.material.DOFade(0, 0.5f));
             mySequence.AppendCallback(ClearDrawing);
             mySequence.AppendCallback(CheckForValidation);
-            IncrementText();
 
         }
 
@@ -162,8 +167,10 @@ namespace extOSC
 
         void UpdateCreatureDrawing()
         {
+            Debug.Log(activeDrawing);
             if (activeDrawing == 1)
             {
+                Debug.Log("reacr");
                 SetGlowIntensity(0.3f);
                 DOVirtual.Int(0, 100, 2, (int i) =>
                 {
@@ -231,6 +238,11 @@ namespace extOSC
                 mat.DOFloat(intensity, "_EmissionZoneIntensity", 1f);
             }
 
+        }
+
+        public void ShowDrawing()
+        {
+            SymbolMat.DOColor(SymbolMatStartColor, "_EmissionColor", 2.5f);
         }
 
     }
