@@ -29,6 +29,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: ba995dfb0e3d6493c975b73781f46eb2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _DrawingEmission:
+        m_Texture: {fileID: 2800000, guid: ed1456e3c509e4af8ba2bf89ec362f8a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Normal:
         m_Texture: {fileID: 2800000, guid: b44972fbfe93f414fbfe11053a05af34, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -75,18 +79,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _EmissionMapIntensity: 2.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _uBleed: 0.62
     - _uFreq: 1
-    - _uProgress: 0
+    - _uProgress: 1
     - _uRadius: 0.6
     - _uThickness: 0.18
     - _uWaveOpacity: 1
     - _uvScale: 0.5
     m_Colors:
-    - _emission: {r: 0.01960784, g: 0, b: 0.1470588, a: 0}
-    - _uBaseColor: {r: 0, g: 0, b: 0, a: 0}
+    - _emission: {r: 1, g: 0.023146048, b: 0, a: 1}
+    - _uBaseColor: {r: 1, g: 0.9600028, b: 0, a: 1}
     - _uOrigin: {r: 1.09, g: 0.97, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8124461189137523861
