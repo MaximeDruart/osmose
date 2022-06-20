@@ -82,17 +82,17 @@ Material:
     - _EmissionMapIntensity: 2.5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _uBleed: 0.62
+    - _uBleed: 0.65
     - _uFreq: 1
-    - _uProgress: 1
-    - _uRadius: 0.6
+    - _uProgress: 0
+    - _uRadius: 0.29
     - _uThickness: 0.18
     - _uWaveOpacity: 1
-    - _uvScale: 0.5
+    - _uvScale: 0.8
     m_Colors:
-    - _emission: {r: 1, g: 0.023146048, b: 0, a: 1}
-    - _uBaseColor: {r: 1, g: 0.9600028, b: 0, a: 1}
-    - _uOrigin: {r: 1.09, g: 0.97, b: 0, a: 0}
+    - _emission: {r: 0.4805981, g: 0.75191665, b: 0.754717, a: 1}
+    - _uBaseColor: {r: 0.427451, g: 1, b: 0.5435849, a: 1}
+    - _uOrigin: {r: 0.6, g: 0.7, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8124461189137523861
 MonoBehaviour:
