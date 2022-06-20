@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,6 +21,11 @@ public class HandleTemperature : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     private float maxVolume = 0.7f;
 
+    private IEnumerator coroutine;
+
+    private float currentValue;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +39,17 @@ public class HandleTemperature : MonoBehaviour, IPointerDownHandler, IPointerUpH
 
     }
 
-    public void checkForValidation(float value)
+    public void GetValue(float value)
     {
-        validateTemperature.Invoke(value > targetValue - validationRange && value < targetValue + validationRange);
+        currentValue = value;
     }
+    public IEnumerator checkForValidation()
+    {
+        yield return new WaitForSeconds(1f);
+
+        validateTemperature.Invoke(currentValue > targetValue - validationRange && currentValue < targetValue + validationRange);
+    }
+
     public void UpdatePitch(float value)
     {
         audioSource.pitch = extOSC.OSCUtilities.Map(value, 0, 1, minPitch, maxPitch);
@@ -47,9 +61,26 @@ public class HandleTemperature : MonoBehaviour, IPointerDownHandler, IPointerUpH
     {
         if (!audioSource.isPlaying) audioSource.Play();
         audioSource.DOFade(maxVolume, 0.5f);
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
     }
     public void OnPointerUp(PointerEventData eventData)
     {
         audioSource.DOFade(0, 0.5f);
+
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = checkForValidation();
+        StartCoroutine(coroutine);
+
+
     }
 }

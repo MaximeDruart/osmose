@@ -4,6 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace extOSC
 {
@@ -25,9 +26,6 @@ namespace extOSC
 
         [Space(10)]
 
-        public GameObject Loader;
-        private Vector3 LoaderInitialScale;
-
         public UnityEvent<bool> onCompleted;
         public BoolVariable HelpIsOpened;
 
@@ -48,16 +46,25 @@ namespace extOSC
 
         private AudioSource audioSource;
 
+        [SerializeField]
+        private GameObject ProgressionBar;
+
+        [SerializeField]
+        private GameObject ProgressionContainer;
+
+        private RectTransform ProgressionContainerRect;
+        private RectTransform ProgressionBarRect;
+
 
         private void Start()
         {
             lineRenderer = lineObject.GetComponent<LineRenderer>();
             lineTargetRenderer = lineTargetObject.GetComponent<LineRenderer>();
 
-            LoaderInitialScale = Loader.transform.localScale;
-            Loader.transform.localScale = Vector3.zero;
-
             audioSource = GetComponent<AudioSource>();
+
+            ProgressionContainerRect = ProgressionContainer.GetComponent<RectTransform>();
+            ProgressionBarRect = ProgressionBar.GetComponent<RectTransform>();
 
 
             List<Vector2> firstDrawing = new List<Vector2> {
@@ -142,10 +149,6 @@ namespace extOSC
 
         }
 
-        private void FixedUpdate()
-        {
-            Loader.transform.Rotate(0, Time.deltaTime * 45f, 0);
-        }
 
         void AddPoint()
         {
@@ -389,15 +392,20 @@ namespace extOSC
         {
             if (isTrue)
             {
-                // Loader.transform.rotation = Quaternion.Euler(Loader.transform.rotation.x, 0, Loader.transform.rotation.z);
-
-                // Loader.transform.DOScale(LoaderInitialScale, 0.2f);
                 PlaySound();
-                lineRenderer.material.DOFade(0, 0.7f);
+                Sequence mySequence = DOTween.Sequence();
+                mySequence.Append(
+                ProgressionBarRect.DOSizeDelta(new Vector2(ProgressionContainerRect.rect.width, ProgressionBarRect.rect.height), 1f)
+                );
+                mySequence.Join(lineRenderer.material.DOFade(0, 0.7f));
+                mySequence.Append(ProgressionBar.GetComponent<Image>().DOFade(0f, 0.6f));
+                mySequence.Append(
+                ProgressionBarRect.DOSizeDelta(new Vector2(0, ProgressionBarRect.rect.height), 0f)
+                );
             }
             else
             {
-                // Loader.transform.DOScale(Vector3.zero, 0.2f);
+                ProgressionBar.GetComponent<Image>().DOFade(1f, 0f);
                 lineRenderer.material.DOFade(1, 0.3f);
             }
         }

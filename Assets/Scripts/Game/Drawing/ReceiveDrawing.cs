@@ -54,6 +54,12 @@ namespace extOSC
         private SkinnedMeshRenderer skinnedMeshRenderer;
         private Mesh skinnedMesh;
 
+
+        public GameObject[] emissionObjects;
+        private Material[] emissionMaterials = new Material[4];
+
+
+
         public UnityEvent OnCompleted;
 
 
@@ -63,7 +69,11 @@ namespace extOSC
             lineRenderer = LineObject.GetComponent<LineRenderer>();
             DotBackground = DrawingContainer.GetComponent<Image>();
 
-            Receiver.Bind(Address, ReceiveMessage);
+            for (int i = 0; i < emissionObjects.Length; i++)
+            {
+                emissionMaterials[i] = emissionObjects[i].GetComponent<Renderer>().material;
+            }
+
 
             Canvas.transform.localScale = Vector3.zero;
             DotBackground.color = new Color32(160, 197, 255, 0);
@@ -72,6 +82,7 @@ namespace extOSC
             skinnedMeshRenderer = SymbolObject.GetComponent<SkinnedMeshRenderer>();
             skinnedMesh = SymbolObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
 
+            Receiver.Bind(Address, ReceiveMessage);
         }
 
         void onValidDrawing()
@@ -153,6 +164,7 @@ namespace extOSC
         {
             if (activeDrawing == 1)
             {
+                SetGlowIntensity(0.3f);
                 DOVirtual.Int(0, 100, 2, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);
@@ -160,6 +172,7 @@ namespace extOSC
             }
             if (activeDrawing == 2)
             {
+                SetGlowIntensity(1f);
                 DOVirtual.Int(100, 0, 2, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);
@@ -209,5 +222,16 @@ namespace extOSC
                 }
             }
         }
+
+        private void SetGlowIntensity(float intensity)
+        {
+            foreach (var mat in emissionMaterials)
+            {
+                mat.DOFloat(intensity, "_EmissionMapIntensity", 1f);
+                mat.DOFloat(intensity, "_EmissionZoneIntensity", 1f);
+            }
+
+        }
+
     }
 }

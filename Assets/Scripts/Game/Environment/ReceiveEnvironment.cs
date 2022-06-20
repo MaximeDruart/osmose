@@ -145,7 +145,6 @@ namespace extOSC.Examples
 
         private void PlayAudio()
         {
-            Debug.Log("piston sound !");
             audioSource.Play();
         }
 

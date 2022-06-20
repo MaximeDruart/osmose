@@ -14,7 +14,7 @@ public class ReceiveListen : MonoBehaviour
     private bool isListen1Completed = false;
 
     public GameObject[] waveObjects;
-    public Material[] noiseWaveMaterials = new Material[2];
+    private Material[] noiseWaveMaterials = new Material[2];
 
 
 
