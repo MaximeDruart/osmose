@@ -60,7 +60,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Caustic_Brightness: 0.65
+    - _Caustic_Brightness: 0.3
     - _Caustic_Power: 0.15
     - _Cloud_Brightness: 0.87
     - _Cloud_Power: 6.77
