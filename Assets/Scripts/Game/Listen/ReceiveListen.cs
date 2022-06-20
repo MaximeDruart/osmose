@@ -13,11 +13,17 @@ public class ReceiveListen : MonoBehaviour
 
     private bool isListen1Completed = false;
 
+    public GameObject[] waveObjects;
+    public Material[] noiseWaveMaterials = new Material[2];
+
 
 
     void Start()
     {
-
+        for (int i = 0; i < waveObjects.Length; i++)
+        {
+            noiseWaveMaterials[i] = waveObjects[i].GetComponent<Renderer>().material;
+        }
     }
 
 
@@ -35,9 +41,16 @@ public class ReceiveListen : MonoBehaviour
     {
         isListen1Completed = true;
         ToggleSound(false);
+        ToggleWave();
+        SetWaveOpacity(0.3f);
         // make the wave easy to see on the creature
 
     }
+    public void ReceiveCompleted()
+    {
+        SetWaveOpacity(1f);
+    }
+
 
     // ADRESS : /listen/color
     public void ReceiveColor(Color color)
@@ -83,4 +96,20 @@ public class ReceiveListen : MonoBehaviour
             audioSourceDistorted.DOFade(0, 0.5f);
         }
     }
+
+    private void ToggleWave()
+    {
+        foreach (var mat in noiseWaveMaterials)
+        {
+            mat.DOFloat(1, "_uProgress", 1f);
+        }
+    }
+    private void SetWaveOpacity(float alpha)
+    {
+        foreach (var mat in noiseWaveMaterials)
+        {
+            mat.DOFloat(alpha, "_uWaveOpacity", 1f);
+        }
+    }
+
 }

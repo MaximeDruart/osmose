@@ -106,13 +106,13 @@ void main_float(float uTime, float2 uFragCoord, float uFreq, float uThickness, f
     r +=  n2*0.08;
 
     // r *= uProgress*3.0;
-    r *= time*3.;
+    r *= uProgress * time*3.;
 
         
 
 	float pct = ring(uv, uOrigin, r, uThickness*time, uBleed, uBleed); 
     float3 color = float3(1., 1.,1.) * pct + float3(1., 1., 1.) * pct * n * 2.;
-    // if (uProgress < 0.08) color = float3(0., 0., 0.);
+    if (uProgress < 0.08) color = float3(0., 0., 0.);
     Out = float4(color,1.0);
 
 }
