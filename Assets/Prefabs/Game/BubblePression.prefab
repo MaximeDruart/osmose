@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7923001116854674429}
   - component: {fileID: 7001846701314609200}
   m_Layer: 0
-  m_Name: Bubble
+  m_Name: BubblePression
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,4 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyLimit: 3.7
-  bubbleFlySpeed: 0.001
+  bubbleFlySpeed: 0.005
+  bubbleEndScale: {x: 1.5, y: 1.5, z: 1.5}
+  bubbleScaleGrowing: {x: 0.00001, y: 0.00001, z: 0.00001}
