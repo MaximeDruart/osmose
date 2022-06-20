@@ -55,7 +55,15 @@ public class ReceiveListen : MonoBehaviour
 
     public void ToggleSound(bool isOn)
     {
-        if (isListen1Completed) return;
+        if (isListen1Completed)
+        {
+            if (audioSourceNormal.isPlaying)
+            {
+                audioSourceNormal.DOFade(0, 0.5f);
+                audioSourceDistorted.DOFade(0, 0.5f);
+            };
+            return;
+        };
 
         if (isOn)
         {
