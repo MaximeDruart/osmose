@@ -87,7 +87,7 @@ namespace extOSC
             Receiver.Bind(Address, ReceiveMessage);
         }
 
-        void onValidDrawing()
+        void IncrementActiveDrawing()
         {
             if (activeDrawing < 3)
             {
@@ -102,7 +102,7 @@ namespace extOSC
             if (message.ToArray(out var arrayValues)) // Get all values from first array in message.
             {
                 points.Clear();
-                if (arrayValues[0].BoolValue) onValidDrawing();
+                if (arrayValues[0].BoolValue) IncrementActiveDrawing();
 
                 // we're sending in a 1D array so we need to split it to get an array of vector2s
                 // we're scrolling the array 2 by 2 and creating a vector with the current value and the next
@@ -167,10 +167,8 @@ namespace extOSC
 
         void UpdateCreatureDrawing()
         {
-            Debug.Log(activeDrawing);
             if (activeDrawing == 1)
             {
-                Debug.Log("reacr");
                 SetGlowIntensity(0.3f);
                 DOVirtual.Int(0, 100, 2, (int i) =>
                 {
@@ -179,7 +177,7 @@ namespace extOSC
             }
             if (activeDrawing == 2)
             {
-                SetGlowIntensity(1f);
+                SetGlowIntensity(0.6f);
                 DOVirtual.Int(100, 0, 2, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);
@@ -188,6 +186,11 @@ namespace extOSC
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(1, i);
                 });
+            }
+            if (activeDrawing == 3)
+            {
+                SetGlowIntensity(1f);
+                SymbolMat.DOFade(0, 1.5f);
             }
         }
 

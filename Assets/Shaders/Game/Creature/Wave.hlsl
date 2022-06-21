@@ -86,8 +86,6 @@ float ring(float2 st, float2 center, float radius, float thickness, float bleed1
 void main_float(float uTime, float2 uFragCoord, float uFreq, float uThickness, float2 uOrigin, float uRadius, float uBleed, float uProgress, out float4 Out)
 {
     float2 uv = float2(uFragCoord.x, uFragCoord.y);
-
-    
     
 	float time = uTime % uFreq;
 	float noiseTime = uTime * 2.;
@@ -105,7 +103,6 @@ void main_float(float uTime, float2 uFragCoord, float uFreq, float uThickness, f
     r +=  n*0.18;
     r +=  n2*0.08;
 
-    // r *= uProgress*3.0;
     r *= uProgress * time*3.;
 
         
