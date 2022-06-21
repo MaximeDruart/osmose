@@ -52,6 +52,8 @@ namespace extOSC
         private Mesh skinnedMesh;
 
 
+        public GameObject EmissionCorps;
+        private Material EmissionCorpsMat;
         public GameObject[] emissionObjects;
         private Material[] emissionMaterials = new Material[4];
 
@@ -76,6 +78,8 @@ namespace extOSC
             {
                 emissionMaterials[i] = emissionObjects[i].GetComponent<Renderer>().material;
             }
+
+            EmissionCorpsMat = EmissionCorps.GetComponent<Renderer>().material;
 
             skinnedMeshRenderer = SymbolObject.GetComponent<SkinnedMeshRenderer>();
             skinnedMesh = SymbolObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
@@ -169,7 +173,8 @@ namespace extOSC
         {
             if (activeDrawing == 1)
             {
-                SetGlowIntensity(0.3f);
+                EmissionCorpsMat.DOFloat(0.6f, "_EmissionMapIntensity", 1f);
+                EmissionCorpsMat.DOFloat(0.6f, "_EmissionZoneIntensity", 1f);
                 DOVirtual.Int(0, 100, 2, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);
@@ -177,7 +182,7 @@ namespace extOSC
             }
             if (activeDrawing == 2)
             {
-                SetGlowIntensity(0.6f);
+                SetGlowIntensity(0.4f);
                 DOVirtual.Int(100, 0, 2, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);
@@ -189,6 +194,8 @@ namespace extOSC
             }
             if (activeDrawing == 3)
             {
+                EmissionCorpsMat.DOFloat(1f, "_EmissionMapIntensity", 1f);
+                EmissionCorpsMat.DOFloat(1f, "_EmissionZoneIntensity", 1f);
                 SetGlowIntensity(1f);
                 SymbolMat.DOFade(0, 1.5f);
             }

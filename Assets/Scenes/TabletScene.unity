@@ -6850,7 +6850,7 @@ MonoBehaviour:
   _address: /temp
   _mapBundle: {fileID: 0}
   reflectionMember:
-    Target: {fileID: 0}
+    Target: {fileID: 582234730}
     MemberName: Value
   informOnChanged: 1
   informInterval: 0
@@ -17709,7 +17709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1548004983
 RectTransform:
   m_ObjectHideFlags: 0

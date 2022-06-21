@@ -59,9 +59,13 @@ namespace extOSC.Examples
         private float tempAlpha = 0.5f;
         private float pressureAlpha = 0.5f;
 
+        public GameObject Canvas;
+
 
         private void Start()
         {
+
+            Canvas.SetActive(false);
 
             skinnedMeshRenderer = EyesObject.GetComponent<SkinnedMeshRenderer>();
             skinnedMesh = EyesObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
@@ -133,7 +137,6 @@ namespace extOSC.Examples
             if (message.ToArray(out var arrayValues))
             {
 
-                SetPressure(GetTempValue());
                 if (MotionHasPlayed.Value)
                 {
                     PlayAudio();
@@ -144,6 +147,7 @@ namespace extOSC.Examples
                     UpdateMotor(i, motorState[i]);
                 }
 
+                SetPressure(GetTempValue());
             }
         }
 
@@ -229,6 +233,11 @@ namespace extOSC.Examples
             pressureAlpha += 2;
             float pressureValue = OSCUtilities.Map(pressure, 0, 1, 400, 900);
             PressureText.DOText(pressureValue.ToString(), 0.5f);
+        }
+
+        public void ShowCanvas()
+        {
+            Canvas.SetActive(true);
         }
 
     }
