@@ -54,12 +54,13 @@ namespace extOSC.Examples
         public TMP_Text TemperatureText;
         public TMP_Text TemperatureTextRef;
         public GameObject Warning;
-        private Image WarningImage;
+        private Material WarningMat;
 
         private float tempAlpha = 0.5f;
         private float pressureAlpha = 0.5f;
 
         public GameObject Canvas;
+        public BubbleController bubbleController;
 
 
         private void Start()
@@ -78,7 +79,7 @@ namespace extOSC.Examples
 
             audioSource = GetComponent<AudioSource>();
 
-            WarningImage = Warning.GetComponent<Image>();
+            WarningMat = Warning.GetComponent<Image>().material;
 
             AnimateEyes(100, 0);
 
@@ -116,11 +117,11 @@ namespace extOSC.Examples
             TemperatureTextRef.DOFade(tempAlpha, 0f);
 
 
-            float variation = OSCUtilities.Map(Mathf.Sin(Time.time), -1, 1, 0.55f, 1f);
-            WarningImage.color = Color.red * variation;
+            float variation = OSCUtilities.Map(Mathf.Sin(Time.time), -1, 1, 1.4f, 1.9f);
+            WarningMat.SetColor("_Color", Color.red * variation);
             if (isTempValidated && isPressureValidated)
             {
-                WarningImage.color = Color.clear;
+                WarningMat.color = Color.clear;
             }
         }
 
@@ -143,12 +144,14 @@ namespace extOSC.Examples
                 {
                     PlayAudio();
                 }
+                SendBubbles();
+
                 for (int i = 0; i < arrayValues.Count; i++)
                 {
                     motorState[i] = arrayValues[i].BoolValue;
+                    Debug.Log(arrayValues[i].BoolValue);
                     UpdateMotor(i, motorState[i]);
                 }
-
                 SetPressure(GetTempValue());
             }
         }
@@ -156,9 +159,10 @@ namespace extOSC.Examples
         private float GetTempValue()
         {
             float temp = 0f;
-            foreach (var motorIsActivated in motorState)
+            foreach (bool motorIsActivated in motorState)
             {
-                if (motorIsActivated) temp += (1 / 6);
+                Debug.Log(motorIsActivated);
+                if (motorIsActivated) temp += (1f / 6f);
             }
             return temp;
         }
@@ -227,19 +231,28 @@ namespace extOSC.Examples
         private void SetTemperature(float temperature)
         {
             tempAlpha += 2;
-            float temperatureValue = OSCUtilities.Map(temperature, 0, 1, 0, 9);
+            int temperatureValue = Mathf.FloorToInt(OSCUtilities.Map(temperature, 0, 1, 0, 8));
             TemperatureText.DOText(temperatureValue.ToString(), 0.5f);
         }
         private void SetPressure(float pressure)
         {
             pressureAlpha += 2;
-            float pressureValue = OSCUtilities.Map(pressure, 0, 1, 400, 900);
+            int pressureValue = Mathf.FloorToInt(OSCUtilities.Map(pressure, 0, 1, 550, 850));
             PressureText.DOText(pressureValue.ToString(), 0.5f);
         }
 
         public void ShowCanvas()
         {
             Canvas.SetActive(true);
+        }
+
+        private void SendBubbles()
+        {
+            bubbleController.toggleBubbling();
+            Sequence mySeq = DOTween.Sequence();
+            mySeq.AppendInterval(2);
+            mySeq.AppendInterval(0);
+            mySeq.AppendCallback(() => bubbleController.toggleBubbling());
         }
 
     }

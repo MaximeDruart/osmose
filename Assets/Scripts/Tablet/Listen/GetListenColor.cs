@@ -48,6 +48,9 @@ namespace extOSC.Examples
         {
             HandleImage = Handle.GetComponent<Image>();
             OuterCircleImage = OuterCircle.GetComponent<Image>();
+
+            SetHandleColor(Color.white);
+            SetOuterColor(Color.white);
         }
 
         private void SendValidation()

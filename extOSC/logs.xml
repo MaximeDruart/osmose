@@ -1,4 +1,22 @@
 <root>
+  <message info="Receiver: 7000. From: Debug" type="Received" timestamp="[00:47:38]">
+    <packet>L21vdGlvbgAsSQAA</packet>
+  </message>
+  <message info="Receiver: 7000. From: Debug" type="Received" timestamp="[00:46:53]">
+    <packet>L21vdGlvbgAsAAAA</packet>
+  </message>
+  <message info="Receiver: 7000. From: 10.190.133.153:63610" type="Received" timestamp="[00:44:52]">
+    <packet>L3ByZXNzdXJlAAAALFtGRlRGRkZdAAAA</packet>
+  </message>
+  <message info="Receiver: 7000. From: 10.190.133.153:63610" type="Received" timestamp="[00:44:52]">
+    <packet>L2Vudmlyb25tZW50L2NvbXBsZXRlZAAALEZGAA==</packet>
+  </message>
+  <message info="Receiver: 7000. From: 10.190.133.153:63610" type="Received" timestamp="[00:44:52]">
+    <packet>L2Vudmlyb25tZW50L2NvbXBsZXRlZAAALEZGAA==</packet>
+  </message>
+  <message info="Receiver: 7000. From: 10.190.133.153:63610" type="Received" timestamp="[00:44:52]">
+    <packet>L3ByZXNzdXJlAAAALFtGRkZGRkZdAAAA</packet>
+  </message>
   <message info="Transmitter: 10.190.133.153:7000" type="Transmitted" timestamp="[22:12:10]">
     <packet>L3ByZXNzdXJlAAAALFtGVFRGVEZdAAAA</packet>
   </message>

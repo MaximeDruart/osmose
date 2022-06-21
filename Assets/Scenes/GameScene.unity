@@ -17442,7 +17442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: c5ee70677efb34f4c8345a1f475b08b1, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -18918,6 +18918,7 @@ MonoBehaviour:
   zRangeSpawnStart: -1.2
   zRangeSpawnEnd: 1.2
   isVariation: 0
+  constantBubbling: 1
 --- !u!4 &1038497829
 Transform:
   m_ObjectHideFlags: 0
@@ -19082,7 +19083,7 @@ MonoBehaviour:
   _mapBundle: {fileID: 0}
   _workInEditor: 1
   _localHostMode: 1
-  _localHost: 10.137.99.229
+  _localHost: 10.190.133.153
   _localPort: 7000
 --- !u!4 &1042719348
 Transform:
@@ -19532,6 +19533,7 @@ GameObject:
   - component: {fileID: 1139171044}
   - component: {fileID: 1139171043}
   - component: {fileID: 1139171045}
+  - component: {fileID: 1139171046}
   m_Layer: 0
   m_Name: Environment
   m_TagString: Untagged
@@ -19621,6 +19623,7 @@ MonoBehaviour:
   TemperatureTextRef: {fileID: 1032837520}
   Warning: {fileID: 713235670}
   Canvas: {fileID: 1128019922}
+  bubbleController: {fileID: 1139171046}
 --- !u!4 &1139171044
 Transform:
   m_ObjectHideFlags: 0
@@ -19733,6 +19736,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1139171046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139171042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7203c0ec73436415883454255f0cb080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 7923001116854674428, guid: b4aeb3e8a9edf410584bb9699241981e,
+    type: 3}
+  timeSpan: 1
+  xRangeSpawnStart: -5
+  xRangeSpawnEnd: 5
+  zRangeSpawnStart: -5
+  zRangeSpawnEnd: 5
+  isVariation: 1
+  constantBubbling: 0
 --- !u!1 &1141077566
 GameObject:
   m_ObjectHideFlags: 0
@@ -20966,7 +20990,7 @@ VideoPlayer:
   m_RenderMode: 1
   m_AspectRatio: 1
   m_DataSource: 0
-  m_PlaybackSpeed: 1
+  m_PlaybackSpeed: 8.28
   m_AudioOutputMode: 1
   m_TargetAudioSources:
   - {fileID: 1401743577}
@@ -26268,7 +26292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1579639188
 Transform:
   m_ObjectHideFlags: 0
@@ -27123,7 +27147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1856137143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27144,6 +27168,7 @@ MonoBehaviour:
   zRangeSpawnStart: -1.25
   zRangeSpawnEnd: -0.5
   isVariation: 1
+  constantBubbling: 0
 --- !u!4 &1856137144
 Transform:
   m_ObjectHideFlags: 0
@@ -27698,6 +27723,7 @@ MonoBehaviour:
   zRangeSpawnStart: -1.2
   zRangeSpawnEnd: 1.2
   isVariation: 0
+  constantBubbling: 1
 --- !u!4 &1990546709
 Transform:
   m_ObjectHideFlags: 0
@@ -27729,7 +27755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2024678441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27749,7 +27775,8 @@ MonoBehaviour:
   xRangeSpawnEnd: 0.15
   zRangeSpawnStart: 1.25
   zRangeSpawnEnd: 0.5
-  isVariation: 0
+  isVariation: 1
+  constantBubbling: 0
 --- !u!4 &2024678442
 Transform:
   m_ObjectHideFlags: 0
