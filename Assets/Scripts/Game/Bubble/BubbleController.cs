@@ -11,6 +11,9 @@ public class BubbleController : MonoBehaviour
     [SerializeField] private float zRangeSpawnStart = -5f;
     [SerializeField] private float zRangeSpawnEnd = 5f;
     [SerializeField] private bool isVariation = false;
+    [SerializeField] private bool constantBubbling = true;
+    private bool isBubbling = false;
+
 
 
     void Start()
@@ -29,13 +32,28 @@ public class BubbleController : MonoBehaviour
         {
             yield return new WaitForSeconds(timeSpan);
 
-            if (isVariation)
+            if (isBubbling || constantBubbling)
             {
-                zRangeSpawnEnd = Random.Range(zRangeSpawnEnd - 0.04f, zRangeSpawnEnd + 0.04f);
-            }
+                if (isVariation)
+                {
+                    zRangeSpawnEnd = Random.Range(zRangeSpawnEnd - 0.04f, zRangeSpawnEnd + 0.04f);
+                }
 
-            GameObject bubbleInstance = (GameObject)Instantiate(bubblePrefab);
-            bubbleInstance.transform.position = new Vector3(Random.Range(xRangeSpawnStart, xRangeSpawnEnd), 0, Random.Range(zRangeSpawnStart, zRangeSpawnEnd));
+                GameObject bubbleInstance = (GameObject)Instantiate(bubblePrefab);
+                bubbleInstance.transform.position = new Vector3(Random.Range(xRangeSpawnStart, xRangeSpawnEnd), 0, Random.Range(zRangeSpawnStart, zRangeSpawnEnd));
+            }
+        }
+    }
+
+    public void toggleBubbling()
+    {
+        if (isBubbling)
+        {
+            isBubbling = false;
+        }
+        else
+        {
+            isBubbling = true;
         }
     }
 }
