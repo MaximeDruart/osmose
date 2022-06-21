@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 public class PressionModulesManager : MonoBehaviour
 {
@@ -33,7 +33,7 @@ public class PressionModulesManager : MonoBehaviour
         }
     }
 
-    private void TogglePressionModule(int idPressionModuleToToggle, bool isToggle)
+    public void TogglePressionModule(int idPressionModuleToToggle, bool isToggle)
     {
         Debug.Log("\nPression Module: " + (idPressionModuleToToggle + 1) + "\nToggle: " + isToggle + "\n Index Pression Module: " + idPressionModuleToToggle);
         if (isToggle)

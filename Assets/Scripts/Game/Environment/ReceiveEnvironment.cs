@@ -9,6 +9,7 @@ namespace extOSC.Examples
 
         [SerializeField] private OSCReceiver Receiver;
         [SerializeField] private GameObject[] motorObjects;
+        private Material[] motorObjectsMats = new Material[6];
         public float motorMovementAmount = 0.2f;
 
         [SerializeField] private Animator animator;
@@ -53,7 +54,7 @@ namespace extOSC.Examples
             for (int i = 0; i < motorObjects.Length; i++)
             {
                 motorObjectsInitialPosX[i] = motorObjects[i].transform.localPosition.x;
-
+                motorObjectsMats[i] = motorObjects[i].GetComponent<Renderer>().material;
             }
 
             audioSource = GetComponent<AudioSource>();
@@ -106,10 +107,12 @@ namespace extOSC.Examples
             if (isActivated)
             {
                 motorObjects[motorIndex].transform.DOLocalMoveX(motorObjectsInitialPosX[motorIndex] + motorMovementAmount, 0.6f);
+                motorObjectsMats[motorIndex].DOFloat(1, "_Progress_Value", 0.6f);
             }
             else
             {
                 motorObjects[motorIndex].transform.DOLocalMoveX(motorObjectsInitialPosX[motorIndex], 0.6f);
+                motorObjectsMats[motorIndex].DOFloat(0, "_Progress_Value", 0.6f);
             }
         }
 

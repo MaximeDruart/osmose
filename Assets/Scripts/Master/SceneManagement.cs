@@ -21,7 +21,7 @@ public class SceneManagement : MonoBehaviour
     }
     public void LoadGame()
     {
-        SceneManager.LoadSceneAsync("GameSceneMax");
+        SceneManager.LoadSceneAsync("GameScene");
     }
     public void LoadTablet()
     {
