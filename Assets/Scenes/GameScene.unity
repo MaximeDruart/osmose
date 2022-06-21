@@ -1015,9 +1015,6 @@ MonoBehaviour:
   audioSourceDistorted: {fileID: 202759959}
   maxDistortionDistance: 3
   waveObjects: []
-  noiseWaveMaterials:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &231963509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7911,12 +7908,12 @@ MonoBehaviour:
   Address: /draw
   Brush: {fileID: 878494557500543303, guid: 6f90d65aa10d2014996261ae69bc4e5a, type: 3}
   LineObject: {fileID: 1060101973}
-  Loader: {fileID: 1436606545}
   Canvas: {fileID: 1149949764}
   animationDuration: 2
-  DrawingCounterText: {fileID: 1021422661}
+  Mask: {fileID: 0}
   DrawingContainer: {fileID: 1966659115}
   SymbolObject: {fileID: 5572796747747383457}
+  emissionObjects: []
   OnCompleted:
     m_PersistentCalls:
       m_Calls:
@@ -8893,6 +8890,7 @@ MonoBehaviour:
   xRangeSpawnEnd: 1.5
   zRangeSpawnStart: -1.2
   zRangeSpawnEnd: 1.2
+  isVariation: 0
 --- !u!4 &1038497829
 Transform:
   m_ObjectHideFlags: 0
@@ -16538,7 +16536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1856137143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16558,6 +16556,7 @@ MonoBehaviour:
   xRangeSpawnEnd: -0.15
   zRangeSpawnStart: -1.25
   zRangeSpawnEnd: -0.5
+  isVariation: 1
 --- !u!4 &1856137144
 Transform:
   m_ObjectHideFlags: 0
@@ -16734,6 +16733,7 @@ MonoBehaviour:
   xRangeSpawnEnd: -0.8
   zRangeSpawnStart: -1.2
   zRangeSpawnEnd: 1.2
+  isVariation: 0
 --- !u!4 &1990546709
 Transform:
   m_ObjectHideFlags: 0
@@ -16778,13 +16778,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7203c0ec73436415883454255f0cb080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 7923001116854674428, guid: 8a42852749d3a4f16b4e6e5aea7a08db,
+  bubblePrefab: {fileID: 7923001116854674428, guid: b4aeb3e8a9edf410584bb9699241981e,
     type: 3}
   timeSpan: 0.01
   xRangeSpawnStart: -0.15
   xRangeSpawnEnd: 0.15
   zRangeSpawnStart: 1.25
   zRangeSpawnEnd: 0.5
+  isVariation: 0
 --- !u!4 &2024678442
 Transform:
   m_ObjectHideFlags: 0
@@ -17161,7 +17162,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

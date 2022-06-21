@@ -64,9 +64,10 @@ Material:
     - _Caustic_Power: 0.15
     - _Cloud_Brightness: 0.87
     - _Cloud_Power: 6.77
-    - _Distortion_Speed: 0.3
+    - _Distortion_Speed: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Test: 4.65
     - _Transparency: 0.04
     m_Colors:
     - _Caustic_Color: {r: 1, g: 1, b: 1, a: 0}
