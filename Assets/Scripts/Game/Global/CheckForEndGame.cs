@@ -16,6 +16,7 @@ public class CheckForEndGame : MonoBehaviour
     public UnityEvent OnGameCompletion;
 
     private AudioSource audioSource;
+    private AudioSource audioSourceSessionTermine;
 
     public BloomControllers BloomController;
     public Color EndColor;
@@ -83,7 +84,11 @@ public class CheckForEndGame : MonoBehaviour
 
         mySequence.AppendInterval(7.5f);
         mySequence.AppendInterval(0f);
-        mySequence.AppendCallback(() => animator.SetBool("IsBackToFetus", true));
+        mySequence.AppendCallback(() =>
+        {
+            animator.SetBool("IsBackToFetus", true);
+            audioSourceSessionTermine.Play();
+        });
         foreach (var creatureMat in CreatureMats)
         {
             mySequence.Join(creatureMat.DOFloat(0, "_DissolveProgress", 3f).SetDelay(0.3f));

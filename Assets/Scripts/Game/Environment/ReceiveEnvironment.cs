@@ -225,7 +225,7 @@ namespace extOSC.Examples
         private void SetTemperature(float temperature)
         {
             tempAlpha += 2;
-            float temperatureValue = OSCUtilities.Map(temperature, 0, 1, -20, 12);
+            float temperatureValue = OSCUtilities.Map(temperature, 0, 1, 0, 9);
             TemperatureText.DOText(temperatureValue.ToString(), 0.5f);
         }
         private void SetPressure(float pressure)

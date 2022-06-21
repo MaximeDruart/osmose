@@ -30,7 +30,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DrawingEmission:
-        m_Texture: {fileID: 2800000, guid: 41bac64073e6946aa8651d495d327b33, type: 3}
+        m_Texture: {fileID: 2800000, guid: bd891ff86fae493469c4813541b131a2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
@@ -97,7 +97,8 @@ Material:
     - _FinalProgress: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _VeinsOpacity: 0.284
+    - _VeinsOpacity: 1
+    - _isUV0: 1
     - _uBleed: 0.65
     - _uFreq: 1
     - _uProgress: 0
@@ -106,7 +107,7 @@ Material:
     - _uWaveOpacity: 1
     - _uvScale: 0.8
     m_Colors:
-    - _VeinsColor: {r: 0.9499446, g: 1.165809, b: 1.882133, a: 0}
+    - _VeinsColor: {r: 1.9820216, g: 0.6259016, b: 3.3207555, a: 1}
     - _emission: {r: 0.4805981, g: 0.75191665, b: 0.754717, a: 1}
     - _uBaseColor: {r: 0.427451, g: 1, b: 0.5435849, a: 1}
     - _uOrigin: {r: 0.6, g: 0.7, b: 0, a: 0}
