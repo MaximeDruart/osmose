@@ -16,14 +16,6 @@ public class PressionModulesManager : MonoBehaviour
         parseTableOfPressionModuleMaterials();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            switchToggle = switchToggle ? false : true;
-            TogglePressionModule(2, switchToggle);
-        }
-    }
 
     private void parseTableOfPressionModuleMaterials()
     {

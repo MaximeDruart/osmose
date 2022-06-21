@@ -16,14 +16,6 @@ public class BloomControllers : MonoBehaviour
         volume.profile.TryGet(out b);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            b.tint.value = new Color(UnityEngine.Random.Range(1.1f, 10.9f), UnityEngine.Random.Range(1.1f, 10.9f), UnityEngine.Random.Range(1.1f, 10.9f), 1.0F);
-        }
-    }
-
     public void SetBloomColor(Color color)
     {
         Color colorTemp = b.tint.value;

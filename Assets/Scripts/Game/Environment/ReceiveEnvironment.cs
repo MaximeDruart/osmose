@@ -88,8 +88,8 @@ namespace extOSC.Examples
 
         private void FixedUpdate()
         {
-            tempAlpha -= 0.01;
-            pressureAlpha -= 0.01;
+            tempAlpha -= 0.01f;
+            pressureAlpha -= 0.01f;
             tempAlpha = Mathf.Clamp(tempAlpha, 0, 2);
             pressureAlpha = Mathf.Clamp(pressureAlpha, 0, 2);
 
@@ -129,7 +129,7 @@ namespace extOSC.Examples
             float temp = 0f;
             foreach (var motorIsActivated in motorState)
             {
-                if (motorIsActivated) temp += (1 / (float)motorAmount);
+                if (motorIsActivated) temp += (1 / 6);
             }
             return temp;
         }

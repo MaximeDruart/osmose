@@ -124,6 +124,7 @@ Material:
     - _EmissionMapIntensity: 0
     - _EmissionZoneIntensity: 0
     - _EnvironmentReflections: 1
+    - _FinalProgress: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

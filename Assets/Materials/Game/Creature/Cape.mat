@@ -87,20 +87,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DissolveProgress: 1
     - _EmissionMapIntensity: 0
     - _EmissionZoneIntensity: 0
+    - _FinalProgress: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _VeinsOpacity: 1
+    - _VeinsOpacity: 0
     - _uBleed: 0.65
     - _uFreq: 1
-    - _uProgress: 1
+    - _uProgress: 0
     - _uRadius: 0.35
     - _uThickness: 0.18
     - _uWaveOpacity: 1
     - _uvScale: 0.8
     m_Colors:
-    - _VeinsColor: {r: 0.9499446, g: 1.165809, b: 1.882133, a: 0}
+    - _VeinsColor: {r: 3.0431373, g: 3.7333333, b: 5.992157, a: 1}
     - _emission: {r: 0.4805981, g: 0.75191665, b: 0.754717, a: 1}
     - _uBaseColor: {r: 0.427451, g: 1, b: 0.5435849, a: 1}
     - _uOrigin: {r: 0.6, g: 0.7, b: 0, a: 0}
