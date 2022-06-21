@@ -21967,7 +21967,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1045025763}
-  _value: {x: 1, y: 0}
+  _value: {x: 0.45, y: -0.87}
   _maxValue: {x: 1, y: 1}
   _minValue: {x: -1, y: -1}
   _onValueChanged:
@@ -22032,12 +22032,14 @@ MonoBehaviour:
   Transmitter: {fileID: 1853618885}
   Address: /listen/color
   colors:
+  - {r: 0.99607843, g: 0.29411766, b: 0.20784314, a: 1}
+  - {r: 1, g: 0.6, b: 0.3137255, a: 1}
+  - {r: 1, g: 0.8117647, b: 0.44313726, a: 1}
+  - {r: 0.69803923, g: 0.90588236, b: 0.3764706, a: 1}
+  - {r: 0.35686275, g: 0.9137255, b: 0.6901961, a: 1}
+  - {r: 0.28627452, g: 0.6901961, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0.32101834, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0.32854438, b: 1, a: 1}
-  - {r: 0.3739757, g: 0.38679248, b: 0.023718417, a: 1}
-  - {r: 1, g: 0.042452812, b: 0.6049247, a: 1}
+  - {r: 0.7137255, g: 0.26666668, b: 0.9764706, a: 1}
   Handle: {fileID: 1045025761}
   OuterCircle: {fileID: 401504728}
   ValidColorIndex: 4
