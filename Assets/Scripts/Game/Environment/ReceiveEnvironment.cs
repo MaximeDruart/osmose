@@ -51,6 +51,9 @@ namespace extOSC.Examples
         public TMP_Text PressureText;
         public TMP_Text TemperatureText;
 
+        private float tempAlpha = 0f;
+        private float pressureAlpha = 0f;
+
 
         private void Start()
         {
@@ -81,6 +84,17 @@ namespace extOSC.Examples
 
             Receiver.Bind(AddressCompleted, onCompleted);
 
+        }
+
+        private void FixedUpdate()
+        {
+            tempAlpha -= 0.01;
+            pressureAlpha -= 0.01;
+            tempAlpha = Mathf.Clamp(tempAlpha, 0, 2);
+            pressureAlpha = Mathf.Clamp(pressureAlpha, 0, 2);
+
+            PressureText.DOFade(pressureAlpha, 0f);
+            TemperatureText.DOFade(tempAlpha, 0f);
         }
 
         private void onTemperature(OSCMessage message)
@@ -183,11 +197,13 @@ namespace extOSC.Examples
 
         private void SetTemperature(float temperature)
         {
+            tempAlpha += 2;
             float temperatureValue = OSCUtilities.Map(temperature, 0, 1, -20, 12);
             TemperatureText.DOText(temperatureValue.ToString(), 0.5f);
         }
         private void SetPressure(float pressure)
         {
+            pressureAlpha += 2;
             float pressureValue = OSCUtilities.Map(pressure, 0, 1, 400, 900);
             PressureText.DOText(pressureValue.ToString(), 0.5f);
         }
