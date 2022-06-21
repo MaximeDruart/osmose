@@ -13961,7 +13961,7 @@ MonoBehaviour:
   Trail: {fileID: 1074421440}
   Background: {fileID: 374416162}
   HelpIsOpened: {fileID: 11400000, guid: 0732bce2fd7afc84194a6bcbed1326e1, type: 2}
-  motionDuration: 5
+  motionDuration: 31
 --- !u!114 &1242064380
 MonoBehaviour:
   m_ObjectHideFlags: 0

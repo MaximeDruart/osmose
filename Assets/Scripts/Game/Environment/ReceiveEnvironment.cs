@@ -2,6 +2,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace extOSC.Examples
 {
@@ -49,10 +50,14 @@ namespace extOSC.Examples
         [Header("Tank UI")]
 
         public TMP_Text PressureText;
+        public TMP_Text PressureTextRef;
         public TMP_Text TemperatureText;
+        public TMP_Text TemperatureTextRef;
+        public GameObject Warning;
+        private Image WarningImage;
 
-        private float tempAlpha = 0f;
-        private float pressureAlpha = 0f;
+        private float tempAlpha = 0.5f;
+        private float pressureAlpha = 0.5f;
 
 
         private void Start()
@@ -69,7 +74,14 @@ namespace extOSC.Examples
 
             audioSource = GetComponent<AudioSource>();
 
+            WarningImage = Warning.GetComponent<Image>();
+
             AnimateEyes(100, 0);
+
+            SetTemperature(0);
+            SetPressure(0);
+            tempAlpha = 0.5f;
+            pressureAlpha = 0.5f;
 
 
             if (StartDeployed)
@@ -90,11 +102,22 @@ namespace extOSC.Examples
         {
             tempAlpha -= 0.01f;
             pressureAlpha -= 0.01f;
-            tempAlpha = Mathf.Clamp(tempAlpha, 0, 2);
-            pressureAlpha = Mathf.Clamp(pressureAlpha, 0, 2);
+            tempAlpha = Mathf.Clamp(tempAlpha, 0.5f, 2);
+            pressureAlpha = Mathf.Clamp(pressureAlpha, 0.5f, 2);
 
             PressureText.DOFade(pressureAlpha, 0f);
+            PressureTextRef.DOFade(pressureAlpha, 0f);
+
             TemperatureText.DOFade(tempAlpha, 0f);
+            TemperatureTextRef.DOFade(tempAlpha, 0f);
+
+
+            float variation = OSCUtilities.Map(Mathf.Sin(Time.time), -1, 1, 0.55f, 1f);
+            WarningImage.color = Color.red * variation;
+            if (isTempValidated && isPressureValidated)
+            {
+                WarningImage.color = Color.clear;
+            }
         }
 
         private void onTemperature(OSCMessage message)
@@ -207,5 +230,6 @@ namespace extOSC.Examples
             float pressureValue = OSCUtilities.Map(pressure, 0, 1, 400, 900);
             PressureText.DOText(pressureValue.ToString(), 0.5f);
         }
+
     }
 }
