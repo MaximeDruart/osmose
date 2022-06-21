@@ -23240,7 +23240,7 @@ MonoBehaviour:
   ColorPad2Obj: {fileID: 508399650}
   audioSourceNormal: {fileID: 608672591}
   audioSourceDistorted: {fileID: 1024369410}
-  maxDistortionDistance: 0.6
+  maxDistortionDistance: 0.3
   isValidateEnabled: 1
   PlayAudioOnTablet: 0
 --- !u!1 &1989688240

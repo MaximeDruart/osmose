@@ -70,7 +70,7 @@ namespace extOSC
 
             MaskRect = Mask.GetComponent<RectTransform>();
             MaskMask = Mask.GetComponent<RectMask2D>();
-            SetBorderPadding(6);
+            SetBorderPadding(8);
 
             for (int i = 0; i < emissionObjects.Length; i++)
             {
@@ -131,7 +131,7 @@ namespace extOSC
             lineRenderer.positionCount = points.Count;
             lineRenderer.material.DOFade(1, 0f);
             Sequence mySequence = DOTween.Sequence();
-            DOVirtual.Float(6, 0, 0.9f, SetBorderPadding).SetEase(Ease.OutQuint);
+            DOVirtual.Float(8, 0, 0.9f, SetBorderPadding).SetEase(Ease.OutQuint);
             mySequence.AppendInterval(0.8f);
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 103), 0.6f));
             mySequence.AppendCallback(() => StartCoroutine(AnimateLine()));
@@ -143,7 +143,7 @@ namespace extOSC
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 0), 1f));
             mySequence.AppendCallback(() =>
             {
-                DOVirtual.Float(0, 6, 0.9f, SetBorderPadding).SetEase(Ease.OutQuint);
+                DOVirtual.Float(0, 8, 0.9f, SetBorderPadding).SetEase(Ease.OutQuint);
             });
             mySequence.AppendInterval(0.5f);
             mySequence.Append(lineRenderer.material.DOFade(0, 0.5f));

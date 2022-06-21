@@ -86,11 +86,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VeinsMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d45b3b3b226c0054ca6e35c188691a24, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaveMap:
-        m_Texture: {fileID: 2800000, guid: 494958d3760e29344a63703dbc7f40e3, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaveVeinsMap:
@@ -120,6 +120,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DissolveProgress: 1
     - _DstBlend: 0
     - _EmissionMapIntensity: 0
     - _EmissionZoneIntensity: 0
@@ -142,22 +143,22 @@ Material:
     - _VeinsOpacity: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _uBleed: 0.62
+    - _uBleed: 0.65
     - _uFreq: 1
     - _uProgress: 0
-    - _uRadius: 0.6
+    - _uRadius: 0.45
     - _uThickness: 0.18
     - _uWaveOpacity: 1
-    - _uvScale: 1
+    - _uvScale: 0.8
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _VeinsColor: {r: 0.9499446, g: 1.165809, b: 1.882133, a: 0}
-    - _emission: {r: 0.01960784, g: 0, b: 0.1470588, a: 1}
-    - _uBaseColor: {r: 0.990566, g: 0, b: 0, a: 0}
-    - _uOrigin: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _VeinsColor: {r: 3.0431373, g: 3.7333333, b: 5.992157, a: 1}
+    - _emission: {r: 0.4805981, g: 0.75191665, b: 0.754717, a: 1}
+    - _uBaseColor: {r: 0.427451, g: 1, b: 0.5435849, a: 1}
+    - _uOrigin: {r: 0.6, g: 0.7, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &3935824221535950479
 MonoBehaviour:

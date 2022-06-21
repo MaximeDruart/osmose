@@ -91,6 +91,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DissolveProgress: 1
     - _EmissionMapIntensity: 0
     - _EmissionZoneIntensity: 0
     - _FinalProgress: 0
