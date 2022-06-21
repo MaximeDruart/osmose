@@ -142,7 +142,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.1432894, g: 0.15735134, b: 0.18867922, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
-    - _BloomColor: {r: 220.86275, g: 449.75687, b: 766.9961, a: 0}
+    - _BloomColor: {r: 1024, g: 1024, b: 1024, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 0, g: 0.30980182, b: 1, a: 1}
     - _EmissionColor: {r: 0.3018868, g: 0.3018868, b: 0.3018868, a: 1}

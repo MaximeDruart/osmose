@@ -126,6 +126,7 @@ namespace extOSC.Examples
 
         private void onTemperature(OSCMessage message)
         {
+            Debug.Log(message);
             if (message.ToFloat(out float temp))
             {
                 SetTemperature(temp);
@@ -134,6 +135,7 @@ namespace extOSC.Examples
 
         private void onPressure(OSCMessage message)
         {
+            Debug.Log(message);
             if (message.ToArray(out var arrayValues))
             {
 

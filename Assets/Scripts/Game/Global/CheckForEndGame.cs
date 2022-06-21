@@ -21,10 +21,15 @@ public class CheckForEndGame : MonoBehaviour
     public BloomControllers BloomController;
     public Color EndColor;
 
+    [Header("Particles")]
+
+    public ParticleSystem elec1;
+    public ParticleSystem elec2;
+
 
     void Start()
     {
-        EyesMat = Eyes.GetComponent<Renderer>().material;
+        EyesMat = Eyes.GetComponent<SkinnedMeshRenderer>().material;
 
         audioSource = GetComponent<AudioSource>();
 
@@ -72,6 +77,8 @@ public class CheckForEndGame : MonoBehaviour
         {
             animator.SetBool("isTaz", true);
             BloomController.SetBloomColor(EndColor);
+            elec1.Play();
+            elec2.Play();
         });
         // lightning effect
         mySequence.AppendInterval(0.1f);
