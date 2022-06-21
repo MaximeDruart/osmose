@@ -39,8 +39,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Add_Alpha: 0.4
-    - _Blend_Opacity: 1.3
+    - _Add_Alpha: 0.75
+    - _Blend_Opacity: 3
     - _Blend_Sharpness: 2
     - _Divide_Color: 3
     - _Fresnel_Power: 5
