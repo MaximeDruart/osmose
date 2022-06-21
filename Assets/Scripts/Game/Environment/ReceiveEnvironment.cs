@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -45,6 +46,12 @@ namespace extOSC.Examples
         private Mesh skinnedMesh;
 
 
+        [Header("Tank UI")]
+
+        public TMP_Text PressureText;
+        public TMP_Text TemperatureText;
+
+
         private void Start()
         {
 
@@ -80,7 +87,7 @@ namespace extOSC.Examples
         {
             if (message.ToFloat(out float temp))
             {
-                // temp value
+                SetTemperature(temp);
             }
         }
 
@@ -88,6 +95,8 @@ namespace extOSC.Examples
         {
             if (message.ToArray(out var arrayValues))
             {
+
+                SetPressure(GetTempValue());
                 if (MotionHasPlayed.Value)
                 {
                     PlayAudio();
@@ -99,6 +108,16 @@ namespace extOSC.Examples
                 }
 
             }
+        }
+
+        private float GetTempValue()
+        {
+            float temp = 0f;
+            foreach (var motorIsActivated in motorState)
+            {
+                if (motorIsActivated) temp += (1 / (float)motorAmount);
+            }
+            return temp;
         }
 
         private void UpdateMotor(int motorIndex, bool isActivated)
@@ -160,6 +179,17 @@ namespace extOSC.Examples
                 (int i) => skinnedMeshRenderer.SetBlendShapeWeight(0, i)
                 )
                 .SetDelay(0.5f);
+        }
+
+        private void SetTemperature(float temperature)
+        {
+            float temperatureValue = OSCUtilities.Map(temperature, 0, 1, -20, 12);
+            TemperatureText.DOText(temperatureValue.ToString(), 0.5f);
+        }
+        private void SetPressure(float pressure)
+        {
+            float pressureValue = OSCUtilities.Map(pressure, 0, 1, 400, 900);
+            PressureText.DOText(pressureValue.ToString(), 0.5f);
         }
     }
 }
