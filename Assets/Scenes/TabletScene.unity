@@ -7733,8 +7733,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -449.7}
-  m_SizeDelta: {x: 0, y: 900.63}
+  m_AnchoredPosition: {x: 0, y: -514.85}
+  m_SizeDelta: {x: 0, y: 1029.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &624000003
 GameObject:
@@ -16683,7 +16683,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Le sujet entre dans une forme de parade <b>lorsqu'un certain rythme est
     jou\xE9</b> via l\u2019\xE9metteur sonore. Si le bon tempo est <b>tenu assez
-    longtemps</b>, une forme de transe est observ\xE9e."
+    longtemps</b>, une forme de transe est observ\xE9e. L\u2019illumination du bout
+    de ses tentacules est un indicateur efficace\r."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ffe6ed8b01478447a1b4ada2fd10a9b, type: 2}
   m_sharedMaterial: {fileID: -4365317957712703240, guid: 3ffe6ed8b01478447a1b4ada2fd10a9b,
