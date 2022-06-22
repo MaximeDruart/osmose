@@ -96,15 +96,17 @@ public class CheckForEndGame : MonoBehaviour
         {
             animator.SetBool("IsBackToFetus", true);
             EyesMat.DOFade(0, 0.5f);
-            audioSourceSessionTermine.Play();
+            elec1.Stop();
+            elec2.Stop();
         });
         foreach (var creatureMat in CreatureMats)
         {
             mySequence.Join(creatureMat.DOFloat(0, "_DissolveProgress", 3f).SetDelay(0.3f));
         }
-
+        mySequence.AppendInterval(2f);
+        mySequence.AppendCallback(() => audioSourceSessionTermine.Play());
+        mySequence.AppendInterval(7f);
         mySequence.AppendInterval(0f);
-        mySequence.AppendInterval(5f);
         mySequence.AppendCallback(OnGameCompletion.Invoke);
     }
 }
