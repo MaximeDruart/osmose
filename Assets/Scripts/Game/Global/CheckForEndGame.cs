@@ -14,9 +14,10 @@ public class CheckForEndGame : MonoBehaviour
     private Material[] CreatureMats = new Material[4];
 
     public UnityEvent OnGameCompletion;
+    public UnityEvent OnGameCompletionStart;
 
-    private AudioSource audioSource;
-    private AudioSource audioSourceSessionTermine;
+    public AudioSource audioSource;
+    public AudioSource audioSourceSessionTermine;
 
     public BloomControllers BloomController;
     public Color EndColor;
@@ -30,8 +31,6 @@ public class CheckForEndGame : MonoBehaviour
     void Start()
     {
         EyesMat = Eyes.GetComponent<SkinnedMeshRenderer>().material;
-
-        audioSource = GetComponent<AudioSource>();
 
         for (int i = 0; i < CreatureItems.Length; i++)
         {
@@ -75,10 +74,12 @@ public class CheckForEndGame : MonoBehaviour
         mySequence.AppendInterval(0f);
         mySequence.AppendCallback(() =>
         {
+            OnGameCompletionStart.Invoke();
             animator.SetBool("isTaz", true);
             BloomController.SetBloomColor(EndColor);
             elec1.Play();
             elec2.Play();
+
         });
         // lightning effect
         mySequence.AppendInterval(0.1f);
@@ -94,6 +95,7 @@ public class CheckForEndGame : MonoBehaviour
         mySequence.AppendCallback(() =>
         {
             animator.SetBool("IsBackToFetus", true);
+            EyesMat.DOFade(0, 0.5f);
             audioSourceSessionTermine.Play();
         });
         foreach (var creatureMat in CreatureMats)

@@ -12,6 +12,8 @@ public class TriggerMotion : MonoBehaviour
     public UnityEvent OnFinishMotion;
     public BoolVariable MotionHasPlayed;
 
+    public GameObject PostProcessing;
+
     private void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
@@ -20,6 +22,8 @@ public class TriggerMotion : MonoBehaviour
         MotionHasPlayed.Value = false;
 
         audioSource.volume = 0;
+
+        PostProcessing.SetActive(false);
     }
 
     public void TriggerAnim()

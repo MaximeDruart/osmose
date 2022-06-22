@@ -10,6 +10,7 @@ public class EyesBlink : MonoBehaviour
 
     private SkinnedMeshRenderer skinnedMeshRenderer;
     private Mesh skinnedMesh;
+    private Material eyeMaterial;
 
 
     public float eyeBlinkDelay = 400;
@@ -22,6 +23,7 @@ public class EyesBlink : MonoBehaviour
     {
         skinnedMeshRenderer = EyesObject.GetComponent<SkinnedMeshRenderer>();
         skinnedMesh = EyesObject.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+        eyeMaterial = EyesObject.GetComponent<SkinnedMeshRenderer>().material;
     }
 
     // Update is called once per frame
@@ -49,6 +51,6 @@ public class EyesBlink : MonoBehaviour
             (int i) => skinnedMeshRenderer.SetBlendShapeWeight(0, i)
             ).SetDelay(0.45f);
 
-
     }
+
 }

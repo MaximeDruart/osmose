@@ -55,7 +55,7 @@ namespace extOSC
         public GameObject EmissionCorps;
         private Material EmissionCorpsMat;
         public GameObject[] emissionObjects;
-        private Material[] emissionMaterials = new Material[4];
+        private Material[] emissionMaterials = new Material[3];
 
 
 
@@ -139,10 +139,7 @@ namespace extOSC
             mySequence.AppendInterval(0.8f);
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 103), 0.6f));
             mySequence.AppendCallback(() => StartCoroutine(AnimateLine()));
-            if (isValid)
-            {
-                mySequence.AppendCallback(UpdateCreatureDrawing);
-            }
+
             mySequence.AppendInterval(6f);
             mySequence.Append(DotBackground.DOColor(new Color32(160, 197, 255, 0), 1f));
             mySequence.AppendCallback(() =>
@@ -151,6 +148,10 @@ namespace extOSC
             });
             mySequence.AppendInterval(0.5f);
             mySequence.Append(lineRenderer.material.DOFade(0, 0.5f));
+            if (isValid)
+            {
+                mySequence.AppendCallback(UpdateCreatureDrawing);
+            }
             mySequence.AppendCallback(ClearDrawing);
             mySequence.AppendCallback(CheckForValidation);
 
@@ -183,11 +184,11 @@ namespace extOSC
             if (activeDrawing == 2)
             {
                 SetGlowIntensity(0.4f);
-                DOVirtual.Int(100, 0, 2, (int i) =>
+                DOVirtual.Int(100, 0, 2f, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);
                 });
-                DOVirtual.Int(0, 100, 2, (int i) =>
+                DOVirtual.Int(0, 100, 2f, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(1, i);
                 });
@@ -197,7 +198,7 @@ namespace extOSC
                 EmissionCorpsMat.DOFloat(1f, "_EmissionMapIntensity", 1f);
                 EmissionCorpsMat.DOFloat(1f, "_EmissionZoneIntensity", 1f);
                 SetGlowIntensity(1f);
-                SymbolMat.DOFade(0, 1.5f);
+                SymbolMat.DOColor(Color.clear, "_EmissionColor", 2.5f);
             }
         }
 
@@ -253,6 +254,10 @@ namespace extOSC
         public void ShowDrawing()
         {
             SymbolMat.DOColor(SymbolMatStartColor, "_EmissionColor", 2.5f);
+        }
+        public void HideDrawing()
+        {
+            SymbolMat.DOColor(Color.clear, "_EmissionColor", 2.5f);
         }
 
     }

@@ -127,7 +127,6 @@ namespace extOSC.Examples
 
         private void onTemperature(OSCMessage message)
         {
-            Debug.Log(message);
             if (message.ToFloat(out float temp))
             {
                 SetTemperature(temp);
@@ -136,7 +135,6 @@ namespace extOSC.Examples
 
         private void onPressure(OSCMessage message)
         {
-            Debug.Log(message);
             if (message.ToArray(out var arrayValues))
             {
 
@@ -149,7 +147,6 @@ namespace extOSC.Examples
                 for (int i = 0; i < arrayValues.Count; i++)
                 {
                     motorState[i] = arrayValues[i].BoolValue;
-                    Debug.Log(arrayValues[i].BoolValue);
                     UpdateMotor(i, motorState[i]);
                 }
                 SetPressure(GetTempValue());
@@ -161,7 +158,6 @@ namespace extOSC.Examples
             float temp = 0f;
             foreach (bool motorIsActivated in motorState)
             {
-                Debug.Log(motorIsActivated);
                 if (motorIsActivated) temp += (1f / 6f);
             }
             return temp;
