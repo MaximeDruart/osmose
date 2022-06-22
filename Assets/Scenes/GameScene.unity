@@ -18199,7 +18199,7 @@ MonoBehaviour:
   Brush: {fileID: 878494557500543303, guid: 6f90d65aa10d2014996261ae69bc4e5a, type: 3}
   LineObject: {fileID: 123022508}
   Canvas: {fileID: 1888052138}
-  animationDuration: 0.7
+  animationDuration: 0.2
   Mask: {fileID: 1586955416}
   DrawingContainer: {fileID: 260052291}
   SymbolObject: {fileID: 902708616208385595}
@@ -19737,7 +19737,21 @@ MonoBehaviour:
   TemperatureTextRef: {fileID: 1032837520}
   Warning: {fileID: 713235670}
   Canvas: {fileID: 1128019922}
-  bubbleController: {fileID: 1139171046}
+  BubbleEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1139171046}
+        m_TargetAssemblyTypeName: BubbleController, Assembly-CSharp
+        m_MethodName: toggleBubbling
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1139171044
 Transform:
   m_ObjectHideFlags: 0
@@ -26419,7 +26433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1579639188
 Transform:
   m_ObjectHideFlags: 0
@@ -27847,8 +27861,8 @@ MonoBehaviour:
   timeSpan: 4
   xRangeSpawnStart: 1
   xRangeSpawnEnd: -0.8
-  zRangeSpawnStart: -1.2
-  zRangeSpawnEnd: 1.2
+  zRangeSpawnStart: -1
+  zRangeSpawnEnd: 1
   isVariation: 0
   constantBubbling: 1
 --- !u!4 &1990546709

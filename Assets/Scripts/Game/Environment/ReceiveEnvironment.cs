@@ -60,7 +60,7 @@ namespace extOSC.Examples
         private float pressureAlpha = 0.5f;
 
         public GameObject Canvas;
-        public BubbleController bubbleController;
+        public UnityEvent BubbleEvent;
 
 
         private void Start()
@@ -117,7 +117,7 @@ namespace extOSC.Examples
             TemperatureTextRef.DOFade(tempAlpha, 0f);
 
 
-            float variation = OSCUtilities.Map(Mathf.Sin(Time.time), -1, 1, 1.4f, 1.9f);
+            float variation = OSCUtilities.Map(Mathf.Sin(Time.time * 5), -1, 1, 1.4f, 1.9f);
             WarningMat.SetColor("_Color", Color.red * variation);
             if (isTempValidated && isPressureValidated)
             {
@@ -244,11 +244,11 @@ namespace extOSC.Examples
 
         private void SendBubbles()
         {
-            bubbleController.toggleBubbling();
+            BubbleEvent.Invoke();
             Sequence mySeq = DOTween.Sequence();
             mySeq.AppendInterval(2);
             mySeq.AppendInterval(0);
-            mySeq.AppendCallback(() => bubbleController.toggleBubbling());
+            mySeq.AppendCallback(() => BubbleEvent.Invoke());
         }
 
     }

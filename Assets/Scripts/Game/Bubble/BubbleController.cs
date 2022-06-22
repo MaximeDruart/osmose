@@ -39,6 +39,8 @@ public class BubbleController : MonoBehaviour
                     zRangeSpawnEnd = Random.Range(zRangeSpawnEnd - 0.04f, zRangeSpawnEnd + 0.04f);
                 }
 
+                Debug.Log("instantiating");
+
                 GameObject bubbleInstance = (GameObject)Instantiate(bubblePrefab);
                 bubbleInstance.transform.position = new Vector3(Random.Range(xRangeSpawnStart, xRangeSpawnEnd), 0, Random.Range(zRangeSpawnStart, zRangeSpawnEnd));
             }
@@ -47,13 +49,6 @@ public class BubbleController : MonoBehaviour
 
     public void toggleBubbling()
     {
-        if (isBubbling)
-        {
-            isBubbling = false;
-        }
-        else
-        {
-            isBubbling = true;
-        }
+        isBubbling = !isBubbling;
     }
 }

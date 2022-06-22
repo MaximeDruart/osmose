@@ -8561,10 +8561,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 3879.5,
-            "y": -1352.5,
-            "width": 208.000244140625,
-            "height": 302.0
+            "x": 3984.0,
+            "y": -1352.0001220703125,
+            "width": 208.0,
+            "height": 302.0001220703125
         }
     },
     "m_Slots": [
@@ -9579,7 +9579,7 @@
     "m_ShaderOutputName": "A",
     "m_StageCapability": 3,
     "m_Value": {
-        "e00": 6.0,
+        "e00": 3.7300000190734865,
         "e01": 0.0,
         "e02": 0.0,
         "e03": 0.0,
@@ -14646,7 +14646,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Vector1_D4A5C52D",
     "m_StageCapability": 3,
-    "m_Value": 20.299999237060548,
+    "m_Value": 70.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -16228,8 +16228,8 @@
     "m_ShaderOutputName": "OutMinMax",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": -0.20000000298023225,
-        "y": 0.5299999713897705
+        "x": -0.10999999940395355,
+        "y": 0.800000011920929
     },
     "m_DefaultValue": {
         "x": 0.0,

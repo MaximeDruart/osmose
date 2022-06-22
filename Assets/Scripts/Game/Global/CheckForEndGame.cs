@@ -70,7 +70,7 @@ public class CheckForEndGame : MonoBehaviour
         {
             audioSource.Play();
         });
-        mySequence.AppendInterval(2.2f);
+        mySequence.AppendInterval(4.2f);
         mySequence.AppendInterval(0f);
         mySequence.AppendCallback(() =>
         {
@@ -90,7 +90,7 @@ public class CheckForEndGame : MonoBehaviour
             mySequence.Join(creatureMat.DOFloat(0, "_EmissionZoneIntensity", 1.6f));
         }
 
-        mySequence.AppendInterval(7.5f);
+        mySequence.AppendInterval(5.5f);
         mySequence.AppendInterval(0f);
         mySequence.AppendCallback(() =>
         {
