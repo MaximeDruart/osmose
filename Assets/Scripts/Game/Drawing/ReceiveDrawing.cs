@@ -174,8 +174,8 @@ namespace extOSC
         {
             if (activeDrawing == 1)
             {
-                EmissionCorpsMat.DOFloat(0.6f, "_EmissionMapIntensity", 1f);
-                EmissionCorpsMat.DOFloat(0.6f, "_EmissionZoneIntensity", 1f);
+                EmissionCorpsMat.DOFloat(0.3f, "_EmissionMapIntensity", 1f);
+                EmissionCorpsMat.DOFloat(0.3f, "_EmissionZoneIntensity", 1f);
                 DOVirtual.Int(0, 100, 2, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);
@@ -183,7 +183,7 @@ namespace extOSC
             }
             if (activeDrawing == 2)
             {
-                SetGlowIntensity(0.4f);
+                SetGlowIntensity(0.3f);
                 DOVirtual.Int(100, 0, 2f, (int i) =>
                 {
                     skinnedMeshRenderer.SetBlendShapeWeight(0, i);

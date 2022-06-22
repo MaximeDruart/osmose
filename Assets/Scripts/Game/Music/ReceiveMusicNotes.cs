@@ -57,6 +57,11 @@ namespace extOSC.Examples
         void ReceiveCompleted(OSCMessage message)
         {
 
+            // for (int i = 0; i < mouflesMaterials.Length; i++)
+            // {
+            //     mouflesMaterials[i].DOFloat(1, "_isActivated", 0.6f).SetDelay(i * 0.1f);
+            // }
+
             OnCompleted.Invoke();
             // isValidated = true;
             // animator.SetBool("isDance", true);

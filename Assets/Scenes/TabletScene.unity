@@ -5063,6 +5063,7 @@ GameObject:
   m_Component:
   - component: {fileID: 460739286}
   - component: {fileID: 460739287}
+  - component: {fileID: 460739288}
   m_Layer: 0
   m_Name: CheckForEnd
   m_TagString: Untagged
@@ -5101,18 +5102,32 @@ MonoBehaviour:
   OnTabletCompletion:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 460739288}
+        m_TargetAssemblyTypeName: extOSC.Examples.ResetApp, Assembly-CSharp
+        m_MethodName: ResetTablet
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &460739288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460739285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc2768adf771545a303c25f11cd648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Transmitter: {fileID: 1853618885}
+  Address: /reset
 --- !u!1 &463709213
 GameObject:
   m_ObjectHideFlags: 0
@@ -11930,7 +11945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopSize: 369
-  speed: 0.09
+  speed: 0.1
 --- !u!114 &1005352183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16349,7 +16364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopSize: 267.5
-  speed: 0.32
+  speed: 0.1
 --- !u!114 &1434075797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20166,7 +20181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopSize: 134.2
-  speed: 0.23
+  speed: 0.1
 --- !u!114 &1685273732
 MonoBehaviour:
   m_ObjectHideFlags: 0

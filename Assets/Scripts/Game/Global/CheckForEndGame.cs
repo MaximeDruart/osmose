@@ -59,11 +59,13 @@ public class CheckForEndGame : MonoBehaviour
     {
         Debug.Log("play end tl");
         Sequence mySequence = DOTween.Sequence();
+        mySequence.AppendInterval(5f);
+        mySequence.AppendInterval(0f);
         foreach (var creatureMat in CreatureMats)
         {
             mySequence.Join(creatureMat.DOFloat(1, "_FinalProgress", 3f));
         }
-        mySequence.AppendInterval(15.5f);
+        mySequence.AppendInterval(10.5f);
         mySequence.AppendInterval(1f);
 
         mySequence.AppendCallback(() =>

@@ -100,15 +100,15 @@ Material:
     - _VeinsOpacity: 1
     - _isUV0: 1
     - _uBleed: 0.65
-    - _uFreq: 1
+    - _uFreq: 0.8
     - _uProgress: 0
-    - _uRadius: 0.45
+    - _uRadius: 0.55
     - _uThickness: 0.18
     - _uWaveOpacity: 1
     - _uvScale: 0.8
     m_Colors:
-    - _VeinsColor: {r: 1.9820216, g: 0.6259016, b: 3.3207555, a: 1}
-    - _emission: {r: 0.4805981, g: 0.75191665, b: 0.754717, a: 1}
+    - _VeinsColor: {r: 4.7301903, g: 12.30041, b: 12.38025, a: 1}
+    - _emission: {r: 0.39607844, g: 0.78431374, b: 0.6392157, a: 1}
     - _uBaseColor: {r: 0.427451, g: 1, b: 0.5435849, a: 1}
     - _uOrigin: {r: 0.6, g: 0.7, b: 0, a: 0}
   m_BuildTextureStacks: []

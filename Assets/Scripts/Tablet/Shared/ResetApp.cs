@@ -24,6 +24,12 @@ namespace extOSC.Examples
 
             Transmitter.Send(message);
         }
+
+        public void ResetTablet()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 1f;
+        }
     }
 
 }

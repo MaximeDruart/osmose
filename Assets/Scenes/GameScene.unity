@@ -18199,7 +18199,7 @@ MonoBehaviour:
   Brush: {fileID: 878494557500543303, guid: 6f90d65aa10d2014996261ae69bc4e5a, type: 3}
   LineObject: {fileID: 123022508}
   Canvas: {fileID: 1888052138}
-  animationDuration: 0.2
+  animationDuration: 0.05
   Mask: {fileID: 1586955416}
   DrawingContainer: {fileID: 260052291}
   SymbolObject: {fileID: 902708616208385595}
@@ -26433,7 +26433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1579639188
 Transform:
   m_ObjectHideFlags: 0
